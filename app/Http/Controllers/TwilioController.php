@@ -29,11 +29,21 @@ class TwilioController extends Controller
             'to' => $request->input('To'),
             'from' => $request->input('From'),
             'body' => $request->input('Body'),
+            'incoming' => true,
+            'twilio_sid' => $request->input('MessageSid'),
+        ]);
+
+        $returnMessage = 'lol nope';
+        Message::create([
+            'to' => $request->input('From'),
+            'from' => $request->input('To'),
+            'body' => $returnMessage,
+            'incoming' => false,
             'twilio_sid' => $request->input('MessageSid'),
         ]);
 
         $response = new Twiml();
-        $response->message('lolnope');
+        $response->message($returnMessage);
         return response($response, 200)->header('content-type', 'text/xml');
     }
 }

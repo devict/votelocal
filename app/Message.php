@@ -12,6 +12,6 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'to', 'from', 'body', 'twilio_sid',
+        'to', 'from', 'body', 'twilio_sid', 'incoming',
     ];
 }
