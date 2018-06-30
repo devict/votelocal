@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Hoooome page!
+                    It's the admin area!
                 </div>
             </div>
         </div>

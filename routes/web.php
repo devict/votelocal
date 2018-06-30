@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
+// TODO: use a middleware to verify requests from Twilio
 Route::post('/sms/receive', 'TwilioController@receiveSms');
+
+Route::middleware(['auth', 'require-admin'])->group(function () {
+    Route::get('/admin', 'AdminController@index');
+});
