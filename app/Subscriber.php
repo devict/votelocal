@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Message extends Model
+class Subscriber extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,6 +12,6 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'to', 'from', 'body', 'twilio_sid', 'incoming',
+        'number', 'subscribed',
     ];
 }
