@@ -5,10 +5,12 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">New Scheduled Message</div>
 
                 <div class="card-body">
-                    It's the admin area!
+                    @include('admin.scheduled_messages.form', [
+                        'scheduled_message' => $scheduled_message,
+                    ])
                 </div>
             </div>
         </div>

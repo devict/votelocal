@@ -52,6 +52,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/admin">Admin Area</a>
+                                    <a class="dropdown-item" href="/admin/scheduled_messages">Scheduled Messages</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -70,6 +71,17 @@
         </nav>
 
         <main class="py-4">
+            @if (session('status'))
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="alert alert-info">
+                                <p>{{ session('status') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             @yield('content')
         </main>
     </div>

@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Twilio\Rest\TwilioClient as TwilioClient;
+use Twilio\Rest\Client as TwilioClient;
 
 class TwilioServiceProvider extends ServiceProvider
 {
