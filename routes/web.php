@@ -20,6 +20,7 @@ Route::post('/sms/receive', 'TwilioController@receiveSms');
 
 Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/subscribers', 'AdminController@subscribers');
 
     Route::get('/admin/scheduled_messages', 'ScheduledMessageController@index');
     Route::get('/admin/scheduled_messages/new', 'ScheduledMessageController@new');
