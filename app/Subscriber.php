@@ -12,6 +12,6 @@ class Subscriber extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'subscribed',
+        'number', 'subscribed', 'locale',
     ];
 }

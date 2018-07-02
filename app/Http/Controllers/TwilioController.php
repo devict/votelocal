@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Message;
 use App\Subscriber;
 use Twilio\Twiml;
@@ -46,14 +47,14 @@ class TwilioController extends Controller
 
         if ($subscriber && $subscriber->subscribed) {
             // Already a subscriber
+            App::setLocale($subscriber->locale);
+
             $unsubTriggers = ['unsubscribe', 'stop'];
-            if (in_array(strtolower($processedIncomingMessage), $unsubTriggers)) {
-                // If there isn't a subscriber record, nothing to do
-                if ($subscriber) {
-                    $subscriber->subscribed = false;
-                    $subscriber->save();
-                    $returnMessage = 'You have been unsubscribed! Text SUBSCRIBE again to resubscribe.';
-                }
+
+            if (in_array($processedIncomingMessage, $unsubTriggers)) {
+                $subscriber->subscribed = false;
+                $subscriber->save();
+                $returnMessage = __('twilio.unsubscribed');
             }
         } else {
             // Not currently subscribed
@@ -65,7 +66,7 @@ class TwilioController extends Controller
                     $subscriber->subscribed = true;
                     $subscriber->save();
                 }
-                $returnMessage = 'Thanks for subscribing! Text STOP to unsubscribe. Need to register to vote? Go to https://bit.ly/voteictregister to do it now, right from your phone!';
+                $returnMessage = __('twilio.subscribed');
             }
         }
 
