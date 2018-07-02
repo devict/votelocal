@@ -65,7 +65,7 @@ class TwilioController extends Controller
                     $subscriber->subscribed = true;
                     $subscriber->save();
                 }
-                $returnMessage = 'Thanks for subscribing! Text STOP to unsubscribe. If you are not already registered to vote, go to https://bit.ly/voteictregister to do it now, right from your phone!';
+                $returnMessage = 'Thanks for subscribing! Text STOP to unsubscribe. Need to register to vote? Go to https://bit.ly/voteictregister to do it now, right from your phone!';
             }
         }
 
