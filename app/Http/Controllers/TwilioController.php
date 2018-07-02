@@ -52,7 +52,7 @@ class TwilioController extends Controller
                 if ($subscriber) {
                     $subscriber->subscribed = false;
                     $subscriber->save();
-                    $returnMessage = 'You have been unsubscribed!';
+                    $returnMessage = 'You have been unsubscribed! Text SUBSCRIBE again to resubscribe.';
                 }
             }
         } else {
@@ -65,7 +65,7 @@ class TwilioController extends Controller
                     $subscriber->subscribed = true;
                     $subscriber->save();
                 }
-                $returnMessage = 'You have been subscribed!';
+                $returnMessage = 'Thanks for subscribing! Text STOP to unsubscribe. If you are not already registered to vote, go to https://bit.ly/voteictregister to do it now, right from your phone!';
             }
         }
 
