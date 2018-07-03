@@ -18,7 +18,7 @@
             <h1 class="text-center">@lang('home.text_subscribe_cta')</h1>
             <h2 class="text-center">
                 <!-- TODO: make this a vcard link -->
-                @lang('home.add_to_contacts_cta', ['link' => '#'])
+                @lang('home.add_to_contacts_cta', ['link' => 'tel:+1' . env('TWILIO_FROM_NUMBER')])
             </h2>
         </div>
     </div>
