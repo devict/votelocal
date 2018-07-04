@@ -14,7 +14,10 @@ class AddIncomingBoolToMessages extends Migration
     public function up()
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->boolean('incoming')->after('twilio_sid');
+            $column = $table->boolean('incoming')->after('twilio_sid');
+            if (config('database.default') === 'sqlite') {
+                $column->default('');
+            }
         });
     }
 
