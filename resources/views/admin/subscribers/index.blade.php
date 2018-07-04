@@ -5,10 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
-                    <a href="{{ route('subscribers.admin.new') }}" class="btn btn-success btn-sm float-right">New Subscriber</a>
-                    Subscribers
-                </div>
+                <div class="card-header">Subscribers</div>
 
                 <div class="card-body">
                   <table class="table">
