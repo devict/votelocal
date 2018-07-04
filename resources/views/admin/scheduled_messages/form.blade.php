@@ -1,13 +1,4 @@
-@if ($errors->any())
-    <div class="alert alert-success" role="alert">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
+@include('partials.errors')
 
 <form id="scheduled_message_form" action="/admin/scheduled_messages{{ $scheduled_message->exists ? '/' . $scheduled_message->id : '' }}" method="POST">
     @csrf
