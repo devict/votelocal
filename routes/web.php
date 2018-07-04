@@ -13,6 +13,12 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/vcard', function () {
+    return response()->view('vcard')
+        ->header('Content-Type', 'text/vcard; charset=UTF-8')
+        ->header('Content-Disposition', 'attachment; filename=' . str_slug(config('app.name')) . '.vcf;');
+})->name('vcard');
+
 Auth::routes();
 
 // TODO: use a middleware to verify requests from Twilio
