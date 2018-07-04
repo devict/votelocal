@@ -74,7 +74,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="alert alert-info">
-                                <p>{{ session('status') }}</p>
+                                <p class="my-0">{{ session('status') }}</p>
                             </div>
                         </div>
                     </div>
