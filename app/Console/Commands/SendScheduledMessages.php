@@ -69,11 +69,12 @@ class SendScheduledMessages extends Command
 
                         // Log it in the database
                         Message::create([
-                            'from' => env('TWILIO_FROM_NUMBER'),
-                            'to' => $subscriber->number,
-                            'body' => $message->body,
-                            'incoming' => false,
-                            'twilio_sid' => $twilioMessage->sid,
+                            'subscriber_id' => $subscriber->id,
+                            'from'          => env('TWILIO_FROM_NUMBER'),
+                            'to'            => $subscriber->number,
+                            'body'          => $message->body,
+                            'incoming'      => false,
+                            'twilio_sid'    => $twilioMessage->sid,
                         ]);
                     }
                 }

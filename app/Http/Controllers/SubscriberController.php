@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Message;
 use App\Subscriber;
 use Illuminate\Http\Request;
+use App\Filters\MessageFilters;
 
 class SubscriberController extends Controller
 {
@@ -21,12 +23,26 @@ class SubscriberController extends Controller
         ]);
     }
 
+    public function messages(Subscriber $subscriber, MessageFilters $filters)
+    {
+        return view('admin.subscribers.messages', [
+            'subscriber' => $subscriber,
+            'messages'   => $subscriber->messages()->filter($filters)->get(),
+            'filters'    => $filters,
+            'types'      => [
+                ''                => 'Any',
+                Message::INCOMING => 'Incoming',
+                Message::OUTGOING => 'Outgoing'
+            ],
+        ]);
+    }
+
     public function create(Request $request)
     {
         // Force the existence of the `subscribed` checkbox
         $request->merge(['subscribed' => $request->has('subscribed')]);
         Subscriber::create($request->validate([
-            'number'     => 'required|max:12|unique:subscribers',
+            'number'     => 'required|max:255|unique:subscribers',
             'subscribed' => 'boolean',
         ]));
 
@@ -45,7 +61,7 @@ class SubscriberController extends Controller
         // Force the existence of the `subscribed` checkbox
         $request->merge(['subscribed' => $request->has('subscribed')]);
         $subscriber->update($request->validate([
-            'number'     => 'required|max:12|unique:subscribers,number,' . $subscriber->id,
+            'number'     => 'required|max:255|unique:subscribers,number,' . $subscriber->id,
             'subscribed' => 'boolean',
         ]));
 
