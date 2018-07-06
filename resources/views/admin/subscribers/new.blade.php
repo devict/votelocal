@@ -6,7 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">New Subscriber</div>
-
                 <div class="card-body">
                     @include('admin.subscribers.form', compact('subscriber'))
                 </div>
