@@ -37,10 +37,11 @@ class SubscriberTest extends TestCase
     public function testAdminCanCreateSubscriber()
     {
         $subscriber = make('App\Subscriber');
-        $r          = $this->signIn(['admin' => 1])
+        $this->signIn(['admin' => 1])
             ->withoutExceptionHandling()
             ->post(route('subscribers.admin.create'), $subscriber->toArray())
             ->assertRedirect(route('subscribers.admin.index'));
+
         $this->assertDatabaseHas('subscribers', [
             'number' => $subscriber->number
         ]);
