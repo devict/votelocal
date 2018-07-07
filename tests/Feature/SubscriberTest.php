@@ -57,13 +57,12 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanUpdateSubscriber()
     {
-        $newAttrs   = ['number' => '1231231234'];
-        $subscriber = create('App\Subscriber');
+        $subscriber = create('App\Subscriber', ['subscribed' => true]);
         $this->signIn(['admin' => 1])
             ->withoutExceptionHandling()
-            ->put(route('subscribers.admin.update', $subscriber), $newAttrs)
+            ->put(route('subscribers.admin.update', $subscriber), [])
             ->assertRedirect(route('subscribers.admin.index'));
 
-        $this->assertDatabaseHas('subscribers', $newAttrs);
+        $this->assertDatabaseHas('subscribers', ['subscribed' => false]);
     }
 }
