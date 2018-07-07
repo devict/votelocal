@@ -16,12 +16,12 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'to', 'from', 'body', 'twilio_sid', 'subscriber_id', 'incoming',
+        'to', 'from', 'body', 'twilio_sid', 'subscriber_number', 'incoming',
     ];
 
     public function subscriber()
     {
-        return $this->belongsTo('App\Subscriber');
+        return $this->belongsTo('App\Subscriber', 'subscriber_number', 'number');
     }
 
     /**

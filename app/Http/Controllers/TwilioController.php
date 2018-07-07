@@ -32,18 +32,17 @@ class TwilioController extends Controller
         $toNumber        = $request->input('To');
         $sid             = $request->input('MessageSid');
 
-        // Check if number is already a subscriber
-        $subscriber = Subscriber::where('number', $fromNumber)->first();
-
         $message = Message::create([
-            'subscriber_id' => $subscriber->id ?? null,
-            'to'            => $toNumber,
-            'from'          => $fromNumber,
-            'body'          => $incomingMessage,
-            'incoming'      => true,
-            'twilio_sid'    => $sid,
+            'subscriber_number' => $fromNumber,
+            'to'                => $toNumber,
+            'from'              => $fromNumber,
+            'body'              => $incomingMessage,
+            'incoming'          => true,
+            'twilio_sid'        => $sid,
         ]);
 
+        // Check if number is already a subscriber
+        $subscriber               = Subscriber::where('number', $fromNumber)->first();
         $processedIncomingMessage = strtolower(trim($incomingMessage));
 
         // TODO: Is there a better place for this logic?
@@ -88,12 +87,12 @@ class TwilioController extends Controller
     protected function messageResponse($message, $subscriber, $from, $sid)
     {
         Message::create([
-            'subscriber_id' => $subscriber->id,
-            'to'            => $subscriber->number,
-            'from'          => $from,
-            'body'          => $message,
-            'incoming'      => false,
-            'twilio_sid'    => $sid,
+            'subscriber_number' => $subscriber->number,
+            'to'                => $subscriber->number,
+            'from'              => $from,
+            'body'              => $message,
+            'incoming'          => false,
+            'twilio_sid'        => $sid,
         ]);
 
         $response = new Twiml();

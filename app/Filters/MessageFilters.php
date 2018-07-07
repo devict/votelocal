@@ -15,8 +15,8 @@ class MessageFilters extends AbstractFilters
         }
     }
 
-    protected function subscriber_id($value)
+    protected function subscriber_number($value)
     {
-        $this->builder->where('subscriber_id', $value);
+        $this->builder->where('subscriber_number', $value);
     }
 }

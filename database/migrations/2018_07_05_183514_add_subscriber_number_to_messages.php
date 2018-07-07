@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSubscriberIdToMessages extends Migration
+class AddSubscriberNumberToMessages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class AddSubscriberIdToMessages extends Migration
     public function up()
     {
         Schema::table('messages', function ($table) {
-            $column = $table->integer('subscriber_id')->unsigned()->nullable()->after('twilio_sid');
+            $column = $table->string('subscriber_number')->unsigned()->after('twilio_sid');
+            if (config('database.default') === 'sqlite') {
+                $column->default('');
+            }
         });
     }
 
@@ -25,7 +28,7 @@ class AddSubscriberIdToMessages extends Migration
     public function down()
     {
         Schema::table('messages', function ($table) {
-            $table->dropColumn('subscriber_id');
+            $table->dropColumn('subscriber_number');
         });
     }
 }

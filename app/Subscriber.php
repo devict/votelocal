@@ -17,6 +17,6 @@ class Subscriber extends Model
 
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany('App\Message', 'subscriber_number', 'number');
     }
 }
