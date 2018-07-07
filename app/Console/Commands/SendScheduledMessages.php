@@ -43,9 +43,7 @@ class SendScheduledMessages extends Command
      */
     public function handle()
     {
-        $scheduled_messages = ScheduledMessage::where('sent', false)
-            ->where('send_at', '<=', Carbon::now())
-            ->get();
+        $scheduled_messages = ScheduledMessage::readyToSend()->get();
 
         if ($scheduled_messages->count()) {
             $subscribers = Subscriber::where('subscribed', true)->get();

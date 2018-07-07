@@ -20,4 +20,9 @@ class ScheduledMessage extends Model
     {
         return $this->hasMany('App\Message');
     }
+
+    public static function scopeReadyToSend($query)
+    {
+        return $query->where('sent', false)->where('send_at', '<=', Carbon::now());
+    }
 }
