@@ -13,7 +13,7 @@ class AddSubscriberNumberToMessages extends Migration
     public function up()
     {
         Schema::table('messages', function ($table) {
-            $column = $table->string('subscriber_number')->unsigned()->after('twilio_sid');
+            $column = $table->string('subscriber_number')->after('twilio_sid');
             if (config('database.default') === 'sqlite') {
                 $column->default('');
             }
