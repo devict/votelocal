@@ -43,7 +43,6 @@ class TwilioController extends Controller
 
         // Check if number is already a subscriber
         $subscriber               = Subscriber::where('number', $fromNumber)->first();
-        $processedIncomingMessage = strtolower(trim($incomingMessage));
 
         // TODO: Is there a better place for this logic?
 
@@ -51,9 +50,7 @@ class TwilioController extends Controller
             // Already a subscriber
             App::setLocale($subscriber->locale);
 
-            $unsubTriggers = ['unsubscribe', 'stop'];
-
-            if (in_array($processedIncomingMessage, $unsubTriggers)) {
+            if ($message->hasTrigger('unsubscribe')) {
                 $subscriber->unsubscribe();
 
                 return $this->messageResponse(
@@ -66,8 +63,7 @@ class TwilioController extends Controller
         }
 
         // Not currently subscribed
-        $subscribeTriggers = ['subscribe', 'start'];
-        if (in_array($processedIncomingMessage, $subscribeTriggers)) {
+        if ($message->hasTrigger('subscribe')) {
             if (! $subscriber) {
                 $subscriber = Subscriber::create(['number' => $fromNumber]);
             }
