@@ -54,7 +54,7 @@ class TwilioController extends Controller
             $unsubTriggers = ['unsubscribe', 'stop'];
 
             if (in_array($processedIncomingMessage, $unsubTriggers)) {
-                $subscriber->update(['subscribed' => false]);
+                $subscriber->unsubscribe();
 
                 return $this->messageResponse(
                     __('twilio.unsubscribed'),
@@ -71,7 +71,7 @@ class TwilioController extends Controller
             if (! $subscriber) {
                 $subscriber = Subscriber::create(['number' => $fromNumber]);
             }
-            $subscriber->update(['subscribed' => true]);
+            $subscriber->subscribe();
 
             return $this->messageResponse(
                 __('twilio.subscribed'),
