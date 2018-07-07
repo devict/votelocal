@@ -4,7 +4,7 @@
     @csrf
     <div class="form-group">
         <label class="form-label" for="body">Number</label>
-        <input type="text" class="form-control" name="number" id="number" value="{{ old('number', $subscriber->number) }}">
+        <input type="text" class="form-control" name="number" id="number" value="{{ old('number', $subscriber->number) }}"{{ $subscriber->exists ? ' disabled' : '' }}>
     </div>
 
     <div class="form-group">
