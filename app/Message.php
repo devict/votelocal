@@ -16,7 +16,13 @@ class Message extends Model
      * @var array
      */
     protected $fillable = [
-        'to', 'from', 'body', 'twilio_sid', 'subscriber_number', 'incoming',
+        'to',
+        'from',
+        'body',
+        'twilio_sid',
+        'subscriber_number',
+        'incoming',
+        'scheduled_message_id',
     ];
 
     public function subscriber()

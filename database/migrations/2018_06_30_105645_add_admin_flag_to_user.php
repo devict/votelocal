@@ -26,7 +26,7 @@ class AddAdminFlagToUser extends Migration
     public function down()
     {
         Schema::table('users', function ($table) {
-            $table->dropColumnb('admin');
+            $table->dropColumn('admin');
         });
     }
 }

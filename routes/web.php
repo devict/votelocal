@@ -40,6 +40,7 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::get('/admin/scheduled_messages/new', 'ScheduledMessageController@new');
     Route::post('/admin/scheduled_messages', 'ScheduledMessageController@create');
     Route::get('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@edit');
+    Route::get('/admin/scheduled_messages/{scheduled_message}/messages', 'ScheduledMessageController@messages');
     Route::put('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@update');
     Route::get('/admin/scheduled_messages/{scheduled_message}/delete', 'ScheduledMessageController@destroy');
 });

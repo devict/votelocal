@@ -16,6 +16,12 @@ class ScheduledMessageController extends Controller
         ]);
     }
 
+    function messages (ScheduledMessage $scheduled_message) {
+        return view('admin.scheduled_messages.messages', [
+            'scheduled_message' => $scheduled_message
+        ]);
+    }
+
     function new () {
         $scheduled_message = new ScheduledMessage();
         return view('admin.scheduled_messages.new', [

@@ -7,6 +7,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\ScheduledMessage;
+use App\Message;
 use App\User;
 
 class ScheduledMessagesTest extends TestCase
@@ -149,6 +150,34 @@ class ScheduledMessagesTest extends TestCase
         $request->assertRedirect('/admin/scheduled_messages');
         $request->assertSessionHasErrors('cant_change_sent_message');
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
+    }
+
+    /**
+     * Test viewing sent messages of a processed scheduled message.
+     * 
+     * @return void
+     */
+    public function testViewMessagesOfSentScheduledMessage()
+    {
+        // create scheduled message and a few messages with it's id,
+        $user = factory(User::class)->create([ 'admin' => true ]);
+        $scheduled_message = factory(ScheduledMessage::class)->create([
+            'sent' => true,
+        ]);
+        $messages = factory(Message::class, 3)->create([
+            'scheduled_message_id' => $scheduled_message->id,
+        ]);
+
+        // go to /messages on the scheduled message
+        $request = $this
+            ->actingAs($user)
+            ->get('/admin/scheduled_messages/' . $scheduled_message->id . '/messages');
+
+        // expect to see each of the messages sent
+        foreach ($messages as $message) {
+            $request->assertSee($message->body);
+            $request->assertSee($message->to);
+        }
     }
 
     // /**

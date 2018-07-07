@@ -15,4 +15,9 @@ class ScheduledMessage extends Model
     {
         return Carbon::parse($value)->format('Y-m-d\TH:i');
     }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message');
+    }
 }

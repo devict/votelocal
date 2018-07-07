@@ -31,6 +31,9 @@
                                     <td>
                                     @if ($scheduled_message->sent)
                                         <!-- TODO: create a send report view -->
+                                        <a href="/admin/scheduled_messages/{{ $scheduled_message->id }}/messages" class="btn btn-primary btn-sm">
+                                            View Messages
+                                        </a>
                                     @else
                                         <a href="/admin/scheduled_messages/{{ $scheduled_message->id }}" class="btn btn-warning btn-sm">
                                             Edit
