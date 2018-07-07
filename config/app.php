@@ -159,8 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\TwilioServiceProvider::class,
-
+        App\Services\Sms\SmsServiceProvider::class,
     ],
 
     /*
