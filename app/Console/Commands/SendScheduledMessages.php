@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Subscriber;
 use App\ScheduledMessage;
 use Illuminate\Console\Command;
-use App\Services\Sms\Contract\Sms;
+use App\Services\Sms\Contracts\Sms;
 use Illuminate\Support\Facades\Log;
 
 class SendScheduledMessages extends Command
