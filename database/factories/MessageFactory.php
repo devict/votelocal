@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Message::class, function (Faker $faker) {
     return [
-        'twilio_sid'    => $faker->phoneNumber(),
+        'twilio_sid'        => $faker->md5(),
         'subscriber_number' => function () {
             return create('App\Subscriber')->number;
         },
