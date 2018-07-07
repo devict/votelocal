@@ -14,4 +14,9 @@ class Subscriber extends Model
     protected $fillable = [
         'number', 'subscribed', 'locale',
     ];
+
+    public function messages()
+    {
+        return $this->hasMany('App\Message', 'subscriber_number', 'number');
+    }
 }

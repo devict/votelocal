@@ -28,20 +28,22 @@ class TwilioController extends Controller
     public function receiveSms(Request $request)
     {
         $incomingMessage = $request->input('Body');
-        $fromNumber = $request->input('From');
+        $fromNumber      = $request->input('From');
+        $toNumber        = $request->input('To');
+        $sid             = $request->input('MessageSid');
 
-        Message::create([
-            'to' => $request->input('To'),
-            'from' => $fromNumber,
-            'body' => $incomingMessage,
-            'incoming' => true,
-            'twilio_sid' => $request->input('MessageSid'),
+        $message = Message::create([
+            'subscriber_number' => $fromNumber,
+            'to'                => $toNumber,
+            'from'              => $fromNumber,
+            'body'              => $incomingMessage,
+            'incoming'          => true,
+            'twilio_sid'        => $sid,
         ]);
 
-        // check if user is already a subscriber
-        $subscriber = Subscriber::where('number', $fromNumber)->first();
+        // Check if number is already a subscriber
+        $subscriber               = Subscriber::where('number', $fromNumber)->first();
         $processedIncomingMessage = strtolower(trim($incomingMessage));
-        $returnMessage = null;
 
         // TODO: Is there a better place for this logic?
 
@@ -52,39 +54,50 @@ class TwilioController extends Controller
             $unsubTriggers = ['unsubscribe', 'stop'];
 
             if (in_array($processedIncomingMessage, $unsubTriggers)) {
-                $subscriber->subscribed = false;
-                $subscriber->save();
-                $returnMessage = __('twilio.unsubscribed');
-            }
-        } else {
-            // Not currently subscribed
-            $subscribeTriggers = ['subscribe', 'start'];
-            if (in_array(strtolower($processedIncomingMessage), $subscribeTriggers)) {
-                if (!$subscriber) {
-                    Subscriber::create([ 'number' => $fromNumber ]);
-                } else {
-                    $subscriber->subscribed = true;
-                    $subscriber->save();
-                }
-                $returnMessage = __('twilio.subscribed');
+                $subscriber->update(['subscribed' => false]);
+
+                return $this->messageResponse(
+                    __('twilio.unsubscribed'),
+                    $subscriber,
+                    $toNumber,
+                    $sid
+                );
             }
         }
 
-        if ($returnMessage != null) {
-            Message::create([
-                'to' => $fromNumber,
-                'from' => $request->input('To'),
-                'body' => $returnMessage,
-                'incoming' => false,
-                'twilio_sid' => $request->input('MessageSid'),
-            ]);
+        // Not currently subscribed
+        $subscribeTriggers = ['subscribe', 'start'];
+        if (in_array($processedIncomingMessage, $subscribeTriggers)) {
+            if (! $subscriber) {
+                $subscriber = Subscriber::create(['number' => $fromNumber]);
+            }
+            $subscriber->update(['subscribed' => true]);
 
-            $response = new Twiml();
-            $response->message($returnMessage);
-
-            return response($response, 200)->header('content-type', 'text/xml');
+            return $this->messageResponse(
+                __('twilio.subscribed'),
+                $subscriber,
+                $toNumber,
+                $sid
+            );
         }
 
         return response(200);
+    }
+
+    protected function messageResponse($message, $subscriber, $from, $sid)
+    {
+        Message::create([
+            'subscriber_number' => $subscriber->number,
+            'to'                => $subscriber->number,
+            'from'              => $from,
+            'body'              => $message,
+            'incoming'          => false,
+            'twilio_sid'        => $sid,
+        ]);
+
+        $response = new Twiml();
+        $response->message($message);
+
+        return response($response, 200)->header('content-type', 'text/xml');
     }
 }
