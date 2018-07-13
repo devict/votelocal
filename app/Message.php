@@ -11,6 +11,16 @@ class Message extends Model
     const OUTGOING = 'outgoing';
 
     /**
+     * SMS trigger words.
+     *
+     * @var array
+     */
+    protected $triggers = [
+        'subscribe'   => ['subscribe', 'start'],
+        'unsubscribe' => ['unsubscribe', 'stop']
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -28,6 +38,26 @@ class Message extends Model
     public function subscriber()
     {
         return $this->belongsTo('App\Subscriber', 'subscriber_number', 'number');
+    }
+
+    /*
+     * Check if message matches a trigger word.
+     */
+    public function hasTrigger($key)
+    {
+        if (! array_key_exists($key, $this->triggers)) {
+            return false;
+        }
+
+        return in_array($this->normalizedBody(), $this->triggers[$key]);
+    }
+
+    /*
+     * Clean up the message text.
+     */
+    public function normalizedBody()
+    {
+        return strtolower(trim($this->body));
     }
 
     /**

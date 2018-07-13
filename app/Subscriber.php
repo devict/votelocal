@@ -19,4 +19,14 @@ class Subscriber extends Model
     {
         return $this->hasMany('App\Message', 'subscriber_number', 'number');
     }
+
+    public function subscribe()
+    {
+        return $this->update(['subscribed' => true]);
+    }
+
+    public function unsubscribe()
+    {
+        return $this->update(['subscribed' => false]);
+    }
 }

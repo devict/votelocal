@@ -30,7 +30,7 @@ class TwilioTest extends TestCase
         ]);
 
         $response->assertStatus(200);
-        $response->assertSeeText(__('twilio.subscribed'));
+        $response->assertSeeText(__('sms.subscribed'));
     }
 
     /**
@@ -75,7 +75,7 @@ class TwilioTest extends TestCase
         ]);
 
         $response->assertStatus(200);
-        $response->assertSeeText(__('twilio.unsubscribed'));
+        $response->assertSeeText(__('sms.unsubscribed'));
     }
 
     /**
