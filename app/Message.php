@@ -11,16 +11,6 @@ class Message extends Model
     const OUTGOING = 'outgoing';
 
     /**
-     * SMS trigger words.
-     *
-     * @var array
-     */
-    protected $triggers = [
-        'subscribe'   => ['subscribe', 'start'],
-        'unsubscribe' => ['unsubscribe', 'stop']
-    ];
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -41,15 +31,29 @@ class Message extends Model
     }
 
     /*
-     * Check if message matches a trigger word.
+     * Get the locale of the message if it's body is a trigger word.
      */
-    public function hasTrigger($key)
+    public function getLocaleFromTrigger($key)
     {
-        if (! array_key_exists($key, $this->triggers)) {
-            return false;
+        $locales = array_diff(scandir(resource_path('lang')), ['..', '.']);
+
+        foreach ($locales as $locale) {
+            if ($this->hasTrigger($key, $locale)) {
+                return $locale;
+            }
         }
 
-        return in_array($this->normalizedBody(), $this->triggers[$key]);
+        return null;
+    }
+
+    /*
+     * Check if message matches a trigger word.
+     */
+    public function hasTrigger($key, $locale = null)
+    {
+        $triggers = app('translator')->get('triggers.' . $key, [], $locale);
+
+        return in_array($this->normalizedBody(), $triggers);
     }
 
     /*

@@ -34,6 +34,46 @@ class TwilioTest extends TestCase
     }
 
     /**
+     * Tests that a new number texting "comienzo" registers the user with a
+     * spanish locale and returns the expected response.
+     *
+     * @return void
+     */
+    public function testNewSpanishSubscriber()
+    {
+        $twilioSms = $this->createTwilioIncomingSms([
+            'Body' => 'coMiEnZo',
+        ]);
+
+        $response = $this->json('POST', '/sms/receive', $twilioSms);
+
+        $this->assertDatabaseHas('subscribers', [
+            'number'     => $twilioSms['From'],
+            'subscribed' => true,
+            'locale'     => 'es'
+        ]);
+    }
+
+    /**
+     * Tests that a new number texting "comienzo" registers the user with a
+     * spanish locale and returns the expected response.
+     *
+     * @return void
+     */
+    public function testSubscriberCanChangeLocale()
+    {
+        $subscriber = create('App\Subscriber', ['locale' => 'en']);
+        $twilioSms  = $this->createTwilioIncomingSms([
+            'From' => $subscriber->number,
+            'Body' => 'coMiEnZo',
+        ]);
+
+        $response = $this->json('POST', '/sms/receive', $twilioSms);
+
+        $this->assertEquals('es', $subscriber->fresh()->locale);
+    }
+
+    /**
      * Test that a message from a new number that isn't a subscribe keyword
      * does not create a new subscriber.
      * 
