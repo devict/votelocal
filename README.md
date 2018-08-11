@@ -2,6 +2,8 @@
 
 A service for being an informed voter in the Wichita, KS area.
 
+[voteict.org](https://www.voteict.org)
+
 ## Primary Goals
 
 - Receive SMS reminders on important voting dates and information
