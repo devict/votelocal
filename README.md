@@ -30,6 +30,9 @@ needs to set a few things:
 
 The recommended way is to use [Homestead](https://laravel.com/docs/5.6/homestead).
 
+Mainly, run `vagrant up`, and then the site should be available at
+localhost:8000.
+
 To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and
 point your Twilio number's SMS receive endpoint to the ngrok tunnel URL,
 suffixed with the path `/sms/receive`.
