@@ -43,11 +43,20 @@ class SmsController extends Controller
         }
 
         // Not currently subscribed
-        if ($message->hasTrigger('subscribe')) {
+        $locale = $message->getLocaleFromTrigger('subscribe');
+        if ($locale) {
             if (! $subscriber) {
-                $subscriber = Subscriber::create(['number' => $message->from]);
+                $subscriber = Subscriber::create([
+                    'number' => $message->from,
+                    'locale' => $locale
+                ]);
             }
-            $subscriber->subscribe();
+            $subscriber->update([
+                'subscribed' => true,
+                'locale'     => $locale
+            ]);
+
+            App::setLocale($subscriber->locale);
 
             return $sms->response($subscriber->number, __('sms.subscribed'));
         }
