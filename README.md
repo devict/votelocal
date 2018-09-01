@@ -31,13 +31,16 @@ needs to set a few things:
 The recommended way is to use [Homestead](https://laravel.com/docs/5.6/homestead).
 
 Mainly, run `vagrant up`, and then the site should be available at
-localhost:8000.
+localhost:8000. Most commands that you will need run will need to be run inside
+the vagrant box, so do `vagrant ssh` first. 
 
 To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and
 point your Twilio number's SMS receive endpoint to the ngrok tunnel URL,
 suffixed with the path `/sms/receive`.
 
 To test scheduled messages, you can manually run `php artisan schedule:run`.
+
+To run tests, first `vagrant ssh`, then `cd code` and finally `phpunit`.
 
 ## Contributing
 
