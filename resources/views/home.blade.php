@@ -5,7 +5,8 @@
 <div class="container home-feature">
     <div class="row justify-content-center">
         <div class="col-md-12 my-5">
-            <h1 class="text-center">
+            <img src="{{ asset('img/logo.svg') }}" title="Vote ICT">
+            <h1 class="text-center home--tagline">
                 @lang('home.tagline')
             </h1>
         </div>
@@ -15,9 +16,22 @@
 <div class="container-fluid bg-white">
     <div class="row justify-content-center">
         <div class="col-md-12 my-5">
-            <h1 class="text-center">@lang('home.text_subscribe_cta')</h1>
+            <h1 class="text-center">
+                <strong>@lang('home.text_subscribe_cta')</strong>
+            </h1>
             <h2 class="text-center">
                 @lang('home.add_to_contacts_cta', ['link' => 'tel:+1' . env('TWILIO_FROM_NUMBER')])
+            </h2>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-12 my-5">
+            <h2 class="text-center">@lang('home.partners_head')</h2>
+            <p class="text-center">
+                @lang('home.partners_body')
             </h2>
         </div>
     </div>

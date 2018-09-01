@@ -8,6 +8,12 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+$voteict-blue: #0190bc;
+
+body {
+  background: lighten($voteict-blue, 60%);
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -15,4 +21,13 @@
 
 .bg-white {
   background: white;
+}
+
+.home--logo {
+  margin-bottom: 60px;
+}
+
+.home--tagline {
+  margin-top: 60px;
+  color: $voteict-blue;
 }
