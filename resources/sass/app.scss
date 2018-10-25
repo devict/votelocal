@@ -1,36 +1,28 @@
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
-@import "variables";
-
-// Bootstrap
+@import 'variables';
 @import '~bootstrap/scss/bootstrap';
 
-$voteict-blue: #0190bc;
-
 body {
-  background: lighten($voteict-blue, 60%);
+    background: lighten(theme-color(info), 60%);
 }
 
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .bg-white {
-  background: white;
+    background: white;
 }
 
 .home--logo {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .home--tagline {
-  margin-top: 60px;
-  color: $voteict-blue;
+    margin-top: 60px;
+    color: theme-color(info);
 }
+
 .page-title {
     font-size: 1.25rem;
     color: #0190bc;
