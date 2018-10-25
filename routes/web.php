@@ -19,6 +19,8 @@ Route::get('/vcard', function () {
         ->header('Content-Disposition', 'attachment; filename=' . str_slug(config('app.name')) . '.vcf;');
 })->name('vcard');
 
+Route::get('/archive', 'ArchiveController@index');
+
 Auth::routes();
 
 // TODO: use a middleware to verify requests from Twilio

@@ -24,4 +24,9 @@ class ScheduledMessage extends Model
     {
         return $query->where('sent', false)->where('send_at', '<=', Carbon::now());
     }
+
+    public static function scopeSent($query)
+    {
+        return $query->where('sent', true);
+    }
 }
