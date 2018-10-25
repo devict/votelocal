@@ -15,6 +15,8 @@
             </div>
         </div>
     @endforeach
+
+    {{ $messages->links() }}
 </div>
 
 @endsection
