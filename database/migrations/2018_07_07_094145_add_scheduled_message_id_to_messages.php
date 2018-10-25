@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddScheduledMessageIdToMessages extends Migration
@@ -31,7 +30,9 @@ class AddScheduledMessageIdToMessages extends Migration
     {
         Schema::table('messages', function ($table) {
             $table->dropColumn('scheduled_message_id');
-            $table->dropForeign(['scheduled_message_id']);
+            if (config('database.default') !== 'sqlite') {
+                $table->dropForeign(['scheduled_message_id']);
+            }
         });
     }
 }
