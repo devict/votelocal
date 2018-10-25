@@ -35,7 +35,7 @@
                                     <td>{{ $message->to }}</td>
                                     <td>{{ $message->from }}</td>
                                     <td>{{ $message->body }}</td>
-                                    <td>{{ date('m/d/Y @ g:i A', strtotime($message->created_at)) }}</td>
+                                    <td>{{ $message->created_at->format('m/d/Y g:i A') }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
