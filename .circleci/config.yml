@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # Specify the version you desire here
+      - image: circleci/php:7.1-jessie-node-browsers
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # Using the RAM variation mitigates I/O contention
+      # for database intensive operations.
+      # - image: circleci/mysql:5.7-ram
+      #
+      # - image: redis:2.8.19
+
+    environment:
+      # These need to be set, even if not valid Twilio creds
+      TWILIO_ACCOUNT_SID: supsupsup
+      TWILIO_AUTH_TOKEN: yoyoyo
+      TWILIO_FROM_NUMBER: +15555555555
+
+    steps:
+      - checkout
+
+      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
+      - run: sudo docker-php-ext-install zip
+
+      # Download and cache dependencies
+
+      # composer cache
+      - restore_cache:
+          keys:
+          # "composer.lock" can be used if it is committed to the repo
+          - v1-dependencies-{{ checksum "composer.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run: composer install -n --prefer-dist
+
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+
+      # node cache
+
+      - restore_cache:
+          keys:
+            - node-v3-{{ checksum "package.json" }}
+            - node-v3-
+      - run: yarn install
+      - save_cache:
+          key: node-v3-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - ~/.yarn
+
+      # prepare the database
+      - run: touch /home/circleci/project/database/database.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite --force
+
+      # run tests with phpunit or codecept
+      - run: ./vendor/bin/phpunit
