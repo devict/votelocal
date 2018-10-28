@@ -51,7 +51,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
-      - run: touch storage/database.sqlite
+      - run: touch /home/circleci/project/database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite --force
 
       # run tests with phpunit or codecept
