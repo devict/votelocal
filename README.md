@@ -28,20 +28,36 @@ needs to set a few things:
 
 ## Developing
 
-The recommended way is to use [Homestead](https://laravel.com/docs/5.6/homestead).
+First, you'll need to run `composer install` to install our dependencies.
+
+The recommended way to get the application running locally is to use [Homestead](https://laravel.com/docs/5.6/homestead).
 
 Mainly, run `vagrant up`, and then the site should be available at
 localhost:8000. Most commands that you will need run will need to be run inside
-the vagrant box, so do `vagrant ssh` first. 
+the vagrant box, so do `vagrant ssh` first and `cd` into `~/code`.
+
+```
+$ artisan migrate
+$ artisan db:seed
+```
+
+- To run tests, run `phpunit`.
+- To connect to the database, `mysql homestead`.
+- To follow the logs, use `tail -f storage/logs/laravel.log`.
 
 To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and
 point your Twilio number's SMS receive endpoint to the ngrok tunnel URL,
 suffixed with the path `/sms/receive`.
 
-To test scheduled messages, you can manually run `php artisan schedule:run`.
+To test scheduled messages, you can manually run `artisan schedule:run` from
+within the `code` directory inside the vagrant box.
 
-To run tests, first `vagrant ssh`, then `cd code` and finally `phpunit`.
 
-## Contributing
+## Getting Involved
 
-Jump into [the issues](https://github.com/openwichita/voteict/issues)!
+VoteICT is a project maintained by [Open Wichita](http://openwichita.org), a
+part of [devICT](https://devict.org), Wichita's developer community. To
+get involved, join the [devICT Slack](https://devict.org/slack) and join the
+[#openwichita channel](https://devict.slack.com/messages/C4KJ8FL4A/).
+
+Also feel free to jump into [the issues](https://github.com/openwichita/voteict/issues)!
