@@ -48,6 +48,10 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/archive') }}">Archive</a>
+                        </li>
+
                         <!-- Authentication Links -->
                         @guest
                             <!-- Hidden login and register links -->

@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class ScheduledMessage extends Model
 {
@@ -11,10 +11,9 @@ class ScheduledMessage extends Model
         'body', 'send_at', 'sent',
     ];
 
-    public function getSendAtAttribute($value)
-    {
-        return Carbon::parse($value)->format('Y-m-d\TH:i');
-    }
+    protected $dates = [
+        'send_at',
+    ];
 
     public function messages()
     {
@@ -24,5 +23,10 @@ class ScheduledMessage extends Model
     public static function scopeReadyToSend($query)
     {
         return $query->where('sent', false)->where('send_at', '<=', Carbon::now());
+    }
+
+    public static function scopeSent($query)
+    {
+        return $query->where('sent', true);
     }
 }

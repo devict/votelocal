@@ -10494,3 +10494,11 @@ body {
   color: #0190bc;
 }
 
+.page-title {
+  font-size: 1.25rem;
+  color: #0190bc;
+  padding-bottom: .5rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+

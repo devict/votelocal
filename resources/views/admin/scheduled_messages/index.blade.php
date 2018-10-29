@@ -26,7 +26,7 @@
                             @foreach ($scheduled_messages as $scheduled_message)
                                 <tr>
                                     <td>{{ $scheduled_message->sent ? 'X' : '' }}</td>
-                                    <td>{{ date('m/d/Y @ g:i A', strtotime($scheduled_message->send_at)) }}</td>
+                                    <td>{{ $scheduled_message->send_at->format('m/d/Y g:i A') }}</td>
                                     <td>{{ $scheduled_message->body }}</td>
                                     <td>
                                     @if ($scheduled_message->sent)

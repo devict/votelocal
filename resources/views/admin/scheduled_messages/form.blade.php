@@ -9,7 +9,7 @@
 
     <div class="form-group">
         <label class="form-label" for="send_at">Send At</label>
-        <input class="form-control" type="datetime-local" name="send_at" id="send_at" value="{{ $scheduled_message->send_at }}">
+        <input class="form-control" type="datetime-local" name="send_at" id="send_at" value="{{ $scheduled_message->send_at->format('Y-m-d\TH:i') }}">
     </div>
 
     <button type="submit" class="btn btn-success">
