@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\ScheduledMessage;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class ScheduledMessageController extends Controller
 {
@@ -24,6 +27,7 @@ class ScheduledMessageController extends Controller
 
     function new () {
         $scheduled_message = new ScheduledMessage();
+        $scheduled_message->send_at = Carbon::now()->add(CarbonInterval::hours(1));
         return view('admin.scheduled_messages.new', [
             'scheduled_message' => $scheduled_message,
         ]);
@@ -43,7 +47,7 @@ class ScheduledMessageController extends Controller
 
         ScheduledMessage::create([
             'body' => $request->input('body'),
-            'send_at' => $request->input('send_at'),
+            'send_at' => new Carbon($request->input('send_at')),
         ]);
 
         return redirect('/admin/scheduled_messages');
