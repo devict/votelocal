@@ -7,7 +7,7 @@
     @foreach($messages as $message)
         <div class="card mb-5">
             <div class="card-body">
-                <p class="lead">{{ $message->body }}</p>
+                <p class="lead">{!! $message->html !!}</p>
 
                 <small class="mt-3 d-block text-muted text-monospace">
                     {{ $message->send_at->toDayDateTimeString() }}

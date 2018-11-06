@@ -29,4 +29,10 @@ class ScheduledMessage extends Model
     {
         return $query->where('sent', true);
     }
+
+    public function getHtmlAttribute()
+    {
+        // LinkFinder in `yarri/link-finder` package
+        return (new \LinkFinder)->process($this->attributes['body']);
+    }
 }

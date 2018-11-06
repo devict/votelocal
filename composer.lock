@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "40d1ca5895d34e5d3d5aaf097ef77585",
+    "content-hash": "16aaf40e786ac3a301a80f4288afafc7",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2405,6 +2405,55 @@
                 "environment"
             ],
             "time": "2018-07-29T20:33:41+00:00"
+        },
+        {
+            "name": "yarri/link-finder",
+            "version": "v2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yarri/LinkFinder.git",
+                "reference": "9bf6f7b1f50c53ec67ef23a1db01c2e5420f97e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yarri/LinkFinder/zipball/9bf6f7b1f50c53ec67ef23a1db01c2e5420f97e7",
+                "reference": "9bf6f7b1f50c53ec67ef23a1db01c2e5420f97e7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "codacy/coverage": "dev-master",
+                "phpunit/phpunit": "4.8.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaromir Tomek",
+                    "homepage": "https://github.com/yarri"
+                }
+            ],
+            "description": "In a plain text document the LinkFinder searches for URLs and email addresses and makes them clickable, in a HTML document searches for missing links and makes them clickable too.",
+            "homepage": "https://github.com/yarri/LinkFinder",
+            "keywords": [
+                "e-mail",
+                "email",
+                "link",
+                "url",
+                "urlize",
+                "urlizer"
+            ],
+            "time": "2018-04-06T12:06:04+00:00"
         }
     ],
     "packages-dev": [
