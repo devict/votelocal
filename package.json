@@ -18,6 +18,9 @@
     "laravel-mix": "^2.0",
     "lodash": "^4.17.4",
     "popper.js": "^1.12",
+		"js-yaml": "^3.13.1",
+		"webpack-dev-server": "^3.1.11",
+		"mem": "^4.0.0",
     "vue": "^2.5.7"
   }
 }
