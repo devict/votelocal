@@ -55,9 +55,9 @@ within the `code` directory inside the vagrant box.
 
 ## Getting Involved
 
-VoteICT is a project maintained by [Open Wichita](http://openwichita.org), a
-part of [devICT](https://devict.org), Wichita's developer community. To
-get involved, join the [devICT Slack](https://devict.org/slack) and join the
-[#openwichita channel](https://devict.slack.com/messages/C4KJ8FL4A/).
+VoteICT is a project maintained by part of [devICT](https://devict.org),
+Wichita's developer community. To get involved, join the [devICT
+Slack](https://devict.org/slack)!
 
-Also feel free to jump into [the issues](https://github.com/openwichita/voteict/issues)!
+Also feel free to jump into [the
+issues](https://github.com/openwichita/voteict/issues)!
