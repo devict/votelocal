@@ -32,7 +32,19 @@ First, you'll need to run `composer install` to install our dependencies.
 
 The recommended way to get the application running locally is to use [Homestead](https://laravel.com/docs/5.6/homestead).
 
-Mainly, run `vagrant up`, and then the site should be available at
+_Note: if you have a global Homestead setup already, these instructions may not
+work correctly._
+
+As a quickstart, you can copy `Homestead.yaml.example` to `Homestead.yaml`, and
+update the line pointing to where the voteict code is stored locally.
+
+Second, you will want to put an `/etc/hosts` entry for..
+
+```
+192.168.10.10 homestead.local
+```
+
+Then, run `vagrant up`, and then the site should be available at
 localhost:8000. Most commands that you will need run will need to be run inside
 the vagrant box, so do `vagrant ssh` first and `cd` into `~/code`.
 
