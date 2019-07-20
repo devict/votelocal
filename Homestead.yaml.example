@@ -1,0 +1,34 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 2
+provider: virtualbox
+
+authorize: ~/.ssh/id_rsa.pub
+
+keys:
+    - ~/.ssh/id_rsa
+
+folders:
+    - map: ~/code/voteict
+      to: /home/vagrant/code
+
+sites:
+    - map: homestead.local
+      to: /home/vagrant/code/public
+
+databases:
+    - homestead
+    - homestead_testing
+
+features:
+    - mariadb: false
+    - ohmyzsh: false
+    - webdriver: false
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
