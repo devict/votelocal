@@ -31,7 +31,8 @@ class ScheduledMessagesTest extends TestCase
         $request->assertRedirect('/admin/scheduled_messages');
 
         $this->assertDatabaseHas('scheduled_messages', [
-            'body' => $message->body,
+            'body_en' => $message->body_en,
+            'body_es' => $message->body_es,
             'send_at' => $message->send_at,
             'sent' => false,
         ]);
@@ -56,7 +57,8 @@ class ScheduledMessagesTest extends TestCase
         $request->assertRedirect('/admin/scheduled_messages/new');
 
         $this->assertDatabaseMissing('scheduled_messages', [
-            'body' => $message->body,
+            'body_en' => $message->body_en,
+            'body_es' => $message->body_es,
             'send_at' => $message->send_at,
         ]);
     }
@@ -70,12 +72,14 @@ class ScheduledMessagesTest extends TestCase
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->create();
-        $newBody = 'New message body!';
+        $newBodyEN = 'New!';
+        $newBodyES = 'Nuevo!';
 
         $request = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
-                'body' => $newBody,
+                'body_en' => $newBodyEN,
+                'body_es' => $newBodyES,
                 'send_at' => $message->send_at,
             ]);
 
@@ -83,7 +87,8 @@ class ScheduledMessagesTest extends TestCase
 
         $this->assertDatabaseHas('scheduled_messages', [
             'id' => $message->id,
-            'body' => $newBody,
+            'body_en' => $newBodyEN,
+            'body_es' => $newBodyES,
             'send_at' => $message->send_at,
         ]);
     }
@@ -99,7 +104,8 @@ class ScheduledMessagesTest extends TestCase
         $message = factory(ScheduledMessage::class)->create();
         $messageAttrCheck = [
             'id' => $message->id,
-            'body' => $message->body,
+            'body_en' => $message->body_en,
+            'body_es' => $message->body_es,
             // We don't check send at because the DB record includes seconds
         ];
 
@@ -128,7 +134,8 @@ class ScheduledMessagesTest extends TestCase
 
         $messageAttrCheck = [
             'id' => $message->id,
-            'body' => $message->body,
+            'body_en' => $message->body_en,
+            'body_es' => $message->body_es,
         ];
 
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
@@ -144,7 +151,7 @@ class ScheduledMessagesTest extends TestCase
         $request = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
-                'body' => 'sup',
+                'body_en' => 'sup',
             ]);
 
         $request->assertRedirect('/admin/scheduled_messages');
@@ -154,7 +161,7 @@ class ScheduledMessagesTest extends TestCase
 
     /**
      * Test viewing sent messages of a processed scheduled message.
-     * 
+     *
      * @return void
      */
     public function testViewMessagesOfSentScheduledMessage()
@@ -175,7 +182,8 @@ class ScheduledMessagesTest extends TestCase
 
         // expect to see each of the messages sent
         foreach ($messages as $message) {
-            $request->assertSee($message->body);
+            $request->assertSee($message->body_en);
+            $request->assertSee($message->body_es);
             $request->assertSee($message->to);
         }
     }
