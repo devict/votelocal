@@ -3,6 +3,7 @@ ip: "192.168.10.10"
 memory: 2048
 cpus: 2
 provider: virtualbox
+version: 7.2.1
 
 authorize: ~/.ssh/id_rsa.pub
 
