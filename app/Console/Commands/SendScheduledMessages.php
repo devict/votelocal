@@ -51,9 +51,15 @@ class SendScheduledMessages extends Command
 
                 foreach ($subscribers as $subscriber) {
                     foreach ($scheduled_messages as $message) {
+                        $body = $message->body_en;
+                        switch ($subscriber->locale) {
+                        case 'es':
+                            $body = $message->body_es;
+                            break;
+                        }
                         $sms->send(
                             $subscriber->number,
-                            $message->body,
+                            $body,
                             ['scheduled_message_id' => $message->id]
                         );
 
