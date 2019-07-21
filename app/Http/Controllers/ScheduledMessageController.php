@@ -86,7 +86,7 @@ class ScheduledMessageController extends Controller
 
         $scheduled_message->body_en = $request->input('body_en');
         $scheduled_message->body_es = $request->input('body_es');
-        $scheduled_message->send_at = $request->input('send_at');
+        $scheduled_message->send_at = new Carbon($request->input('send_at'));
         $scheduled_message->save();
 
         return redirect('/admin/scheduled_messages');
