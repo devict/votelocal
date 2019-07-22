@@ -35,7 +35,8 @@ class ScheduledMessageController extends Controller
 
     function create (Request $request) {
         $validator = Validator::make($request->all(), [
-            'body' => 'required|max:260',
+            'body_en' => 'required|max:260',
+            'body_es' => 'required|max:260',
             'send_at' => 'required|date|after:now',
         ]);
 
@@ -46,7 +47,8 @@ class ScheduledMessageController extends Controller
         }
 
         ScheduledMessage::create([
-            'body' => $request->input('body'),
+            'body_en' => $request->input('body_en'),
+            'body_es' => $request->input('body_es'),
             'send_at' => new Carbon($request->input('send_at')),
         ]);
 
@@ -72,7 +74,8 @@ class ScheduledMessageController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'body' => 'required|max:260',
+            'body_en' => 'required|max:260',
+            'body_es' => 'required|max:260',
             'send_at' => 'required|date|after:now',
         ]);
 
@@ -81,8 +84,9 @@ class ScheduledMessageController extends Controller
                 ->withErrors($validator);
         }
 
-        $scheduled_message->body = $request->input('body');
-        $scheduled_message->send_at = $request->input('send_at');
+        $scheduled_message->body_en = $request->input('body_en');
+        $scheduled_message->body_es = $request->input('body_es');
+        $scheduled_message->send_at = new Carbon($request->input('send_at'));
         $scheduled_message->save();
 
         return redirect('/admin/scheduled_messages');

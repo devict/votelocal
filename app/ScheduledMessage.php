@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ScheduledMessage extends Model
 {
     protected $fillable = [
-        'body', 'send_at', 'sent',
+        'body_en', 'body_es', 'send_at', 'sent',
     ];
 
     protected $dates = [
@@ -32,7 +32,8 @@ class ScheduledMessage extends Model
 
     public function getHtmlAttribute()
     {
+        // TODO: show Spanish version here too
         // LinkFinder in `yarri/link-finder` package
-        return (new \LinkFinder)->process($this->attributes['body']);
+        return (new \LinkFinder)->process($this->attributes['body_en']);
     }
 }
