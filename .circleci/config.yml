@@ -12,7 +12,7 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # Using the RAM variation mitigates I/O contention
       # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
+      - image: circleci/mysql:5.7-ram
       #
       # - image: redis:2.8.19
 
@@ -21,12 +21,27 @@ jobs:
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
+      MYSQL_ROOT_PASSWORD: rootpw
+      MYSQL_DATABASE: homestead_testing
+      MYSQL_USER: forge
+      MYSQL_PASSWORD: ''
 
     steps:
       - checkout
 
-      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
+      - run: sudo apt update && sudo apt install zlib1g-dev
       - run: sudo docker-php-ext-install zip
+      - run:
+        # Our primary container isn't MYSQL so run a sleep command until it's ready.
+        name: Waiting for MySQL to be ready
+        command: |
+          for i in `seq 1 10`;
+          do
+            nc -z 127.0.0.1 3306 && echo Success && exit 0
+            echo -n .
+            sleep 1
+          done
+          echo Failed waiting for MySQL && exit 1
 
       # Download and cache dependencies
 
