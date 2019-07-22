@@ -13,6 +13,10 @@ jobs:
       # Using the RAM variation mitigates I/O contention
       # for database intensive operations.
       - image: circleci/mysql:5.7-ram
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: homestead_testing
+          MYSQL_USER: forge
       #
       # - image: redis:2.8.19
 
@@ -21,10 +25,6 @@ jobs:
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
-      MYSQL_ROOT_PASSWORD: rootpw
-      MYSQL_DATABASE: homestead_testing
-      MYSQL_USER: forge
-      MYSQL_PASSWORD: ''
 
     steps:
       - checkout
@@ -74,8 +74,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
-      - run: touch /home/circleci/project/database/database.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite --force
+      - run: php artisan migrate --env=testing --database=mysql_testing --force
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
