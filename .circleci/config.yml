@@ -10,7 +10,8 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: homestead_testing
-          MYSQL_USER: forge
+          MYSQL_USER: circleci
+          MYSQL_PASSWORD: circleci
           MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     environment:
@@ -19,6 +20,8 @@ jobs:
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
       DB_DATABASE: homestead_testing
+      DB_USERNAME: circleci
+      DB_PASSWORD: circleci
 
     steps:
       - checkout
