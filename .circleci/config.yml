@@ -6,11 +6,12 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.1-jessie-node-browsers
-      - image: circleci/mysql:8.0.4
+      - image: circleci/mysql:5.7-ram
         environment:
-          MYSQL_ROOT_PASSWORD: circleci
+          MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: homestead_testing
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_USER: circleci
+          MYSQL_PASSWORD: circleci
 
     environment:
       # These need to be set, even if not valid Twilio creds
