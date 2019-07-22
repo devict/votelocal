@@ -23,8 +23,8 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt update && sudo apt install zlib1g-dev mysql-client libxml2
-      - run: sudo docker-php-ext-install zip pdo pdo_mysql mysqli mbstring tokenizer xml ctype json
+      - run: sudo apt update && sudo apt install zlib1g-dev mysql-client
+      - run: sudo docker-php-ext-install zip pdo pdo_mysql mysqli mbstring tokenizer ctype json
       - run:
           # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
