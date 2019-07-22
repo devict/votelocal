@@ -8,10 +8,8 @@ jobs:
       - image: circleci/php:7.1-jessie-node-browsers
       - image: circleci/mysql:8.0.4
         environment:
-          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_ROOT_PASSWORD: circleci
           MYSQL_DATABASE: homestead_testing
-          MYSQL_USER: circleci
-          MYSQL_PASSWORD: circleci
           MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     environment:
@@ -20,7 +18,7 @@ jobs:
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
       DB_DATABASE: homestead_testing
-      DB_USERNAME: circleci
+      DB_USERNAME: root
       DB_PASSWORD: circleci
 
     steps:
