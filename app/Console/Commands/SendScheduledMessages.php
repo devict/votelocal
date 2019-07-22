@@ -54,7 +54,9 @@ class SendScheduledMessages extends Command
                         $body = $message->body_en;
                         switch ($subscriber->locale) {
                         case 'es':
-                            $body = $message->body_es;
+                            if ($message->body_es && $message->body_es != '') {
+                                $body = $message->body_es;
+                            }
                             break;
                         }
                         $sms->send(
