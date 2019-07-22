@@ -18,12 +18,13 @@ jobs:
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
+      DB_DATABASE: homestead_testing
 
     steps:
       - checkout
 
-      - run: sudo apt update && sudo apt install zlib1g-dev
-      - run: sudo docker-php-ext-install zip
+      - run: sudo apt update && sudo apt install zlib1g-dev mysql-client
+      - run: sudo docker-php-ext-install zip pdo pdo_mysql mysqli mbstring tokenizer xml ctype json
       - run:
           # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready
