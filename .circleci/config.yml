@@ -6,19 +6,12 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.1-jessie-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      - image: circleci/mysql:5.7-ram
+      - image: circleci/mysql:8.0.4
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: homestead_testing
           MYSQL_USER: forge
-      #
-      # - image: redis:2.8.19
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     environment:
       # These need to be set, even if not valid Twilio creds
