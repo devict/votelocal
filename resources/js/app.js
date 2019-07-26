@@ -1,11 +1,7 @@
-require('./bootstrap');
+import './bootstrap';
+import Vue from 'vue';
 
-window.Vue = require('vue');
-
-Vue.component(
-    'character-count',
-    require('./components/CharacterCount').default
-);
+Vue.component('character-count', () => import('./components/CharacterCount'));
 
 const app = new Vue({
     el: '#app',
