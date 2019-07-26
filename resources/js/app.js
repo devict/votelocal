@@ -16,7 +16,11 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component(
+    'character-count',
+    require('./components/CharacterCount').default
+);
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });
