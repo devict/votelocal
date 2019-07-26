@@ -2,7 +2,9 @@
     <div>
         <slot></slot>
         <slot name="label" :limit="limit" :remaining="remaining" :count="count">
-            <small class="text-muted">{{ count }} characters</small>
+            <small class="text-muted">
+                {{ count }} character{{ count !== 1 ? 's' : '' }}
+            </small>
         </slot>
     </div>
 </template>
