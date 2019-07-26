@@ -11,7 +11,11 @@
 
 <script>
 export default {
-    props: ['limit'],
+    props: {
+        limit: {
+            default: 0,
+        },
+    },
 
     data: () => ({
         count: 0,
