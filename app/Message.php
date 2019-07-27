@@ -51,7 +51,20 @@ class Message extends Model
      */
     public function hasTrigger($key, $locale = null)
     {
-        $triggers = app('translator')->get('triggers.' . $key, [], $locale);
+        $triggers = [];
+
+        if ($locale) {
+            $triggers = app('translator')->get('triggers.' . $key, [], $locale);
+        } else {
+            // Collect triggers for all locales.
+            $locales = array_diff(scandir(resource_path('lang')), ['..', '.']);
+            foreach ($locales as $l) {
+                $ts = app('translator')->get('triggers.' . $key, [], $l);
+                foreach ($ts as $t) {
+                    $triggers[] = $t;
+                }
+            }
+        }
 
         return in_array($this->normalizedBody(), $triggers);
     }
