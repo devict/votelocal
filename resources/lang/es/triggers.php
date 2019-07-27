@@ -7,6 +7,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'subscribe'   => ['suscribir', 'suscribo', 'comienzo', 'spanish', 'español', 'española', 'iniciar'],
+    'subscribe'   => ['suscribir', 'suscribo', 'comienzo', 'spanish', 'español', 'española', 'espanol', 'espanola', 'iniciar'],
     'unsubscribe' => ['unsuscribir', 'detener'],
 ];
