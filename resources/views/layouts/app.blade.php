@@ -49,7 +49,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('archive') }}">Archive</a>
+                            <a class="nav-link{{ Request::is('*archive') ? ' active' : '' }}" href="{{ route('archive') }}">Archive</a>
                         </li>
 
                         <!-- Authentication Links -->
@@ -76,6 +76,30 @@
                                 </div>
                             </li>
                         @endguest
+
+                        <li class="d-flex align-items-center ml-md-4">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                @foreach(config('voteict.locales') as $name => $locale)
+                                    @php
+                                        $current = App::getLocale();
+                                        $segments = Request::segments();
+                                        if ($current === 'en') {
+                                            array_unshift($segments, $locale);
+                                        } else {
+                                            $segments[0] = $locale !== 'en' ? $locale : '' ;
+                                        }
+                                    @endphp
+                                    @if($current === $locale)
+                                        <span class="btn btn-light active">{{ $name }}</span>
+                                    @else
+                                        <a
+                                            class="btn btn-light"
+                                            href="{{ url(implode('/', $segments)) }}"
+                                        >{{ $name }}</a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
