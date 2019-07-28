@@ -4,12 +4,16 @@
     @csrf
     <div class="form-group">
         <label class="form-label" for="body_en">Body (English)</label>
-        <textarea class="form-control" name="body_en" id="body_en" cols="30" rows="3">{{ $scheduled_message->body_en }}</textarea>
+        <character-count>
+            <textarea class="form-control" name="body_en" id="body_en" cols="30" rows="3">{{ $scheduled_message->body_en }}</textarea>
+        </character-count>
     </div>
 
     <div class="form-group">
         <label class="form-label" for="body_es">Body (Spanish)</label>
-        <textarea class="form-control" name="body_es" id="body_es" cols="30" rows="3">{{ $scheduled_message->body_es }}</textarea>
+        <character-count>
+            <textarea class="form-control" name="body_es" id="body_es" cols="30" rows="3">{{ $scheduled_message->body_es }}</textarea>
+        </character-count>
     </div>
 
     <div class="form-group">
