@@ -52,11 +52,37 @@
                             <a class="nav-link{{ Request::is('*archive') ? ' active' : '' }}" href="{{ route('archive') }}">Archive</a>
                         </li>
 
+                        @if (! Request::is('admin*'))
+                            <li class="d-flex align-items-center ml-md-4">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    @foreach(config('voteict.locales') as $name => $locale)
+                                        @php
+                                            $current = App::getLocale();
+                                            $segments = Request::segments();
+                                            if ($current === 'en') {
+                                                array_unshift($segments, $locale);
+                                            } else {
+                                                $segments[0] = $locale !== 'en' ? $locale : '' ;
+                                            }
+                                        @endphp
+                                        @if($current === $locale)
+                                            <span class="btn btn-light active">{{ $name }}</span>
+                                        @else
+                                            <a
+                                                class="btn btn-light"
+                                                href="{{ url(implode('/', $segments)) }}"
+                                            >{{ $name }}</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+                        @endif
+
                         <!-- Authentication Links -->
                         @guest
                             <!-- Hidden login and register links -->
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown ml-md-4">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -77,29 +103,6 @@
                             </li>
                         @endguest
 
-                        <li class="d-flex align-items-center ml-md-4">
-                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                @foreach(config('voteict.locales') as $name => $locale)
-                                    @php
-                                        $current = App::getLocale();
-                                        $segments = Request::segments();
-                                        if ($current === 'en') {
-                                            array_unshift($segments, $locale);
-                                        } else {
-                                            $segments[0] = $locale !== 'en' ? $locale : '' ;
-                                        }
-                                    @endphp
-                                    @if($current === $locale)
-                                        <span class="btn btn-light active">{{ $name }}</span>
-                                    @else
-                                        <a
-                                            class="btn btn-light"
-                                            href="{{ url(implode('/', $segments)) }}"
-                                        >{{ $name }}</a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        </li>
                     </ul>
                 </div>
             </div>
