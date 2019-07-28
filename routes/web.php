@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/archive', 'ArchiveController@index');
-
 Auth::routes();
 
 // TODO: use a middleware to verify requests from Twilio
@@ -42,3 +38,13 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
 });
 
 Route::get('/vcard', 'VCardController@index')->name('vcard');
+
+$locale = App::getLocale();
+if ($locale === 'en') {
+    $locale = '';
+}
+
+Route::prefix($locale)->group(function () {
+    Route::get('/archive', 'ArchiveController@index')->name('archive');
+    Route::get('/', 'HomeController@index')->name('home');
+});

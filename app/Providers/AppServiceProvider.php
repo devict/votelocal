@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,8 +16,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (env('APP_ENV') == 'production') {
-            \URL::forceScheme('https');
+        if (config('app.env') == 'production') {
+            URL::forceScheme('https');
+        }
+
+        $locale = Request::segment(1);
+        if (in_array($locale, config('voteict.locales'))) {
+            App::setLocale($locale);
         }
     }
 
