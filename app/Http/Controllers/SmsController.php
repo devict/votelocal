@@ -33,19 +33,41 @@ class SmsController extends Controller
 
         if ($subscriber && $subscriber->subscribed) {
             // Already a subscriber
-            App::setLocale($subscriber->locale);
+            if ($message->hasTrigger('subscribe')) {
+                // Check if user is resubscribing in a different locale.
+                $locale = $message->getLocaleFromTrigger('subscribe');
+                if ($locale != $subscriber->locale) {
+                    $subscriber->update([
+                        'locale' => $locale,
+                    ]);
+
+                    return $sms->response($subscriber->number, __('sms.updateLocale', [], $subscriber->locale));
+                }
+
+                // Already subscribed.
+                return $sms->response($subscriber->number, __('sms.alreadySubscribed', [], $subscriber->locale));
+            }
 
             if ($message->hasTrigger('unsubscribe')) {
-                $subscriber->unsubscribe();
+                // Update locale if necessary.
+                $locale = $message->getLocaleFromTrigger('unsubscribe');
+                if ($locale != $subscriber->locale) {
+                    $subscriber->update([
+                        'locale' => $locale,
+                    ]);
+                }
 
-                return $sms->response($subscriber->number, __('sms.unsubscribed'));
+                $subscriber->unsubscribe();
+                return $sms->response($subscriber->number, __('sms.unsubscribed', [], $subscriber->locale));
             }
+
+            return response(200);
         }
 
         // Not currently subscribed
         $locale = $message->getLocaleFromTrigger('subscribe');
         if ($locale) {
-            if (! $subscriber) {
+            if (!$subscriber) {
                 $subscriber = Subscriber::create([
                     'number' => $message->from,
                     'locale' => $locale
@@ -56,9 +78,7 @@ class SmsController extends Controller
                 'locale'     => $locale
             ]);
 
-            App::setLocale($subscriber->locale);
-
-            return $sms->response($subscriber->number, __('sms.subscribed'));
+            return $sms->response($subscriber->number, __('sms.subscribed', [], $subscriber->locale));
         }
 
         return response(200);
