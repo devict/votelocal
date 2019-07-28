@@ -13,12 +13,6 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/vcard', function () {
-    return response()->view('vcard')
-        ->header('Content-Type', 'text/vcard; charset=UTF-8')
-        ->header('Content-Disposition', 'attachment; filename=' . str_slug(config('app.name')) . '.vcf;');
-})->name('vcard');
-
 Route::get('/archive', 'ArchiveController@index');
 
 Auth::routes();
@@ -46,3 +40,5 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::put('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@update');
     Route::get('/admin/scheduled_messages/{scheduled_message}/delete', 'ScheduledMessageController@destroy');
 });
+
+Route::get('/vcard', 'VCardController@index')->name('vcard');
