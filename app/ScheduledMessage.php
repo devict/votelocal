@@ -2,7 +2,9 @@
 
 namespace App;
 
+use LinkFinder;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 
 class ScheduledMessage extends Model
@@ -32,8 +34,11 @@ class ScheduledMessage extends Model
 
     public function getHtmlAttribute()
     {
-        // TODO: show Spanish version here too
-        // LinkFinder in `yarri/link-finder` package
-        return (new \LinkFinder)->process($this->attributes['body_en']);
+        $key = 'body_'.App::getLocale();
+        if (! array_key_exists($key, $this->attributes)) {
+            $key = 'body_en';
+        }
+
+        return (new LinkFinder)->process($this->attributes[$key]);
     }
 }

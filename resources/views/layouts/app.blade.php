@@ -33,7 +33,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,14 +49,40 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/archive') }}">Archive</a>
+                            <a class="nav-link{{ Request::is('*archive') ? ' active' : '' }}" href="{{ route('archive') }}">Archive</a>
                         </li>
+
+                        @if (! Request::is('admin*'))
+                            <li class="d-flex align-items-center ml-md-4">
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                    @foreach(config('voteict.locales') as $name => $locale)
+                                        @php
+                                            $current = App::getLocale();
+                                            $segments = Request::segments();
+                                            if ($current === 'en') {
+                                                array_unshift($segments, $locale);
+                                            } else {
+                                                $segments[0] = $locale !== 'en' ? $locale : '' ;
+                                            }
+                                        @endphp
+                                        @if($current === $locale)
+                                            <span class="btn btn-light active">{{ $name }}</span>
+                                        @else
+                                            <a
+                                                class="btn btn-light"
+                                                href="{{ url(implode('/', $segments)) }}"
+                                            >{{ $name }}</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </li>
+                        @endif
 
                         <!-- Authentication Links -->
                         @guest
                             <!-- Hidden login and register links -->
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown ml-md-4">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
@@ -76,6 +102,7 @@
                                 </div>
                             </li>
                         @endguest
+
                     </ul>
                 </div>
             </div>
