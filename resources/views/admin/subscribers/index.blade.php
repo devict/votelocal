@@ -12,6 +12,7 @@
                             <tr>
                                 <th>Subscriber Number</th>
                                 <th>Subscribed?</th>
+                                <th>Locale</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th>Actions</th>
@@ -24,6 +25,7 @@
                                         <a href="{{ route('subscribers.admin.messages', $subscriber) }}">{{ $subscriber->number }}</a>
                                     </td>
                                     <td>{{ $subscriber->subscribed ? 'X' : '' }}</td>
+                                    <td>{{ $subscriber->locale }}</td>
                                     <td>{{ $subscriber->created_at->format('m/d/Y') }}</td>
                                     <td>{{ $subscriber->updated_at->format('m/d/Y') }}</td>
                                     <td>
