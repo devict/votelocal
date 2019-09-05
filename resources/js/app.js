@@ -1,8 +1,7 @@
 import './bootstrap';
 import Vue from 'vue';
-import CharacterCount from './components/CharacterCount';
 
-Vue.component('character-count', () => CharacterCount);
+Vue.component('character-count', () => import('./components/CharacterCount'));
 
 const app = new Vue({
     el: '#app',
