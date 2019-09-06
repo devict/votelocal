@@ -3,7 +3,7 @@ import Vue from 'vue';
 
 Vue.component('character-count', () =>
     import(
-        /* webpackChunkName: '/js/character-count' */ './components/CharacterCount'
+        /* webpackChunkName: 'js/character-count' */ './components/CharacterCount'
     )
 );
 
