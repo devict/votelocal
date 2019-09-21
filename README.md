@@ -28,29 +28,41 @@ needs to set a few things:
 
 ## Developing
 
-First, you'll need to run `composer install` to install our dependencies.
-
 The recommended way to get the application running locally is to use [Homestead](https://laravel.com/docs/5.6/homestead).
 
 _Note: if you have a global Homestead setup already, these instructions may not
 work correctly._
 
 As a quickstart, you can copy `Homestead.yaml.example` to `Homestead.yaml`, and
-update the line pointing to where the voteict code is stored locally.
+update the line pointing to where the voteict code is stored locally. For
+example, if you installed Homestead into `~/Homestead` and your cloned repo is
+in `~/projects/voteict`, you should have a `~/Homestead/Homestead.yaml` file
+with a `folders` entry like...
 
-Second, you will want to put an `/etc/hosts` entry for..
+```
+folders:
+    - map: ~/projects/voteict
+      to: /home/vagrant/code
+```
+
+Add an `/etc/hosts` entry for...
 
 ```
 192.168.10.10 homestead.local
 ```
 
+Within your repo, `cp .env.example .env`.
+
 Then, run `vagrant up`, and then the site should be available at
-localhost:8000. Most commands that you will need run will need to be run inside
-the vagrant box, so do `vagrant ssh` first and `cd` into `~/code`.
+localhost:8000. Most commands will need to be run inside the vagrant box, so
+do `vagrant ssh` first and `cd` into `~/code`.
 
 ```
+$ composer install
+$ artisan key:generate
 $ artisan migrate
 $ artisan db:seed
+$ npm i
 ```
 
 - To run tests, run `phpunit`.
