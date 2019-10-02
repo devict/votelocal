@@ -25,7 +25,7 @@ class SubscriberTest extends TestCase
     {
         $message = create('App\Message');
         $this->signIn(['admin' => 1])
-            ->get(route('subscribers.admin.messages', $message->subscriber))
+            ->get(route('subscribers.admin.edit', $message->subscriber))
             ->assertSee($message->subscriber->number);
     }
 
