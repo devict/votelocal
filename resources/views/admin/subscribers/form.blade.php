@@ -1,24 +1,40 @@
 @include ('partials.errors')
 
-<form id="subscriber_form" action="{{ $subscriber->exists ? route('subscribers.admin.update', $subscriber) : route('subscribers.admin.create') }}" method="POST">
-    @csrf
-    <div class="form-group">
-        <label class="form-label" for="body">Number</label>
-        <input type="text" class="form-control" name="number" id="number" value="{{ old('number', $subscriber->number) }}"{{ $subscriber->exists ? ' disabled' : '' }}>
+<form action="{{ $subscriber->exists ? route('subscribers.admin.update', $subscriber) : route('subscribers.admin.create') }}" method="POST">
+    <div class="p-8">
+        @csrf
+        @include('partials/fields/input', [
+            'label' => __('Number'),
+            'name' => 'number',
+            'value' => old('number', $subscriber->number),
+            'attributes' => [
+                'required' => true,
+                'disabled' => $subscriber->exists,
+                'class' => $subscriber->exists ? 'bg-gray-300' : '',
+            ]
+        ])
+
+        @include('partials/fields/checkbox', [
+            'label' => __('Subscribed'),
+            'name' => 'subscribed',
+            'class' => 'mt-6',
+            'checked' => old('subscribed', $subscriber->subscribed),
+        ])
     </div>
+    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center">
+        @if ($subscriber->exists)
+            <a
+                href="{{ route('subscribers.admin.destroy', $subscriber) }}"
+                onclick="return confirm('Are you sure?');"
+                class="focus:text-red-500 hover:text-red-500"
+            >
+                Delete Subscriber
+            </a>
+            <input type="hidden" name="_method" value="PUT">
+        @endif
 
-    <div class="form-group">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="subscribed" id="subscribed" value="1"{{ 1 == old('subscribed', $subscriber->subscribed) ? ' checked' : '' }}>
-            <label class="form-check-label" for="subscribed">Subscribed</label>
-        </div>
+        <button class="btn">
+            {{ $subscriber->exists ? 'Update' : 'Create' }}
+        </button>
     </div>
-
-    <button type="submit" class="btn btn-success">
-        {{ $subscriber->exists ? 'Update' : 'Create' }}
-    </button>
-
-    @if ($subscriber->exists)
-        <input type="hidden" name="_method" value="PUT">
-    @endif
 </form>

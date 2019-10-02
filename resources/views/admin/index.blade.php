@@ -1,17 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    It's the admin area!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<h1 class="mb-8 font-bold text-2xl">Dashboard</h1>
+<p>This is the admin area</p>
 @endsection

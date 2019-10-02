@@ -17,16 +17,14 @@ export default {
         },
     },
 
-    data: () => ({
+    data: self => ({
         count: 0,
-        listener: null,
+        listener: event => {
+            self.count = event.target.value.length;
+        },
     }),
 
     mounted() {
-        this.listener = event => {
-            this.count = event.target.value.length;
-        };
-
         this.$slots.default[0].elm.addEventListener('input', this.listener);
     },
 
