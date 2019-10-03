@@ -8,7 +8,10 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    It's the admin area!
+                    <p><strong>Total subscribers</strong>: {{ $subscriberCount }}</p>
+                    <p><strong>Subscribes in the last week</strong>: {{ $subscribersThisWeek }}</p>
+                    <p><strong>English Subscribers</strong>: {{ $subscribersEN }}</p>
+                    <p><strong>Spanish Subscribers</strong>: {{ $subscribersES }}</p>
                 </div>
             </div>
         </div>
