@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12 my-5">
             <h1 class="text-center">
-                @lang('home.text_subscribe_cta', ['link' => 'tel:+1' . env('TWILIO_FROM_NUMBER')])
+                @lang('home.text_subscribe_cta', ['link' => 'sms://+1' . env('TWILIO_FROM_NUMBER') . ';?&body=' . __('home.text_subscribe_keyword')])
             </h1>
             <h2 class="text-center">
                 @lang('home.add_to_contacts_cta', ['link' => 'tel:+1' . env('TWILIO_FROM_NUMBER')])
