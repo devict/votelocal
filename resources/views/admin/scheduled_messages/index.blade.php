@@ -18,7 +18,8 @@
                             <tr>
                                 <th>Sent</th>
                                 <th>Send At</th>
-                                <th>Body</th>
+                                <th>Body (en)</th>
+                                <th>Body (es)</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -27,7 +28,8 @@
                                 <tr>
                                     <td>{{ $scheduled_message->sent ? 'X' : '' }}</td>
                                     <td>{{ $scheduled_message->send_at->format('m/d/Y g:i A') }}</td>
-                                    <td>{{ $scheduled_message->body }}</td>
+                                    <td>{{ $scheduled_message->body_en }}</td>
+                                    <td>{{ $scheduled_message->body_es }}</td>
                                     <td>
                                     @if ($scheduled_message->sent)
                                         <!-- TODO: create a send report view -->

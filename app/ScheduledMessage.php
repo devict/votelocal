@@ -2,13 +2,15 @@
 
 namespace App;
 
+use LinkFinder;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Model;
 
 class ScheduledMessage extends Model
 {
     protected $fillable = [
-        'body', 'send_at', 'sent',
+        'body_en', 'body_es', 'send_at', 'sent',
     ];
 
     protected $dates = [
@@ -28,5 +30,15 @@ class ScheduledMessage extends Model
     public static function scopeSent($query)
     {
         return $query->where('sent', true);
+    }
+
+    public function getHtmlAttribute()
+    {
+        $key = 'body_'.App::getLocale();
+        if (! array_key_exists($key, $this->attributes)) {
+            $key = 'body_en';
+        }
+
+        return (new LinkFinder)->process($this->attributes[$key]);
     }
 }

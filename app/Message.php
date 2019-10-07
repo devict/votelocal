@@ -35,9 +35,7 @@ class Message extends Model
      */
     public function getLocaleFromTrigger($key)
     {
-        $locales = array_diff(scandir(resource_path('lang')), ['..', '.']);
-
-        foreach ($locales as $locale) {
+        foreach (config('voteict.locales') as $locale) {
             if ($this->hasTrigger($key, $locale)) {
                 return $locale;
             }
@@ -51,7 +49,19 @@ class Message extends Model
      */
     public function hasTrigger($key, $locale = null)
     {
-        $triggers = app('translator')->get('triggers.' . $key, [], $locale);
+        $triggers = [];
+
+        if ($locale) {
+            $triggers = app('translator')->get('triggers.'.$key, [], $locale);
+        } else {
+            // Collect triggers for all locales.
+            foreach (config('voteict.locales') as $locale) {
+                $ts = app('translator')->get('triggers.'.$key, [], $locale);
+                foreach ($ts as $t) {
+                    $triggers[] = $t;
+                }
+            }
+        }
 
         return in_array($this->normalizedBody(), $triggers);
     }

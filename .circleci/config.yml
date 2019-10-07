@@ -6,27 +6,38 @@ jobs:
     docker:
       # Specify the version you desire here
       - image: circleci/php:7.1-jessie-node-browsers
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # Using the RAM variation mitigates I/O contention
-      # for database intensive operations.
-      # - image: circleci/mysql:5.7-ram
-      #
-      # - image: redis:2.8.19
+      - image: circleci/mysql:5.7-ram
+        environment:
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: homestead_testing
+          MYSQL_USER: circleci
+          MYSQL_PASSWORD: circleci
 
     environment:
       # These need to be set, even if not valid Twilio creds
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
+      DB_DATABASE: homestead_testing
+      DB_USERNAME: circleci
+      DB_PASSWORD: circleci
 
     steps:
       - checkout
 
-      - run: sudo apt update && sudo apt install zlib1g-dev libsqlite3-dev
-      - run: sudo docker-php-ext-install zip
+      - run: sudo apt update && sudo apt install zlib1g-dev mysql-client
+      - run: sudo docker-php-ext-install zip pdo pdo_mysql mysqli mbstring tokenizer ctype json
+      - run:
+          # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
 
       # Download and cache dependencies
 
@@ -59,8 +70,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
-      - run: touch /home/circleci/project/database/database.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite --force
+      - run: php artisan migrate --env=testing --database=mysql_testing --force
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit

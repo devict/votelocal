@@ -11,16 +11,6 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/vcard', function () {
-    return response()->view('vcard')
-        ->header('Content-Type', 'text/vcard; charset=UTF-8')
-        ->header('Content-Disposition', 'attachment; filename=' . str_slug(config('app.name')) . '.vcf;');
-})->name('vcard');
-
-Route::get('/archive', 'ArchiveController@index');
-
 Auth::routes();
 
 // TODO: use a middleware to verify requests from Twilio
@@ -45,4 +35,16 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::get('/admin/scheduled_messages/{scheduled_message}/messages', 'ScheduledMessageController@messages');
     Route::put('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@update');
     Route::get('/admin/scheduled_messages/{scheduled_message}/delete', 'ScheduledMessageController@destroy');
+});
+
+Route::get('/vcard', 'VCardController@index')->name('vcard');
+
+$locale = App::getLocale();
+if ($locale === 'en') {
+    $locale = '';
+}
+
+Route::prefix($locale)->group(function () {
+    Route::get('/archive', 'ArchiveController@index')->name('archive');
+    Route::get('/', 'HomeController@index')->name('home');
 });
