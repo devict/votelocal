@@ -10,6 +10,7 @@ return [
 
     'tagline' => 'Helping you be <strong>locally</strong> engaged.',
     'text_subscribe_cta' => 'Text <strong>START</strong> or <strong>INICIAR</strong> to <strong><a href=":link">864-ICT-VOTE</a></strong>',
+    'text_subscribe_keyword' => 'START',
     'add_to_contacts_cta' => '..and be sure to <a href=":link">add VoteICT to your contacts</a>!',
     'locale_support_head' => 'Spanish available!',
     'locale_support_body' => 'Text <strong>SPANISH</strong> any time to switch your preference, and <strong>ENGLISH</strong> to switch back.',
