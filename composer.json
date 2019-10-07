@@ -14,6 +14,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "nesbot/carbon": "1.34.*",
+        "thujohn/twitter": "^2.2",
         "twilio/sdk": "^5.19",
         "yarri/link-finder": "^2.3"
     },
