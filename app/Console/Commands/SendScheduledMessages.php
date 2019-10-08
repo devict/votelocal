@@ -7,6 +7,7 @@ use App\ScheduledMessage;
 use Illuminate\Console\Command;
 use App\Services\Sms\Contracts\Sms;
 use Illuminate\Support\Facades\Log;
+use \Twitter;
 
 class SendScheduledMessages extends Command
 {
@@ -44,13 +45,14 @@ class SendScheduledMessages extends Command
         $scheduled_messages = ScheduledMessage::readyToSend()->get();
 
         if ($scheduled_messages->count()) {
-            $subscribers = Subscriber::where('subscribed', true)->get();
+            foreach ($scheduled_messages as $message) {
+                $subscribers = Subscriber::where('subscribed', true)->get();
 
-            if ($subscribers->count()) {
-                Log::info('Sending ' . $scheduled_messages->count() . ' scheduled messages to ' . $subscribers->count() . ' subscribers.');
+                // Send to subscribers
+                if ($subscribers->count()) {
+                    Log::info('Sending ' . $scheduled_messages->count() . ' scheduled messages to ' . $subscribers->count() . ' subscribers.');
 
-                foreach ($subscribers as $subscriber) {
-                    foreach ($scheduled_messages as $message) {
+                    foreach ($subscribers as $subscriber) {
                         $body = $message->body_en;
                         switch ($subscriber->locale) {
                         case 'es':
@@ -69,6 +71,12 @@ class SendScheduledMessages extends Command
                         $message->sent = true;
                         $message->save();
                     }
+                }
+
+                try {
+                    Twitter::postTweet(['status' => $message->body_en, 'format' => 'json']);
+                } catch (Exception $e) {
+                    Log::info('Failed to send message to Twitter. Is the account configured correctly?');
                 }
             }
         }
