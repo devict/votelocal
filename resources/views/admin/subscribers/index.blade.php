@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Subscribers</div>
                 <div class="card-body">
+                    <p><strong>Total subscribers</strong>: {{ $subscriberCount }}</p>
                     <table class="table">
                         <thead>
                             <tr>
