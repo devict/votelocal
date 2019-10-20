@@ -46,38 +46,43 @@ class SendScheduledMessages extends Command
 
         if ($scheduled_messages->count()) {
             foreach ($scheduled_messages as $message) {
-                $subscribers = Subscriber::where('subscribed', true)->get();
+                if ($message->target_sms) {
+                    $subscribers = Subscriber::where('subscribed', true)->get();
 
-                // Send to subscribers
-                if ($subscribers->count()) {
-                    Log::info('Sending ' . $scheduled_messages->count() . ' scheduled messages to ' . $subscribers->count() . ' subscribers.');
+                    // Send to subscribers
+                    if ($subscribers->count()) {
+                        Log::info('Sending ' . $scheduled_messages->count() . ' scheduled messages to ' . $subscribers->count() . ' subscribers.');
 
-                    foreach ($subscribers as $subscriber) {
-                        $body = $message->body_en;
-                        switch ($subscriber->locale) {
-                        case 'es':
-                            if ($message->body_es && $message->body_es != '') {
-                                $body = $message->body_es;
+                        foreach ($subscribers as $subscriber) {
+                            $body = $message->body_en;
+                            switch ($subscriber->locale) {
+                            case 'es':
+                                if ($message->body_es && $message->body_es != '') {
+                                    $body = $message->body_es;
+                                }
+                                break;
                             }
-                            break;
-                        }
-                        $sms->send(
-                            $subscriber->number,
-                            $body,
-                            ['scheduled_message_id' => $message->id]
-                        );
+                            $sms->send(
+                                $subscriber->number,
+                                $body,
+                                ['scheduled_message_id' => $message->id]
+                            );
 
-                        // Mark it as sent
-                        $message->sent = true;
-                        $message->save();
+                            // Mark it as sent
+                            $message->sent = true;
+                            $message->save();
+                        }
                     }
                 }
-
-                try {
-                    Twitter::postTweet(['status' => $message->body_en, 'format' => 'json']);
-                } catch (Exception $e) {
-                    Log::info('Failed to send message to Twitter. Is the account configured correctly?');
+                
+                if ($message->target_twitter) {
+                    try {
+                        Twitter::postTweet(['status' => $message->body_en, 'format' => 'json']);
+                    } catch (Exception $e) {
+                        Log::info('Failed to send message to Twitter. Is the account configured correctly?');
+                    }
                 }
+                
             }
         }
     }

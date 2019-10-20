@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                                 <th>Sent</th>
+                                <th>Target</th>
                                 <th>Send At</th>
                                 <th>Body (en)</th>
                                 <th>Body (es)</th>
@@ -27,6 +28,11 @@
                             @foreach ($scheduled_messages as $scheduled_message)
                                 <tr>
                                     <td>{{ $scheduled_message->sent ? 'X' : '' }}</td>
+                                    <td>
+                                        @if( $scheduled_message->target_sms ) SMS @endif 
+                                        @if( $scheduled_message->target_sms and $scheduled_message->target_twitter ) / @endif 
+                                        @if( $scheduled_message->target_twitter ) Twitter @endif
+                                    </td>
                                     <td>{{ $scheduled_message->send_at->format('m/d/Y g:i A') }}</td>
                                     <td>{{ $scheduled_message->body_en }}</td>
                                     <td>{{ $scheduled_message->body_es }}</td>
