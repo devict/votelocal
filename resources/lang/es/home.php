@@ -9,12 +9,14 @@ return [
     */
 
     'tagline' => 'Ayudandole a participar <strong>localmente</strong>.',
-    'text_subscribe_cta' => 'Para empezar envie la palabra INICIAR a <a href=":link">864-ICT-VOTE</a>',
+    'step_1' => 'Envía en texto la palabra <strong>INICIAR</strong> al <strong><a href=":link">864-ICT-VOTE</a></strong> desde tu celular. (864-428-8683)',
+    'step_2' => 'Mantente informado en cosas como registración para votar, elecciones, candidatos y&nbsp;más.',
+    'step_3' => '¡Nunca ha sido más fácil estar activo e involucrado en el&nbsp;proceso!',
     'text_subscribe_keyword' => 'INICIAR',
     'add_to_contacts_cta' => '..y asegúrese de <a href=":link">agregar Vote ICT a sus contactos</a>!',
     'locale_support_head' => 'Español apoyado!',
-    'locale_support_body' => 'Envía <strong>ESPAÑOL</strong> en cualquier momento para cambiar tu preferencia, e <strong>INGLÉS</strong> para volver a cambiar.',
+    'locale_support_body' => 'Envía <strong>ESPAÑOL</strong> en cualquier momento para cambiar tu preferencia, e <strong>INGLÉS</strong> para volver a&nbsp;cambiar.',
     'partners_head' => 'Presentado por la comunidad',
-    'partners_body' => 'VoteICT es creado y operado por organizaciones comunitarias locales <a href="https://kmuw.org" title="KMUW">KMUW</a> y <a href="https://devict.org" title="devICT">devICT</a>.'
+    'partners_body' => 'VoteICT es creado y operado por organizaciones comunitarias locales <a href="https://kmuw.org" title="KMUW">KMUW</a> y <a href="https://devict.org" title="devICT">devICT</a>.',
 
 ];

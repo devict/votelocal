@@ -1,13 +1,22 @@
-@extends('layouts.base')
+@extends('layouts.base', ['background' => $background ?? ''])
 
 @section('content')
-    <header>
+    <header class="relative z-50 text-gray-600">
         @component('partials/main-menu')
             <a
-                class="block px-3 hover:text-red-500 focus:text-red-500{{ Request::is('*archive') ? ' text-red-500' : '' }}"
+                class="
+                    flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-red-500' : '' }}
+                    sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
+                "
                 href="{{ route('archive') }}"
             >
-                Archive
+                @include('partials.icon', [
+                    'name' => 'archive',
+                    'width' => '20',
+                    'height' => '20',
+                    'class' => 'inline-block mr-2'
+                ])
+                Message Archive
             </a>
             @foreach(config('voteict.locales') as $name => $locale)
                 @php
@@ -23,15 +32,24 @@
                     }
                 @endphp
                 <a
-                    class="block px-2 py-5 hover:text-blue-500 focus:text-blue-500 focus:outline-0"
+                    class="
+                        flex items-center px-6 py-2 outline-0 hover:bg-gray-200 focus:bg-gray-200
+                        sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
+                    "
                     href="{{ url(implode('/', $segments)) }}"
                 >
-                    @include('partials/icon', ['name' => $locale, 'class' => 'h-6'])
+                    @include('partials.icon', [
+                        'name' => $locale,
+                        'width' => '20',
+                        'height' => '20',
+                        'class' => 'inline-block mr-2'
+                    ])
+                    <span class="sm:hidden">{{ $name }}</span>
                 </a>
             @endforeach
         @endcomponent
     </header>
-    <main class="px-4 py-8 md:p-12">
+    <main>
         @if (session('status'))
             <div class="container">
                 <div class="row justify-content-center">

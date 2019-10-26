@@ -2,7 +2,8 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Rubik', 'sans-serif'],
+                sans: ['Inter, sans-serif'],
+                display: ['Rubik', 'sans-serif'],
             },
             colors: {
                 red: {

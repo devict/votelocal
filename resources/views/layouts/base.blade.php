@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full bg-gray-200">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full {{ $background ?? '' }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,12 +24,12 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=News+Cycle|Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="font-sans leading-none text-gray-800 antialiased">
+<body class="font-sans text-gray-800 antialiased">
     <div id="app">
         <portal-target name="dropdown" slim></portal-target>
         @yield('content')

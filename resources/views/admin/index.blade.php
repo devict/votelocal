@@ -1,19 +1,32 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    <p><strong>Total subscribers</strong>: {{ $subscriberCount }}</p>
-                    <p><strong>Subscribes in the last week</strong>: {{ $subscribersThisWeek }}</p>
-                    <p><strong>English Subscribers</strong>: {{ $subscribersEN }}</p>
-                    <p><strong>Spanish Subscribers</strong>: {{ $subscribersES }}</p>
-                </div>
-            </div>
+<div class="mb-6 flex justify-between items-center">
+    <h1 class="font-bold text-2xl">Dashboard</h1>
+</div>
+<div class="flex flex-wrap -mx-2">
+    <div class="w-1/2 lg:w-1/4 px-2 mb-4">
+        <div class="flex flex-col h-full bg-white rounded shadow p-6">
+            <h2 class="text-sm text-gray-600 mb-4">Total subscribers</h2>
+            <div class="mt-auto font-bold text-4xl">{{ $subscriberCount }}</div>
+        </div>
+    </div>
+    <div class="w-1/2 lg:w-1/4 px-2 mb-4">
+        <div class="flex flex-col h-full bg-white rounded shadow p-6">
+            <h2 class="text-sm text-gray-600 mb-4">Subscribers this week</h2>
+            <div class="mt-auto font-bold text-4xl">{{ $subscribersThisWeek }}</div>
+        </div>
+    </div>
+    <div class="w-1/2 lg:w-1/4 px-2 mb-4">
+        <div class="flex flex-col h-full bg-white rounded shadow p-6">
+            <h2 class="text-sm text-gray-600 mb-4">English Subscribers</h2>
+            <div class="mt-auto font-bold text-4xl">{{ $subscribersEN }}</div>
+        </div>
+    </div>
+    <div class="w-1/2 lg:w-1/4 px-2 mb-4">
+        <div class="flex flex-col h-full bg-white rounded shadow p-6">
+            <h2 class="text-sm text-gray-600 mb-4">Spanish Subscribers</h2>
+            <div class="mt-auto font-bold text-4xl">{{ $subscribersES }}</div>
         </div>
     </div>
 </div>
