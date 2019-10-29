@@ -8,12 +8,14 @@
     <div class="relative">
         <div class="max-w-5xl mx-auto sm:flex justify-between md:items-center pt-8 md:pt-16">
             <div class="px-4 sm:px-8 sm:w-1/2">
-                <h1 class="text-2xl font-medium leading-tight font-display mb-56 text-center sm:text-left sm:mb-4 sm:text-3xl sm:text-4xl">Welcome to VoteICT.org</h1>
-                <p class="text-lg leading-normal mb-8">Get text message notifications with relevant information about local&nbsp;elections.</p>
+                <h1 class="text-2xl font-medium leading-tight font-display mb-56 text-center sm:text-left sm:mb-4 sm:text-3xl sm:text-4xl">@lang('home.intro')</h1>
+                <p class="text-lg leading-normal mb-8">@lang('home.tagline')</p>
                 <div class="sm:pb-24">
-                    <a class="btn bg-red-500 hover:bg-red-600 focus:bg-red-600 block sm:inline-block mb-4 sm:mr-3" href="{{ 'sms://+1' . env('TWILIO_FROM_NUMBER') . ';?&body=' . __('home.text_subscribe_keyword') }} ">Text START to 864-ICT-VOTE</a>
+                    <a class="btn bg-red-500 hover:bg-red-600 focus:bg-red-600 block sm:inline-block mb-4 sm:mr-3" href="{{ 'sms://+1' . env('TWILIO_FROM_NUMBER') . ';?&body=' . __('home.text_subscribe_keyword') }} ">
+                        @lang('home.text_to')
+                    </a>
                     <a class="btn block sm:inline-block" href="#steps">
-                        Learn more
+                        @lang('home.learn_more')
                         @include('partials.icon', [
                             'width' => 16,
                             'height' => 16,
@@ -156,9 +158,9 @@
         <div class="sm:flex items-center -mx-4">
             <div class="px-4 sm:w-1/2 mb-8 sm:mb-0">
                 <h2 class="text-3xl sm:text-4xl font-medium font-display leading-tight mb-4">
-                    Project Contributors
+                    @lang('home.contributors_head')
                 </h2>
-                <p>These people have been involved in the creation and maintenance of the VoteICT&nbsp;platform.</p>
+                <p>@lang('home.contributors_body')</p>
             </div>
             <div class="px-4 sm:w-1/2">
                 @forelse($contributors as $contributor)
