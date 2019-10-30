@@ -51,7 +51,7 @@
 </section>
 
 <section class="px-8 py-16 sm:py-32 bg-red-200 relative">
-    <div class="absolute inset-0" style="background-image: url({{ asset('img/map.jpg') }})"></div>
+    <div class="absolute inset-0 bg-center" style="background-image: url({{ asset('img/map.jpg') }});"></div>
     <div class="bg-white max-w-md mx-auto px-10 py-5 text-center rounded-lg shadow-lg relative z-10">
         <h2 class="text-3xl sm:text-4xl font-medium text-center font-display leading-tight mb-4">
             @lang('home.locale_support_head')
