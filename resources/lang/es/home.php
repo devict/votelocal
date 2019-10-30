@@ -20,7 +20,7 @@ return [
     'locale_support_head' => 'Español apoyado!',
     'locale_support_body' => 'Envía <strong>ESPAÑOL</strong> en cualquier momento para cambiar tu preferencia, e <strong>INGLÉS</strong> para volver a&nbsp;cambiar.',
     'contributors_head' => 'Colaboradores del proyecto',
-    'contributors_body' => 'These people have been involved in the creation and maintenance of the VoteICT platform.',
+    'contributors_body' => 'Estas personas han estado involucradas en la creación y mantenimiento de la plataforma de VoteICT.',
     'partners_head' => 'Presentado por la comunidad',
     'partners_body' => 'VoteICT es creado y operado por organizaciones comunitarias locales <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.kmuw.org" target="_blank">KMUW</a>, <a class="font-bold text-gray-600 hover:text-blue-500" href="https://devict.org" target="_blank">devICT</a>, y <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.abcbilingualresources.com/" target="_blank">AB&C Bilingual Resources</a>.',
 
