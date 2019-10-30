@@ -22,6 +22,6 @@ return [
     'contributors_head' => 'Project Contributors',
     'contributors_body' => 'These people have been involved in the creation and maintenance of the VoteICT platform.',
     'partners_head' => 'Brought to you by the&nbsp;community',
-    'partners_body' => 'VoteICT is created and operated by local community organizations <a class="font-bold text-gray-600 hover:text-blue-500" href="https://kmuw.org">KMUW</a> and <a class="font-bold text-gray-600 hover:text-blue-500" href="https://devict.org">devICT</a>.',
+    'partners_body' => 'VoteICT is created and operated by local community organizations <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.kmuw.org" target="_blank">KMUW</a>, <a class="font-bold text-gray-600 hover:text-blue-500" href="https://devict.org" target="_blank">devICT</a>, and <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.abcbilingualresources.com/" target="_blank">AB&C Bilingual Resources</a>.',
 
 ];

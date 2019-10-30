@@ -141,9 +141,18 @@
 <section class="max-w-5xl mx-auto py-10 sm:py-20 px-8">
     <div class="px-4">
         <div class="sm:flex items-center -mx-4">
-            <div class="px-4 sm:w-1/2 mb-8 sm:mb-0">
-                <img class="mx-auto mb-6" style="max-width: 190px" src="{{ asset('img/kmuw.png') }}" alt="KMUW logo">
-                <img class="mx-auto" style="max-width: 190px" src="{{ asset('img/devict.png') }}" alt="devICT logo">
+            <div class="px-4 sm:w-1/2 mb-8 sm:mb-0 text-center">
+                <a class="inline-block mb-3" href="https://www.kmuw.org/" target="_blank">
+                    <img style="max-width: 190px" src="{{ asset('img/kmuw.png') }}" alt="KMUW logo">
+                </a>
+                <br>
+                <a class="inline-block mb-3" href="http://devict.org/" target="_blank">
+                    <img style="max-width: 190px" src="{{ asset('img/devict.png') }}" alt="devICT logo">
+                </a>
+                <br>
+                <a class="inline-block" href="https://www.abcbilingualresources.com/" target="_blank">
+                    <img style="max-width: 190px" src="{{ asset('img/ab-c-bilingual.png') }}" alt="AB&C Bilingual Resources logo">
+                </a>
             </div>
             <div class="px-4 sm:w-1/2 text-center sm:text-left">
                 <h2 class="text-3xl sm:text-4xl font-medium font-display leading-tight mb-4">
