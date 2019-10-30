@@ -1,6 +1,6 @@
 <template>
     <button type="button" @click="toggle">
-        <slot />
+        <slot></slot>
         <portal v-if="show" to="dropdown">
             <div>
                 <div
@@ -12,7 +12,7 @@
                     style="position: absolute; z-index: 99999;"
                     @click.stop
                 >
-                    <slot name="menu" />
+                    <slot name="menu"></slot>
                 </div>
             </div>
         </portal>
