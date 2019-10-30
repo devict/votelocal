@@ -68,7 +68,7 @@
                     <img style="max-width: 190px" src="{{ asset('img/kmuw.png') }}" alt="KMUW logo">
                 </a>
                 <br>
-                <a class="inline-block mb-3" href="http://devict.org/" target="_blank">
+                <a class="inline-block mb-3" href="https://devict.org/" target="_blank">
                     <img style="max-width: 190px" src="{{ asset('img/devict.png') }}" alt="devICT logo">
                 </a>
                 <br>
