@@ -1,0 +1,8 @@
+.btn {
+    @apply px-4 py-3 rounded-lg bg-blue-500 text-white text-sm font-bold whitespace-no-wrap text-center leading-tight;
+
+    &:hover,
+    &:focus {
+        @apply bg-blue-600;
+    }
+}

@@ -178,7 +178,7 @@ class ScheduledMessagesTest extends TestCase
         // go to /messages on the scheduled message
         $request = $this
             ->actingAs($user)
-            ->get('/admin/scheduled_messages/' . $scheduled_message->id . '/messages');
+            ->get('/admin/scheduled_messages/'.$scheduled_message->id);
 
         // expect to see each of the messages sent
         foreach ($messages as $message) {

@@ -1,22 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.app', ['background' => 'bg-gray-200'])
 
 @section('content')
+<div class="py-8 md:p-12">
+    <div class="max-w-xl mx-auto">
+        <h1 class="mb-6 font-bold text-2xl">Message Archive</h1>
+        <div class="bg-white rounded shadow">
+            @foreach($messages as $message)
+                <div class="border-t px-6 py-6 leading-normal ">
+                    {!! $message->html !!}
+                    <div class="text-sm text-gray-600 mt-4">
+                        <div class="text-sm text-gray-600 border-gray-200 flex justify-between items-center">
+                            <span><strong>Sent:</strong> {{ $message->send_at->toDayDateTimeString() }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
-<div class="container" style="max-width: 36rem">
-    <h1 class="page-title">Message Archive</h1>
-    @foreach($messages as $message)
-        <div class="card mb-5">
-            <div class="card-body">
-                <p class="lead">{!! $message->html !!}</p>
-
-                <small class="mt-3 d-block text-muted text-monospace">
-                    {{ $message->send_at->toDayDateTimeString() }}
-                </small>
-            </div>
+            {{ $messages->links() }}
         </div>
-    @endforeach
-
-    {{ $messages->links() }}
+    </div>
 </div>
-
 @endsection

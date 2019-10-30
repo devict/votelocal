@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full {{ $background ?? '' }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url('site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ url('safari-pinned-tab.svg') }}" color="#ee215a">
+    <meta name="msapplication-TileColor" content="#ee215a">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+</head>
+<body class="font-sans text-gray-800 antialiased">
+    <div id="app">
+        <portal-target name="dropdown" slim></portal-target>
+        @yield('content')
+    </div>
+</body>
+</html>

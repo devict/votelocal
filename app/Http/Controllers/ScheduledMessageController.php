@@ -3,37 +3,35 @@
 namespace App\Http\Controllers;
 
 use Validator;
-use Illuminate\Support\MessageBag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\ScheduledMessage;
 use Carbon\Carbon;
+use App\ScheduledMessage;
 use Carbon\CarbonInterval;
+use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 
 class ScheduledMessageController extends Controller
 {
-    function index () {
+    public function index()
+    {
         $scheduled_messages = ScheduledMessage::orderBy('created_at', 'desc')->get();
+
         return view('admin.scheduled_messages.index', [
             'scheduled_messages' => $scheduled_messages,
         ]);
     }
 
-    function messages (ScheduledMessage $scheduled_message) {
-        return view('admin.scheduled_messages.messages', [
-            'scheduled_message' => $scheduled_message
-        ]);
-    }
-
-    function new () {
+    public function new()
+    {
         $scheduled_message = new ScheduledMessage();
         $scheduled_message->send_at = Carbon::now()->add(CarbonInterval::hours(1));
+
         return view('admin.scheduled_messages.new', [
             'scheduled_message' => $scheduled_message,
         ]);
     }
 
-    function create (Request $request) {
+    public function create(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'body_en' => 'required|max:260',
             'body_es' => 'required|max:260',
@@ -55,21 +53,19 @@ class ScheduledMessageController extends Controller
         return redirect('/admin/scheduled_messages');
     }
 
-    function edit (ScheduledMessage $scheduled_message, Request $request) {
-        if ($scheduled_message->sent) {
-            session('status', 'Cannot change already sent message');
-            return redirect('/admin/scheduled_messages');
-        }
-
+    public function edit(ScheduledMessage $scheduled_message, Request $request)
+    {
         return view('admin.scheduled_messages.edit', [
             'scheduled_message' => $scheduled_message,
         ]);
     }
 
-    function update (ScheduledMessage $scheduled_message, Request $request) {
+    public function update(ScheduledMessage $scheduled_message, Request $request)
+    {
         if ($scheduled_message->sent) {
             $errors = new MessageBag();
             $errors->add('cant_change_sent_message', 'Cannot change already sent message');
+
             return redirect('/admin/scheduled_messages')->withErrors($errors);
         }
 
@@ -80,7 +76,7 @@ class ScheduledMessageController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('/admin/scheduled_messages/' . $scheduled_message->id)
+            return redirect('/admin/scheduled_messages/'.$scheduled_message->id)
                 ->withErrors($validator);
         }
 
@@ -92,15 +88,18 @@ class ScheduledMessageController extends Controller
         return redirect('/admin/scheduled_messages');
     }
 
-    function destroy (ScheduledMessage $scheduled_message, Request $request) {
+    public function destroy(ScheduledMessage $scheduled_message, Request $request)
+    {
         if ($scheduled_message->sent) {
             $errors = new MessageBag();
             $errors->add('cant_change_sent_message', 'Cannot change already sent message');
+
             return redirect('/admin/scheduled_messages')->withErrors($errors);
         }
 
         $scheduled_message->delete();
         session('status', 'Message deleted.');
+
         return redirect('/admin/scheduled_messages');
     }
 }
