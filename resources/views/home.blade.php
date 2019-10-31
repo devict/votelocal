@@ -42,7 +42,7 @@
             <h2 class="text-center">@lang('home.partners_head')</h2>
             <p class="text-center">
                 @lang('home.partners_body')
-            </h2>
+            </p>
         </div>
     </div>
 </div>
