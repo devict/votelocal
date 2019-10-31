@@ -8,12 +8,12 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'intro' => 'Welcome to voteict.org',
-    'tagline' => 'Get text message notifications with relevant information about local elections.',
+    'intro' => 'Welcome to VoteICT.org',
+    'tagline' => 'Get text message notifications with relevant information about local elections in Wichita, KS.',
     'text_to' => 'Text START to 864-ICT-VOTE',
     'learn_more' => 'Learn more',
     'step_1' => 'Text <strong>START</strong> to <strong><a href=":link">864-ICT-VOTE</a></strong>. (That’s&nbsp;864-428-8683.)',
-    'step_2' => 'Get up to date news about voter registration, elections, candidates and&nbsp;more.',
+    'step_2' => 'Get up to date news about Wichita voter registration, elections, candidates and&nbsp;more.',
     'step_3' => 'Stay locally active and engaged. It couldn’t be&nbsp;easier!',
     'text_subscribe_keyword' => 'START',
     'add_to_contacts_cta' => '..and be sure to <a href=":link">add VoteICT to your contacts</a>!',
