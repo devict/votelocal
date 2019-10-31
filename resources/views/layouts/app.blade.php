@@ -43,6 +43,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link{{ Request::is('*resources') ? ' active' : '' }}" href="{{ route('resources') }}">@lang('resources.page_title')</a>
+                        </li>
 
                     </ul>
 

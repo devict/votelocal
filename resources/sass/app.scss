@@ -32,8 +32,41 @@ a {
 
 .page-title {
     font-size: 1.25rem;
-    color: #0190bc;
+    color: theme-color(info);
     padding-bottom: 0.5rem;
     font-weight: bold;
     margin-bottom: 3rem;
+}
+
+.resource-section {
+    padding-bottom: 1rem;
+    max-width: 36rem;
+    
+    &:first-child {
+
+        padding-top: 1rem;
+    
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .resource-list {
+        list-style: none;
+
+        .resource-title {
+            font-size: 1rem;
+            margin-top: 1rem;
+            margin-bottom: .25rem;
+            a {
+                text-decoration: underline;
+            }
+        }
+
+        ul {
+            list-style: disc;
+        }
+    }
 }
