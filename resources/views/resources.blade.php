@@ -2,14 +2,12 @@
 
 @section('content')
 
-<div class="container">
+<div class="py-8 md:p-12">
     <div class="">
-        <h1 class="page-title">@lang('resources.page_title')</h1>
+        <h1 class="mb-6 font-bold text-2xl">@lang('resources.page_title')</h1>
         @lang('resources.tranlations_in_progress')        
     </div>        
-</div>
-
-<div class="container bg-white">
+    
     <div class="resource-section">
         <h2 class="section-title">@lang('resources.general_section_title')</h2>
         <ul class="resource-list">

@@ -35,8 +35,10 @@
 
 .resource-list .resource-title a {
     text-decoration: underline;
+    color: blue;
 }
 
 .resource-list ul {
     list-style: disc;
+    margin-left: 1.25rem;
 }

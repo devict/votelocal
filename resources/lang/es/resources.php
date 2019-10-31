@@ -8,6 +8,6 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'page_title' => 'Recursos',
+    'page_title' => 'Recursos para votantes',
     'tranlations_in_progress' => 'Traducciones de español en curso'
 ];
