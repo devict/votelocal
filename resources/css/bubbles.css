@@ -1,0 +1,100 @@
+.b1,
+.b2,
+.b3,
+.b4,
+.b5,
+.b6 {
+    position: relative;
+    transform-origin: 50%;
+    transition: transform 0.7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+.b1 {
+    animation-name: b1;
+    animation-duration: 3s;
+}
+.b2 {
+    animation-name: b2;
+    animation-duration: 4s;
+}
+.b3 {
+    animation-name: b3;
+    animation-duration: 3s;
+}
+.b4 {
+    animation-name: b4;
+    animation-duration: 4s;
+}
+.b5 {
+    animation-name: b5;
+    animation-duration: 4s;
+}
+
+.b1 path,
+.b2 path,
+.b3 path,
+.b4 path,
+.b5 path {
+    transition: transform 0.7s;
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes b1 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(8px, 9px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes b2 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-9px, 8px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes b3 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(0, -12px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+@keyframes b4 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(-8px, -9px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes b5 {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    50% {
+        transform: translate3d(9px, 12px, 0);
+    }
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}

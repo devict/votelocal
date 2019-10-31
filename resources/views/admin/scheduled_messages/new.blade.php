@@ -1,19 +1,18 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">New Scheduled Message</div>
+<h1 class="mb-8 font-bold text-2xl">
+    <a
+        class="text-blue-400 hover:text-blue-500"
+        href="{{ route('scheduled_messages.admin.index') }}"
+    >Shedule Messages</a>
+    <span class="text-blue-400 font-medium">/</span>
+    Create Message
+</h1>
 
-                <div class="card-body">
-                    @include('admin.scheduled_messages.form', [
-                        'scheduled_message' => $scheduled_message,
-                    ])
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="max-w-xl bg-white rounded shadow overflow-hidden">
+    @include('admin.scheduled_messages.form', [
+        'scheduled_message' => $scheduled_message,
+    ])
 </div>
 @endsection
