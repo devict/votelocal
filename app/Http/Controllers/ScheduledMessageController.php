@@ -50,7 +50,8 @@ class ScheduledMessageController extends Controller
             'send_at' => new Carbon($request->input('send_at')),
         ]);
 
-        return redirect('/admin/scheduled_messages');
+        return redirect('/admin/scheduled_messages')
+            ->with('status', 'Message scheduled.');
     }
 
     public function edit(ScheduledMessage $scheduled_message, Request $request)
@@ -85,7 +86,8 @@ class ScheduledMessageController extends Controller
         $scheduled_message->send_at = new Carbon($request->input('send_at'));
         $scheduled_message->save();
 
-        return redirect('/admin/scheduled_messages');
+        return redirect('/admin/scheduled_messages')
+            ->with('status', 'Message updated.');
     }
 
     public function destroy(ScheduledMessage $scheduled_message, Request $request)
@@ -100,6 +102,7 @@ class ScheduledMessageController extends Controller
         $scheduled_message->delete();
         session('status', 'Message deleted.');
 
-        return redirect('/admin/scheduled_messages');
+        return redirect('/admin/scheduled_messages')
+            ->with('status', 'Message deleted.');
     }
 }

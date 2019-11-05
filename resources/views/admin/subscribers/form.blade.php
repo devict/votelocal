@@ -1,4 +1,4 @@
-@include ('partials.errors')
+@include ('partials.flash')
 
 <form action="{{ $subscriber->exists ? route('subscribers.admin.update', $subscriber) : route('subscribers.admin.create') }}" method="POST">
     <div class="p-8">

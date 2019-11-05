@@ -1,7 +1,7 @@
-@include('partials.errors')
-
 <form action="{{ $scheduled_message->exists ? route('scheduled_messages.admin.update', $scheduled_message) : route('scheduled_messages.admin.create') }}" method="POST">
     <div class="p-8">
+        @include('partials.flash')
+
         @csrf
         <character-count>
             @include('partials/fields/textarea', [

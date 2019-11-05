@@ -6,10 +6,13 @@
         <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}"
             class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden"
         >
-            @csrf
             <div class="px-10 py-12">
                 <h1 class="text-center font-bold text-3xl">{{ __('Register') }}</h1>
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
+
+                @include('partials.flash')
+
+                @csrf
 
                 @include('partials/fields/input', [
                     'label' => __('Name'),

@@ -8,7 +8,7 @@
     </a>
 </div>
 
-@include('partials.errors')
+@include('partials.flash')
 
 <div class="bg-white rounded shadow overflow-x-auto">
         <table class="w-full">

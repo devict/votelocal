@@ -7,6 +7,9 @@
         <span>Create</span> <span class="hidden md:inline">Subscriber</span>
     </a>
 </div>
+
+@include('partials.flash')
+
 <div class="bg-white rounded shadow overflow-x-auto">
     <table class="w-full">
         <thead>
