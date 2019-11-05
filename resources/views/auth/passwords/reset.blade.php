@@ -12,6 +12,14 @@
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
 
                 @include('partials/fields/input', [
+                    'label' => '',
+                    'type' => 'hidden',
+                    'name' => 'token',
+                    'value' => $token,
+                    'class' => '',
+                ])
+
+                @include('partials/fields/input', [
                     'label' => __('E-Mail Address'),
                     'type' => 'email',
                     'name' => 'email',
