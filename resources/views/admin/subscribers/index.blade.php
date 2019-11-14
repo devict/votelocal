@@ -87,4 +87,5 @@
         </tbody>
     </table>
 </div>
+{{ $subscribers->links() }}
 @endsection

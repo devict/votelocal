@@ -13,10 +13,8 @@ class ScheduledMessageController extends Controller
 {
     public function index()
     {
-        $scheduled_messages = ScheduledMessage::orderBy('created_at', 'desc')->get();
-
         return view('admin.scheduled_messages.index', [
-            'scheduled_messages' => $scheduled_messages,
+            'scheduled_messages' => ScheduledMessage::latest()->paginate(25),
         ]);
     }
 
