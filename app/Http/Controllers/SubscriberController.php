@@ -12,7 +12,7 @@ class SubscriberController extends Controller
     public function index()
     {
         return view('admin.subscribers.index', [
-            'subscribers' => Subscriber::latest()->paginate(1),
+            'subscribers' => Subscriber::latest()->paginate(25),
         ]);
     }
 
