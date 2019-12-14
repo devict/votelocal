@@ -19,6 +19,22 @@
     <meta name="msapplication-TileColor" content="#ee215a">
     <meta name="theme-color" content="#ffffff">
 
+    <!-- Twitter card data -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@VoteICT">
+    <meta name="twitter:title" content="VoteICT">
+    <meta name="twitter:description" content="Get text message notifications with relevant information about local elections in Wichita.">
+    <meta name="twitter:creator" content="@VoteICT">
+    <meta name="twitter:image" content="{{ asset('img/social.png') }}"> 
+
+    <!-- Open Graph data -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="VoteICT">
+    <meta property="og:url" content="{{ request()->url() }}">
+    <meta property="og:description" content="Get text message notifications with relevant information about local elections in Wichita.">
+    <meta property="og:image" content="{{ asset('img/social.png') }}">
+    <meta property="og:site_name" content="VoteICT">
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 
