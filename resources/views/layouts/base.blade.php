@@ -20,12 +20,12 @@
     <meta name="theme-color" content="#ffffff">
 
     <!-- Twitter card data -->
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@VoteICT">
     <meta name="twitter:title" content="VoteICT">
     <meta name="twitter:description" content="Get text message notifications with relevant information about local elections in Wichita.">
     <meta name="twitter:creator" content="@VoteICT">
-    <meta name="twitter:image" content="{{ asset('img/social.png') }}"> 
+    <meta name="twitter:image" content="{{ asset('img/social.png') }}">
 
     <!-- Open Graph data -->
     <meta property="og:type" content="article">
