@@ -76,6 +76,11 @@ suffixed with the path `/sms/receive`.
 To test scheduled messages, you can manually run `artisan schedule:run` from
 within the `code` directory inside the vagrant box.
 
+## Design
+
+Interested in helping boost the design of VoteICT? Local designers interested in contributing their ideas, talents, and time to this effort now can! The homepage design and additional brand assets are managed in a community Figma file that's available here: https://www.figma.com/c/file/804929533491978159
+
+We're open to any ideas that would improve the current state of the VoteICT service; icons, illustrations, or even new pages and additional resources that could be added to the site!
 
 ## Getting Involved
 
