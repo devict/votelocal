@@ -69,6 +69,8 @@ $ npm i
 - To connect to the database, `mysql homestead`.
 - To follow the logs, use `tail -f storage/logs/laravel.log`.
 
+### Twilio Integration
+
 To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and
 point your Twilio number's SMS receive endpoint to the ngrok tunnel URL,
 suffixed with the path `/sms/receive`.
@@ -89,4 +91,4 @@ Wichita's developer community. To get involved, join the [devICT
 Slack](https://devict.org/slack)!
 
 Also feel free to jump into [the
-issues](https://github.com/openwichita/voteict/issues)!
+issues](https://github.com/devict/voteict/issues)!
