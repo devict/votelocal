@@ -11,6 +11,7 @@
 /.vagrant
 .DS_Store
 .env
+.db.env
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
