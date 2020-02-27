@@ -64,7 +64,7 @@ class ScheduledMessagesTest extends TestCase
     }
 
     /**
-     * Test admin can edit a sheduled message.
+     * Test admin can edit a scheduled message.
      *
      * @return void
      */
@@ -94,7 +94,7 @@ class ScheduledMessagesTest extends TestCase
     }
 
     /**
-     * Test admin can delete a sheduled message.
+     * Test admin can delete a scheduled message.
      *
      * @return void
      */
@@ -120,7 +120,7 @@ class ScheduledMessagesTest extends TestCase
     }
 
     /**
-     * Test admin can't edit or delete a sheduled message that has been sent.
+     * Test admin can't edit or delete a scheduled message that has been sent.
      *
      * @return void
      */
