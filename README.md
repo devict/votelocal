@@ -11,72 +11,39 @@ A service for being an informed voter in the Wichita, KS area.
 
 ## Built With..
 
-- Laravel
-- Twilio
+- [Laravel](https://laravel.com/docs/5.7)
+- [Twilio](https://twilio.com)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ## Configuration
 
-In addition to the normal Laravel configuration stuff, this application also
-needs to set a few things:
+In addition to the normal Laravel configuration stuff, this application also needs to set a few things:
 
-- `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` should be your Twilio account
-  credentials, get them from your Twilio Dashboard.
-- `TWILIO_FROM_NUMBER` should be the Twilio number that messages are sent out
-  from. This must be a number owned by the configured account.
-- `TIMEZONE`, defaults to America/Chicago, but should be local to wherever this
-  service is used.
+- `TIMEZONE`, defaults to America/Chicago, but should be local to wherever this service is used.
+- `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` should be your Twilio account credentials, get them from your Twilio Dashboard.
+- `TWILIO_FROM_NUMBER` should be the Twilio number that messages are sent out from. This must be a number owned by the configured account.
+- `TWITTER_*` config values should be filled in using details from an app in the [Twitter Developer](https://developer.twitter.com/en/apps) portal.
+  - Twitter integration is optional. If the config values are not set, the application will simply not attempt to send messages out as tweets.
 
 ## Developing
 
-The recommended way to get the application running locally is to use [Homestead](https://laravel.com/docs/5.6/homestead).
-
-_Note: if you have a global Homestead setup already, these instructions may not
-work correctly._
-
-As a quickstart, you can copy `Homestead.yaml.example` to `Homestead.yaml`, and
-update the line pointing to where the voteict code is stored locally. For
-example, if you installed Homestead into `~/Homestead` and your cloned repo is
-in `~/projects/voteict`, you should have a `~/Homestead/Homestead.yaml` file
-with a `folders` entry like...
-
-```
-folders:
-    - map: ~/projects/voteict
-      to: /home/vagrant/code
-```
-
-Add an `/etc/hosts` entry for...
-
-```
-192.168.10.10 homestead.local
-```
-
-Within your repo, `cp .env.example .env`.
-
-Then, run `vagrant up`, and then the site should be available at
-localhost:8000. Most commands will need to be run inside the vagrant box, so
-do `vagrant ssh` first and `cd` into `~/code`.
-
-```
-$ composer install
-$ artisan key:generate
-$ artisan migrate
-$ artisan db:seed
-$ npm i
-```
-
-- To run tests, run `phpunit`.
-- To connect to the database, `mysql homestead`.
-- To follow the logs, use `tail -f storage/logs/laravel.log`.
+There are currently two ways of running VoteICT locally.
+- [Docker](./DOCKER.md)
+- [Homestead](./HOMESTEAD.md)
 
 ### Twilio Integration
 
-To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and
-point your Twilio number's SMS receive endpoint to the ngrok tunnel URL,
-suffixed with the path `/sms/receive`.
+To get Twilio receiving messages locally, use [ngrok](https://ngrok.com) and point your Twilio number's SMS receive endpoint to the ngrok tunnel URL, suffixed with the path `/sms/receive`.
 
-To test scheduled messages, you can manually run `artisan schedule:run` from
-within the `code` directory inside the vagrant box.
+_Note: if you're using docker for local dev, there is already an `ngrok` service running. Check [the docker docs](./DOCKER.md) for more detail._
+
+To test scheduled messages, you can manually run `artisan schedule:run` from within the `code` directory inside the vagrant box.
+
+### Twitter Integration
+
+Sending messages to a Twitter account from a local setup requires having a Twitter [developer account](https://developer.twitter.com/) and a [Twitter app](https://developer.twitter.com/en/apps) configured on that account.
+
+Twitter messages will automatically be sent out to an account if the necessary Twitter config values are filled in in your `.env` file. Check the "Configuration" section above for more information.
 
 ## Design
 
@@ -86,9 +53,6 @@ We're open to any ideas that would improve the current state of the VoteICT serv
 
 ## Getting Involved
 
-VoteICT is a project maintained by part of [devICT](https://devict.org),
-Wichita's developer community. To get involved, join the [devICT
-Slack](https://devict.org/slack)!
+VoteICT is a project maintained by part of [devICT](https://devict.org), Wichita's developer community. To get involved, join the [devICT Slack](https://devict.org/slack)!
 
-Also feel free to jump into [the
-issues](https://github.com/devict/voteict/issues)!
+Also feel free to jump into [the issues](https://github.com/devict/voteict/issues)!
