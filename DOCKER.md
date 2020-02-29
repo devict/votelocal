@@ -33,6 +33,6 @@ This will boot up all containers, and expose the system at http://localhost:8002
 
 When configuring a number in Twilio, it needs a publicly accessible URL. This is provided locally by the `ngrok` container.
 
-To get the ngrok URL, run `./ngrok-url.sh`.
+To get the URL for Twilio configurationn, run `./twilio-url.sh`.
 
 For more detail on Twilio configuration check the "Twilio Integration" section of the [README](./README.md).
