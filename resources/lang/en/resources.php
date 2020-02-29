@@ -9,7 +9,8 @@ return [
     */
 
     'page_title' => 'Voting Resources',
-    'tranlations_in_progress' => '',
+    'intro' => 'VoteICT Resources',
+    'tagline' => 'Find useful information about voting and elections in Wichita, KS at the links below.',
     'general_section_title' => 'General Resources',
     'voting_section_title' => 'Voting Registration',
     'kansas_section_title' => 'Kansas Resources',
