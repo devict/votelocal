@@ -30,7 +30,3 @@ db-seed:
 
 app-key:
 	docker-compose run --rm php php artisan key:generate
-
-# Prints the ngrok URL from docker-compose to the console for Twilio configuration.
-get-ngrok-url:
-	curl -s http://(docker-compose port ngrok 4040)/api/tunnels | jq .tunnels[0].public_url
