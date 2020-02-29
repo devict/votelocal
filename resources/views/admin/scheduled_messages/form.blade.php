@@ -30,6 +30,20 @@
                 ]
             ])
         </character-count>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">Targets</label>
+        <div class="form-control">
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" name="target_sms" id="target_sms" @if($scheduled_message->target_sms) checked @endif>
+                <label class="custom-control-label" for="target_sms">SMS</label>
+            </div>
+            <div class="custom-control custom-checkbox custom-control-inline">
+                <input type="checkbox" class="custom-control-input" name="target_twitter" id="target_twitter" @if($scheduled_message->target_twitter) checked @endif>
+                <label class="custom-control-label" for="target_twitter">Twitter</label>
+            </div>
+        </div>
 
         @include('partials/fields/input', [
             'label' => __('Send At'),
@@ -42,8 +56,8 @@
                 'class' => (bool) $scheduled_message->sent ? 'bg-gray-300' : '',
             ]
         ])
-
     </div>
+
     @if (! $scheduled_message->sent)
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $scheduled_message->exists ? 'between' : 'end' }} items-center">
             @if ($scheduled_message->exists && ! $scheduled_message->sent)

@@ -16,6 +16,7 @@
             <tr class="text-left font-bold">
                 <th class="px-6 pt-6 pb-4">#</th>
                 <th class="px-6 pt-6 pb-4">Sent</th>
+                <th class="px-6 pt-6 pb-4">Target</th>
                 <th class="px-6 pt-6 pb-4">Send At</th>
                 <th class="px-6 pt-6 pb-4">Body (en)</th>
                 <th class="px-6 pt-6 pb-4">Body (es)</th>
@@ -45,6 +46,11 @@
                                 <div class="w-8 text-center">—</div>
                             @endif
                         </a>
+                    </td>
+                    <td class="border-t">
+                        @if( $scheduled_message->target_sms ) SMS @endif 
+                        @if( $scheduled_message->target_sms and $scheduled_message->target_twitter ) / @endif 
+                        @if( $scheduled_message->target_twitter ) Twitter @endif
                     </td>
                     <td class="border-t">
                         <a

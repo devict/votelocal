@@ -21,6 +21,8 @@ class ScheduledMessageController extends Controller
     public function new()
     {
         $scheduled_message = new ScheduledMessage();
+        $scheduled_message->target_sms = true;
+        $scheduled_message->target_twitter = true;
         $scheduled_message->send_at = Carbon::now()->add(CarbonInterval::hours(1));
 
         return view('admin.scheduled_messages.new', [
@@ -33,6 +35,8 @@ class ScheduledMessageController extends Controller
         $validator = Validator::make($request->all(), [
             'body_en' => 'required|max:260',
             'body_es' => 'required|max:260',
+            'target_sms' => 'required_without:target_twitter',
+            'target_twitter' => 'required_without:target_sms',
             'send_at' => 'required|date|after:now',
         ]);
 
@@ -45,6 +49,8 @@ class ScheduledMessageController extends Controller
         ScheduledMessage::create([
             'body_en' => $request->input('body_en'),
             'body_es' => $request->input('body_es'),
+            'target_sms' => $request->input('target_sms'),
+            'target_twitter' => $request->input('target_twitter'),
             'send_at' => new Carbon($request->input('send_at')),
         ]);
 
@@ -71,6 +77,8 @@ class ScheduledMessageController extends Controller
         $validator = Validator::make($request->all(), [
             'body_en' => 'required|max:260',
             'body_es' => 'required|max:260',
+            'target_sms' => 'required_without:target_twitter',
+            'target_twitter' => 'required_without:target_sms',
             'send_at' => 'required|date|after:now',
         ]);
 
@@ -81,6 +89,8 @@ class ScheduledMessageController extends Controller
 
         $scheduled_message->body_en = $request->input('body_en');
         $scheduled_message->body_es = $request->input('body_es');
+        $scheduled_message->target_sms = $request->input('target_sms');
+        $scheduled_message->target_twitter = $request->input('target_twitter');
         $scheduled_message->send_at = new Carbon($request->input('send_at'));
         $scheduled_message->save();
 

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class ScheduledMessage extends Model
 {
     protected $fillable = [
-        'body_en', 'body_es', 'send_at', 'sent',
+        'body_en', 'body_es', 'send_at', 'sent', 'target_sms', 'target_twitter'
     ];
 
     protected $dates = [
