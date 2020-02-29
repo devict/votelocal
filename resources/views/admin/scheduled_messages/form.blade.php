@@ -32,19 +32,20 @@
         </character-count>
     </div>
     
-    <div class="form-group">
-        <label class="form-label">Targets</label>
-        <div class="form-control">
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" name="target_sms" id="target_sms" @if($scheduled_message->target_sms) checked @endif>
-                <label class="custom-control-label" for="target_sms">SMS</label>
-            </div>
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="custom-control-input" name="target_twitter" id="target_twitter" @if($scheduled_message->target_twitter) checked @endif>
-                <label class="custom-control-label" for="target_twitter">Twitter</label>
-            </div>
-        </div>
+    <div class="px-8">
+        <label>Targets:</label>
+        <label class="pl-2" for="target_sms">
+            <input type="checkbox" class="form-checkbox" name="target_sms" id="target_sms" @if($scheduled_message->target_sms) checked @endif>
+            <span>SMS</span>
+        </label>
 
+        <label class="pl-2" for="target_twitter">
+            <input type="checkbox" class="form-checkbox" name="target_twitter" id="target_twitter" @if($scheduled_message->target_twitter) checked @endif>
+            <span>Twitter</span>
+        </label>
+    </div>
+
+    <div class="px-8 pb-8">
         @include('partials/fields/input', [
             'label' => __('Send At'),
             'name' => 'send_at',
