@@ -24,8 +24,8 @@ jobs:
 
     steps:
       - checkout
-      # oniguruma-dev is required for mbstring
-      - run: sudo apt update && sudo apt install default-mysql-client oniguruma-dev
+      # libonig-dev is required for mbstring
+      - run: sudo apt update && sudo apt install default-mysql-client libonig-dev
       - run: sudo docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer ctype json
       - run:
           # Our primary container isn't MYSQL so run a sleep command until it's ready.
