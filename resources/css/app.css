@@ -8,3 +8,37 @@
 @import 'bubbles';
 
 @import 'tailwindcss/utilities';
+
+.resource-section {
+    padding-bottom: 1rem;
+    max-width: 36rem;
+}
+    
+.resource-section:first-child {
+    padding-top: 1rem;
+}
+
+.resource-section .section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.resource-list {
+    list-style: none;
+}
+
+.resource-list .resource-title {
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: .25rem;
+}
+
+.resource-list .resource-title a {
+    text-decoration: underline;
+    color: blue;
+}
+
+.resource-list ul {
+    list-style: disc;
+    margin-left: 1.25rem;
+}

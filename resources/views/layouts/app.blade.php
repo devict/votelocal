@@ -8,6 +8,15 @@
                     flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-red-500' : '' }}
                     sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
                 "
+                href="{{ route('resources') }}"
+            >
+                @lang('resources.page_title')
+            </a>
+            <a
+                class="
+                    flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-red-500' : '' }}
+                    sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
+                "
                 href="{{ route('archive') }}"
             >
                 @include('partials.icon', [

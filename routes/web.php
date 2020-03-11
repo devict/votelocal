@@ -44,5 +44,6 @@ if ($locale === 'en') {
 
 Route::prefix($locale)->group(function () {
     Route::get('/archive', 'ArchiveController@index')->name('archive');
+    Route::get('/resources', 'ResourcesController@index')->name('resources');
     Route::get('/', 'HomeController@index')->name('home');
 });
