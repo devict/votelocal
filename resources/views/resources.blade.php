@@ -3,13 +3,13 @@
 @section('content')
 
 <header>
-    <div class="max-w-5xl mx-auto px-4 flex justify-between sm:px-8 sm:items-center pt-8 sm:flex-row-reverse md:pt-16">
-        <div class="flex-none mr-4 w-10 sm:w-32 md:w-64 sm:mr-0">
-            @include('partials.resources')
-        </div>
+    <div class="max-w-5xl mx-auto px-4 flex justify-between sm:px-8 sm:items-center pt-8 md:pt-16">
         <div class="mr-auto sm:w-1/2">
             <h1 class="text-2xl font-medium leading-tight font-display sm:text-4xl">@lang('resources.intro')</h1>
             <p class="text-lg leading-normal">@lang('resources.tagline')</p>
+        </div>
+        <div class="flex-none mr-4 w-16 sm:w-32 md:w-64 sm:mr-0">
+            @include('partials.resources')
         </div>
     </div>
 </header>
