@@ -2,7 +2,7 @@
 
 prod-setup: deps build app-key db-migrate
 
-dev-setup: setup db-seed
+dev-setup: prod-setup db-seed
 
 # Runs client in watch mode, and ngrok for local tunneling.
 dev:
