@@ -12,6 +12,7 @@ return [
     'tagline' => 'Get text message notifications with relevant information about local elections in Wichita, KS.',
     'text_to' => 'Text START to 864-ICT-VOTE',
     'learn_more' => 'Learn more',
+    'step' => 'Step',
     'step_1' => 'Text <strong>START</strong> to <strong><a href=":link">864-ICT-VOTE</a></strong>. (That’s&nbsp;864-428-8683.)',
     'step_2' => 'Get up to date news about Wichita voter registration, elections, candidates and&nbsp;more.',
     'step_3' => 'Stay locally active and engaged. It couldn’t be&nbsp;easier!',

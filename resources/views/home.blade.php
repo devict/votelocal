@@ -36,15 +36,15 @@
 <section id="steps" class="max-w-5xl mx-auto px-8 py-10 sm:py-20">
     <div class="sm:flex -mx-4">
         <div class="sm:w-1/3 px-4 mb-8 sm:mb-0">
-            <h2 class="text-2xl font-medium font-display">Step 1</h2>
+            <h2 class="text-2xl font-medium font-display">@lang('home.step') 1</h2>
             <p>@lang('home.step_1')</p>
         </div>
         <div class="sm:w-1/3 px-4 mb-8 sm:mb-0">
-            <h2 class="text-2xl font-medium font-display">Step 2</h2>
+            <h2 class="text-2xl font-medium font-display">@lang('home.step') 2</h2>
             <p>@lang('home.step_2')</p>
         </div>
         <div class="sm:w-1/3 px-4">
-            <h2 class="text-2xl font-medium font-display">Step 3</h2>
+            <h2 class="text-2xl font-medium font-display">@lang('home.step') 3</h2>
             <p>@lang('home.step_3')</p>
         </div>
     </div>
