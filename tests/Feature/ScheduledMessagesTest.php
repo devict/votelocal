@@ -84,7 +84,7 @@ class ScheduledMessagesTest extends TestCase
                 'send_at' => $message->send_at,
             ]);
 
-        $request->assertRedirect('/admin/scheduled_messages/' . $message->id);
+        $request->assertRedirect('/admin/scheduled_messages/');
 
         $this->assertDatabaseHas('scheduled_messages', [
             'id' => $message->id,
