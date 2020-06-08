@@ -9,7 +9,7 @@ jobs:
       - image: circleci/mysql:5.7-ram
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: homestead_testing
+          MYSQL_DATABASE: voteict_testing
           MYSQL_USER: circleci
           MYSQL_PASSWORD: circleci
 
@@ -18,7 +18,7 @@ jobs:
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
-      DB_DATABASE: homestead_testing
+      DB_DATABASE: voteict_testing
       DB_USERNAME: circleci
       DB_PASSWORD: circleci
 

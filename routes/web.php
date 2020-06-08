@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,4 +50,13 @@ Route::prefix($locale)->group(function () {
     Route::get('/archive', 'ArchiveController@index')->name('archive');
     Route::get('/resources', 'ResourcesController@index')->name('resources');
     Route::get('/', 'HomeController@index')->name('home');
+
+    Route::get('/subscriber/login', 'Auth\SubscriberLoginController@loginForm')->name('subscriber.loginForm'); // TODO: Temp route.
+    Route::post('/subscriber/login', 'Auth\SubscriberLoginController@login')->name('subscriber.login');
+    Route::get('/subscriber/verify', 'Auth\SubscriberLoginController@verifyForm')->name('subscriber.verifyForm');
+    Route::post('/subscriber/verify', 'Auth\SubscriberLoginController@verify')->name('subscriber.verify');
+
+    Route::middleware(['require-subscriber'])->group(function () {
+        Route::get('/subscriber', 'SubscriberController@home')->name('subscriber.home');
+    });
 });

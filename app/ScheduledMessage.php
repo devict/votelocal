@@ -22,6 +22,11 @@ class ScheduledMessage extends Model
         return $this->hasMany('App\Message');
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
+
     public static function scopeReadyToSend($query)
     {
         return $query->where('sent', false)->where('send_at', '<=', Carbon::now());

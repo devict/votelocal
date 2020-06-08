@@ -74,7 +74,7 @@ class SendScheduledMessages extends Command
                         }
                     }
                 }
-                
+
                 if ($message->target_twitter) {
                     try {
                         Twitter::postTweet(['status' => $message->body_en, 'format' => 'json']);
@@ -82,8 +82,10 @@ class SendScheduledMessages extends Command
                         Log::info('Failed to send message to Twitter. Is the account configured correctly?');
                     }
                 }
-                
+
             }
         }
+
+        return 0;
     }
 }

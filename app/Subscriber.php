@@ -3,9 +3,9 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Subscriber extends Model
+class Subscriber extends Authenticatable
 {
     /**
      * The attributes that are mass assignable.
@@ -13,12 +13,31 @@ class Subscriber extends Model
      * @var array
      */
     protected $fillable = [
-        'number', 'subscribed', 'locale',
+        'number', 'subscribed', 'locale', 'password',
     ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
+    public function username()
+    {
+        return 'number';
+    }
 
     public function messages()
     {
         return $this->hasMany('App\Message', 'subscriber_number', 'number');
+    }
+
+    public function tags()
+    {
+        return $this->morphToMany('App\Tag', 'taggable');
     }
 
     public function subscribe()

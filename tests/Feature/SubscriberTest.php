@@ -65,4 +65,9 @@ class SubscriberTest extends TestCase
 
         $this->assertDatabaseHas('subscribers', ['subscribed' => false]);
     }
+
+    public function testSubscribeFromSite()
+    {
+        $this->get(route('home'));
+    }
 }
