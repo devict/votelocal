@@ -6,6 +6,7 @@ use App\Message;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Filters\MessageFilters;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriberController extends Controller
 {
@@ -23,9 +24,10 @@ class SubscriberController extends Controller
         ]);
     }
 
-    public function home(Request $request)
+    public function home()
     {
-        return view('subscriber.home');
+        $subscriber = Auth::guard('subscriber')->user();
+        return view('subscriber.home', ['subscriber' => $subscriber]);
     }
 
     public function create(Request $request)
