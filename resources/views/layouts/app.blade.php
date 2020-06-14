@@ -27,6 +27,19 @@
                 ])
                 Message Archive
             </a>
+            @if (Auth::guard('subscriber')->check())
+                <a
+                    class="
+                        flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-red-500' : '' }}
+                        sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
+                    "
+                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
+                    href="#"
+                >
+                    @lang('subscriber.logout')
+                </a>
+            @endif
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
             @foreach(config('voteict.locales') as $name => $locale)
                 @php
                     $current = App::getLocale();
