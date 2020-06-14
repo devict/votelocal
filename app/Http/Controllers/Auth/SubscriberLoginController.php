@@ -74,10 +74,13 @@ class SubscriberLoginController extends Controller
 
     public function verify(Request $request)
     {
-        $creds = $request->only(['number', 'password']);
-        if (Auth::guard('subscriber')->attempt($creds)) {
+        if (Auth::guard('subscriber')->attempt($request->only(['number', 'password']))) {
+            if (!Auth::guard('subscriber')->user()->withinValidVerifyTime()) {
+                return redirect()->back()->with('notify', 'Verification timed out, please try again.');
+            }
+
             return redirect()->intended($this->redirectTo);
         }
-        return redirect(back())->with('status', 'Incorrect verification code.');
+        return redirect()->back()->with('notify', 'Incorrect verification code.');
     }
 }

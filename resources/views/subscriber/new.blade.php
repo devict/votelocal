@@ -6,8 +6,6 @@
 </h1>
 
 <div class="bg-white rounded shadow overflow-hidden max-w-sm">
-    @include ('partials.flash')
-
     <form action="{{ route('subscriber.login') }}" method="POST">
         <div class="p-8">
             @csrf

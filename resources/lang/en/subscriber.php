@@ -9,4 +9,5 @@ return [
 
     'number' => 'Phone Number',
     'login' => 'Login',
+    'verify' => 'Verification Code',
 ];

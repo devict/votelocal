@@ -6,8 +6,6 @@
 </h1>
 
 <div class="bg-white rounded shadow overflow-hidden max-w-sm">
-    @include ('partials.flash')
-
     <form action="{{ route('subscriber.verify') }}" method="POST">
         <input type="hiden" name="number" value="{{ session('number' )}}">
         <div class="p-8">

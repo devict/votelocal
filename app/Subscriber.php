@@ -13,7 +13,7 @@ class Subscriber extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'number', 'subscribed', 'locale', 'password',
+        'number', 'subscribed', 'locale', 'password', 'login_attempt',
     ];
 
     /**
@@ -48,6 +48,13 @@ class Subscriber extends Authenticatable
     public function unsubscribe()
     {
         return $this->update(['subscribed' => false]);
+    }
+
+    public function withinValidVerifyTime()
+    {
+        $oneMinAgo = Carbon::now()->subMinute(1);
+        $loginAttempt = Carbon::parse($this->login_attempt);
+        return $loginAttempt->gt($oneMinAgo);
     }
 
     public static function scopeNewThisWeek($query)
