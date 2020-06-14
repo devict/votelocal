@@ -53,7 +53,6 @@ class SubscriberLoginController extends Controller
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 9999)), 4, '0');
 
-        Log::debug("PIN!! -- " . $pin);
         // Save it as the subscriber's password.
         $subscriber->fill([
             'login_attempt' => Carbon::now(),
