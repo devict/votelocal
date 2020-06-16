@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Tag extends Model
 {
@@ -18,5 +19,13 @@ class Tag extends Model
     public function scheduledMessages()
     {
         return $this->morphedByMany('App\ScheduledMessage', 'taggable');
+    }
+
+    public static function categoryOptions()
+    {
+        return [
+            'location' => 'Location',
+            'topic' => 'Topic',
+        ];
     }
 }

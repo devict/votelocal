@@ -37,6 +37,13 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::get('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@edit')->name('scheduled_messages.admin.edit');
     Route::put('/admin/scheduled_messages/{scheduled_message}', 'ScheduledMessageController@update')->name('scheduled_messages.admin.update');
     Route::get('/admin/scheduled_messages/{scheduled_message}/delete', 'ScheduledMessageController@destroy')->name('scheduled_messages.admin.destroy');
+
+    Route::get('/admin/tags', 'TagController@index')->name('tags.admin.index');
+    Route::get('/admin/tags/new', 'TagController@new')->name('tags.admin.new');
+    Route::post('/admin/tags', 'TagController@create')->name('tags.admin.create');
+    Route::get('/admin/tags/{tag}', 'TagController@edit')->name('tags.admin.edit');
+    Route::put('/admin/tags/{tag}', 'TagController@update')->name('tags.admin.update');
+    Route::get('/admin/tags/{tag}/delete', 'TagController@destroy')->name('tags.admin.destroy');
 });
 
 Route::get('/vcard', 'VCardController@index')->name('vcard');
