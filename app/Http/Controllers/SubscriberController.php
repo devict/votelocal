@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use App\Subscriber;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Filters\MessageFilters;
 use Illuminate\Support\Facades\Auth;

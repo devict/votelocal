@@ -31,7 +31,7 @@
             ])
         </character-count>
     </div>
-    
+
     <div class="px-8">
         <label>Targets:</label>
         <label class="pl-2" for="target_sms">
@@ -43,6 +43,16 @@
             <input type="checkbox" class="form-checkbox" name="target_twitter" id="target_twitter" @if($scheduled_message->target_twitter) checked @endif>
             <span>Twitter</span>
         </label>
+    </div>
+
+    <div class="px-8">
+        <label>Tags:</label>
+        @foreach ($tags as $tag)
+            <label class="pl-2" for="tags[{{ $tag->id }}]">
+                <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
+                <span>{{ ucwords($tag->name) }}</span>
+            </label>
+        @endforeach
     </div>
 
     <div class="px-8 pb-8">
