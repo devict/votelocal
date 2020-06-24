@@ -65,5 +65,6 @@ Route::prefix($locale)->group(function () {
 
     Route::middleware(['require-subscriber'])->group(function () {
         Route::get('/subscriber', 'SubscriberController@home')->name('subscriber.home');
+        Route::post('/subscriber/{subscriber}/tags', 'SubscriberController@updateTags')->name('subscriber.updateTags');
     });
 });

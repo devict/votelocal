@@ -11,16 +11,6 @@ class Tag extends Model
         'name', 'category', 'default'
     ];
 
-    public function subscribers()
-    {
-        return $this->morphByMany('App\Subscriber', 'taggable');
-    }
-
-    public function scheduledMessages()
-    {
-        return $this->morphedByMany('App\ScheduledMessage', 'taggable');
-    }
-
     public static function categoryOptions()
     {
         return [

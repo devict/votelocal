@@ -37,7 +37,15 @@ class Subscriber extends Authenticatable
 
     public function tags()
     {
-        return $this->morphToMany('App\Tag', 'taggable');
+        return $this->belongsToMany('App\Tag');
+    }
+
+    public function tagIds()
+    {
+        $data = collect($this->tags()->select('id')->get());
+        return $data->map(function ($tag) {
+            return $tag->id;
+        });
     }
 
     public function subscribe()

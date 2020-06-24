@@ -28,7 +28,10 @@ class SubscriberController extends Controller
     public function home()
     {
         $subscriber = Auth::guard('subscriber')->user();
-        return view('subscriber.home', ['subscriber' => $subscriber]);
+        return view('subscriber.home', [
+            'subscriber' => $subscriber,
+            'tags' => Tag::all(),
+        ]);
     }
 
     public function create(Request $request)
@@ -71,6 +74,12 @@ class SubscriberController extends Controller
         return redirect()
             ->route('subscribers.admin.index')
             ->with('status', 'Subscriber updated.');
+    }
+
+    public function updateTags(Request $request, Subscriber $subscriber)
+    {
+        $subscriber->tags()->sync($request->input('tags'));
+        return response()->json($subscriber->tagIds());
     }
 
     public function destroy(Subscriber $subscriber)
