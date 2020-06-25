@@ -30,3 +30,6 @@ db-seed:
 
 app-key:
 	docker-compose run --rm php php artisan key:generate
+
+docker-process-messages:
+	docker-compose run --rm php php artisan schedule:run
