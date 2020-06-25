@@ -1,26 +1,44 @@
 <template>
-    <div>
-        <h1>Tags n shit!</h1>
-        <ul id="tags">
-            <li v-for="tag in tags" :key="tag.id">
-                <label :for="`tag-${tag.id}`" v-on:click="updateTags" :data-tag-id="tag.id">
-                    <input type="checkbox"
-                           :name="`tag-${tag.id}`"
-                           :value="tag.id"
-                           :disabled="loading"
-                           :checked="activeTags.indexOf(tag.id) !== -1">
-                    {{ tag.name }}
-                </label>
-            </li>
-        </ul>
-    </div>
+  <div class="flex">
+      <div class="w-1/2">
+          <label class="font-bold">Locations</label>
+          <ul id="tags">
+              <li v-for="tag in locationTags" :key="tag.id">
+                  <label :for="`tag-${tag.id}`" v-on:click="updateTags" :data-tag-id="tag.id">
+                      <input type="checkbox"
+                             :name="`tag-${tag.id}`"
+                             :value="tag.id"
+                             :disabled="loading"
+                             :checked="activeTags.indexOf(tag.id) !== -1">
+                      {{ tag.name }}
+                  </label>
+              </li>
+          </ul>
+      </div>
+      <div class="w-1/2">
+          <label class="font-bold">Topics</label>
+          <ul id="tags">
+              <li v-for="tag in topicTags" :key="tag.id">
+                  <label :for="`tag-${tag.id}`" v-on:click="updateTags" :data-tag-id="tag.id">
+                      <input type="checkbox"
+                             :name="`tag-${tag.id}`"
+                             :value="tag.id"
+                             :disabled="loading"
+                             :checked="activeTags.indexOf(tag.id) !== -1">
+                      {{ tag.name }}
+                  </label>
+              </li>
+          </ul>
+      </div>
+  </div>
 </template>
 
 <script>
 export default {
     props: {
         updateEndpoint: { type: String, default: '' },
-        tags: { type: Array, default: () => [] },
+        locationTags: { type: Array, default: () => [] },
+        topicTags: { type: Array, default: () => [] },
         currentTags: { type: Array, default: () => [] },
     },
 

@@ -30,8 +30,8 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         return view('subscriber.home', [
             'subscriber' => $subscriber,
-            'locationTags' => Tag::locations(),
-            'topicTags' => Tag::topics(),
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 

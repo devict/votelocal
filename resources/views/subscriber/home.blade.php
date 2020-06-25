@@ -8,7 +8,8 @@
 <div class="max-w-xl bg-white rounded shadow overflow-hidden">
     <tag-manager
         update-endpoint="{{ route('subscriber.updateTags', $subscriber) }}"
-        v-bind:tags='{!! json_encode($tags) !!}'
+        v-bind:location-tags='{!! json_encode($locationTags) !!}'
+        v-bind:topic-tags='{!! json_encode($topicTags) !!}'
         v-bind:current-tags='{!! json_encode($subscriber->tagIds()) !!}'>
     </tag-manager>
 </div>

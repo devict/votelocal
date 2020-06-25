@@ -28,8 +28,8 @@ class ScheduledMessageController extends Controller
 
         return view('admin.scheduled_messages.new', [
             'scheduled_message' => $scheduled_message,
-            'locationTags' => Tag::locations(),
-            'topicTags' => Tag::topics(),
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 
