@@ -28,7 +28,8 @@ class ScheduledMessageController extends Controller
 
         return view('admin.scheduled_messages.new', [
             'scheduled_message' => $scheduled_message,
-            'tags' => Tag::all(),
+            'locationTags' => Tag::locations(),
+            'topicTags' => Tag::topics(),
         ]);
     }
 
@@ -66,7 +67,8 @@ class ScheduledMessageController extends Controller
     {
         return view('admin.scheduled_messages.edit', [
             'scheduled_message' => $scheduled_message,
-            'tags' => Tag::all(),
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 

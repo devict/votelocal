@@ -18,4 +18,14 @@ class Tag extends Model
             'topic' => 'Topic',
         ];
     }
+
+    public static function scopeLocations($query)
+    {
+        return $query->where('category', 'location');
+    }
+
+    public static function scopeTopics($query)
+    {
+        return $query->where('category', 'topic');
+    }
 }

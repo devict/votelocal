@@ -1,6 +1,6 @@
 <div class="{{ $class }}">
     @if(! empty($label))
-        <label for="{{ $name }}" class="block mb-1">{!! $label !!}</label>
+        <label for="{{ $name }}" class="font-bold block mb-1">{!! $label !!}</label>
     @endif
 
     {{ $slot }}

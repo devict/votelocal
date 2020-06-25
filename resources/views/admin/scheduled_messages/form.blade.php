@@ -33,7 +33,7 @@
     </div>
 
     <div class="px-8">
-        <label>Targets:</label>
+        <label class="font-bold">Targets</label>
         <label class="pl-2" for="target_sms">
             <input type="checkbox" class="form-checkbox" name="target_sms" id="target_sms" @if($scheduled_message->target_sms) checked @endif>
             <span>SMS</span>
@@ -45,14 +45,29 @@
         </label>
     </div>
 
-    <div class="px-8">
-        <label>Tags:</label>
-        @foreach ($tags as $tag)
-            <label class="pl-2" for="tags[{{ $tag->id }}]">
-                <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
-                <span>{{ ucwords($tag->name) }}</span>
-            </label>
-        @endforeach
+    <div class="px-8 py-8 flex">
+        <div class="w-1/2">
+            <label class="font-bold">Locations</label>
+            @foreach ($locationTags as $tag)
+                <div>
+                    <label class="pr-4" for="tags[{{ $tag->id }}]">
+                        <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
+                        <span>{{ ucwords($tag->name) }}</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        <div class="w-1/2">
+            <label class="font-bold">Topics</label>
+            @foreach ($topicTags as $tag)
+                <div>
+                    <label class="pr-4" for="tags[{{ $tag->id }}]">
+                        <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
+                        <span>{{ ucwords($tag->name) }}</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
     </div>
 
     <div class="px-8 pb-8">
