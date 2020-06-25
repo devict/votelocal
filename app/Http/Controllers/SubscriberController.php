@@ -77,10 +77,27 @@ class SubscriberController extends Controller
             ->with('status', 'Subscriber updated.');
     }
 
-    public function updateTags(Request $request, Subscriber $subscriber)
+    public function updateTags(Request $request)
     {
+        $subscriber = Auth::guard('subscriber')->user();
         $subscriber->tags()->sync($request->input('tags'));
         return response()->json($subscriber->tagIds());
+    }
+
+    public function enable()
+    {
+        $subscriber = Auth::guard('subscriber')->user();
+        $subscriber->subscribed = true;
+        $subscriber->save();
+        return redirect()->route('subscriber.home');
+    }
+
+    public function disable()
+    {
+        $subscriber = Auth::guard('subscriber')->user();
+        $subscriber->subscribed = false;
+        $subscriber->save();
+        return redirect()->route('subscriber.home');
     }
 
     public function destroy(Subscriber $subscriber)
