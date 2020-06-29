@@ -1,0 +1,8 @@
+.text-link {
+    @apply text-red-600 font-bold;
+
+    &:hover,
+    &:focus {
+        @apply text-red-500;
+    }
+}

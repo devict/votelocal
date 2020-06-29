@@ -11,7 +11,12 @@
                 <h1 class="text-2xl font-medium leading-tight font-display mb-56 text-center sm:text-left sm:mb-4 sm:text-3xl sm:text-4xl">@lang('home.intro')</h1>
                 <p class="text-lg leading-normal mb-8">@lang('home.tagline')</p>
                 <div class="sm:pb-24">
+                    <!--
                     <a class="btn bg-red-500 hover:bg-red-600 focus:bg-red-600 block sm:inline-block mb-4 sm:mr-3" href="{{ 'sms://+1' . env('TWILIO_FROM_NUMBER') . ';?&body=' . __('home.text_subscribe_keyword') }} ">
+                        @lang('home.text_to')
+                    </a>
+                    -->
+                    <a class="btn bg-red-500 hover:bg-red-600 focus:bg-red-600 block sm:inline-block mb-4 sm:mr-3" href="{{ route('subscriber.login') }}">
                         @lang('home.text_to')
                     </a>
                     <a class="btn block sm:inline-block" href="#steps">
@@ -37,7 +42,7 @@
     <div class="sm:flex -mx-4">
         <div class="sm:w-1/3 px-4 mb-8 sm:mb-0">
             <h2 class="text-2xl font-medium font-display">@lang('home.step') 1</h2>
-            <p>@lang('home.step_1')</p>
+            <p>@lang('home.step_1', [ 'link' => route('subscriber.login') ])</p>
         </div>
         <div class="sm:w-1/3 px-4 mb-8 sm:mb-0">
             <h2 class="text-2xl font-medium font-display">@lang('home.step') 2</h2>
@@ -56,7 +61,7 @@
         <h2 class="text-3xl sm:text-4xl font-medium text-center font-display leading-tight mb-4">
             @lang('home.locale_support_head')
         </h2>
-        <p>@lang('home.locale_support_body', ['link' => 'tel:+1' . env('TWILIO_FROM_NUMBER')])</p>
+        <p>@lang('home.locale_support_body', [ 'link' => route('subscriber.login') ])</p>
     </div>
 </section>
 
