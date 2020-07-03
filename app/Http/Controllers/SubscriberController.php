@@ -39,9 +39,11 @@ class SubscriberController extends Controller
     {
         // Force the existence of the `subscribed` checkbox
         $request->merge(['subscribed' => $request->has('subscribed')]);
+        $locale = App::getLocale();
         Subscriber::create($request->validate([
             'number' => 'required|max:255|unique:subscribers',
             'subscribed' => 'boolean',
+            'locale' => $locale,
         ]));
 
         return redirect()

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
 use App\Services\Sms\Contracts\Sms;
 
 use App\Subscriber;
@@ -50,8 +50,10 @@ class SubscriberLoginController extends Controller
         $number = $request->get('number');
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
 
+        $subscriber->locale = App::getLocale();
+
         // Generate a verification pin.
-        $pin = str_pad(strval(rand(0, 9999)), 4, '0');
+        $pin = str_pad(strval(rand(0, 999999)), 6, '0');
 
         // Save it as the subscriber's password.
         $subscriber->fill([
