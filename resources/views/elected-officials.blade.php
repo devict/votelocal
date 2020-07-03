@@ -2,8 +2,7 @@
 
 @section('content')
 <header class="mx-auto my-8 w-5/6 md:w-1/2">
-    <p>@lang('resources.elected_officials.page_intro')</p>
-    <p class="mt-6">Enter your address below to search.</p>
+    @lang('resources.elected_officials.page_intro')
 </header>
 
 <aside class="mx-auto w-5/6 md:w-1/2">
