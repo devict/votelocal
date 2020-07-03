@@ -12,7 +12,12 @@
 
 <form action="{{ route('elected-officials.lookup') }}" method="post" class="flex justify-center mt-6 mx-auto w-1/3">
     @csrf
-    <input type="text" name="address" id="address" class="border border-black p-2">
+    <div>
+        <input type="text" name="address" id="address" class="border border-black p-2">
+        @if($errors->has('address'))
+        <p class="mt-2 text-red-500">{{ $errors->first('address') }}</p>
+        @endif
+    </div>
     <button type="submit" class="btn block ml-8 sm:inline-block">Submit</button>
 </form>
 
@@ -28,11 +33,14 @@
 
 @if (isset($data))
 <h3 class="font-bold font-display font-medium mt-12 text-center text-2xl">Showing results for address:</h3>
+
 @php
     $address = $data->normalizedInput
 @endphp
+
 <p class="text-center">{{ $address->line1 }}</p>
 <p class="text-center">{{ "{$address->city}, {$address->state} {$address->zip}" }}</p>
+
 <div class="flex flex-wrap justify-between mt-12 mx-auto w-2/3">
     @foreach ($data->offices as $office)
     @php $official = $data->officials[$office->officialIndices[0]] @endphp

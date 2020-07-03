@@ -26,16 +26,16 @@ class ElectedOfficialsController extends Controller
 
     public function lookup(Request $request)
     {
-        $client = new Client();
+        $validated = $request->validate([
+            'address' => 'required|string'
+        ]);
 
-        if (is_null($request->address)) {
-            return response('Invalid Address', 400);
-        }
+        $client = new Client();
 
         try {
             $response = $client->request('GET', $this->apiEndpoint, [
                 'query' => [
-                    'address' => $request->address,
+                    'address' => $validated['address'],
                     'key' => $this->apiKey
                 ]
             ]);
