@@ -16,6 +16,7 @@
             @include('partials/fields/input', [
                 'label' => '',
                 'name' => 'password',
+                'type' => 'number',
                 'value' => '',
                 'attributes' => [ 'required' => true ],
             ])

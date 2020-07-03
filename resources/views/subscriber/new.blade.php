@@ -15,8 +15,9 @@
             @include('partials/fields/input', [
                 'label' => '',
                 'name' => 'number',
+                'type' => 'number',
                 'value' => '',
-                'attributes' => [ 'required' => true, 'placeholder' => '555-555-5555' ],
+                'attributes' => [ 'required' => true ],
             ])
 
             <button class="btn mt-4 text-lg">@lang('subscriber.login')</button>
