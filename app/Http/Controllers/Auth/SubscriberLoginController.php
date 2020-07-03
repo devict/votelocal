@@ -80,6 +80,6 @@ class SubscriberLoginController extends Controller
 
             return redirect()->intended($this->redirectTo);
         }
-        return redirect()->back()->with('notify', 'Incorrect verification code.');
+        return redirect(route('subscriber.login'))->with('notify', 'Login failed, give it another shot.');
     }
 }

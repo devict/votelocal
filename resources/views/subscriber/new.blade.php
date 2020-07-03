@@ -1,23 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<h1 class="mb-8 font-bold text-2xl">
-    Sign Up
-</h1>
+<main class="px-4 py-8 md:p-12">
+    <h1 class="font-bold text-2xl">
+        @lang('subscriber.welcome')
+    </h1>
+    <h2 class="mb-6 text-xl">
+        @lang('subscriber.login_start')
+    </h2>
 
-<div class="bg-white rounded shadow overflow-hidden max-w-sm">
-    <form action="{{ route('subscriber.login') }}" method="POST">
-        <div class="p-8">
+    <div class="bg-white overflow-hidden max-w-sm">
+        <form action="{{ route('subscriber.login') }}" method="POST">
             @csrf
             @include('partials/fields/input', [
-                'label' => __('subscriber.number'),
+                'label' => '',
                 'name' => 'number',
                 'value' => '',
-                'attributes' => [ 'required' => true ],
+                'attributes' => [ 'required' => true, 'placeholder' => '555-555-5555' ],
             ])
 
-            <button class="btn">@lang('subscriber.login')</button>
-        </div>
-    </form>
-</div>
+            <button class="btn mt-4 text-lg">@lang('subscriber.login')</button>
+        </form>
+    </div>
+</main>
 @endsection
