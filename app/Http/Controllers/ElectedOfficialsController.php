@@ -49,12 +49,4 @@ class ElectedOfficialsController extends Controller
             return view('elected-officials', ['error' => $error->error]);
         }
     }
-
-    public function success()
-    {
-    }
-
-    public function error()
-    {
-    }
 }
