@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ElectedOfficialsController extends Controller
 {
@@ -29,17 +32,29 @@ class ElectedOfficialsController extends Controller
             return response('Invalid Address', 400);
         }
 
-        $response = $client->request('GET', $this->apiEndpoint, [
-            'query' => [
-                'address' => $request->address,
-                'key' => $this->apiKey
-            ]
-        ]);
+        try {
+            $response = $client->request('GET', $this->apiEndpoint, [
+                'query' => [
+                    'address' => $request->address,
+                    'key' => $this->apiKey
+                ]
+            ]);
 
-        $data = json_decode($response->getBody()->getContents());
+            $data = json_decode($response->getBody()->getContents());
 
-        // dd($data);
+            return view('elected-officials', ['data' => $data]);
+        } catch (ClientException $e) {
+            $error = json_decode($e->getResponse()->getBody()->getContents());
 
-        return view('elected-officials', ['data' => $data]);
+            return view('elected-officials', ['error' => $error->error]);
+        }
+    }
+
+    public function success()
+    {
+    }
+
+    public function error()
+    {
     }
 }

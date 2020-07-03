@@ -16,6 +16,16 @@
     <button type="submit">Submit</button>
 </form>
 
+@if (isset($error))
+    @foreach ($error->errors as $errorMessage)
+        @if ($errorMessage->reason == 'parseError')
+            <p class="text-center text-red-500">I had some trouble reading that address.</p>
+            <p class="text-center text-red-500">Make sure to use the format "&lt;House Number&gt; &lt;Street&gt; &lt;City&gt; &lt;State&gt; &lt;Zip Code&gt;</p>
+            <p class="text-center text-xs">Commas are not necessary</p>
+        @endif
+    @endforeach
+@endif
+
 @if (isset($data))
 <h3 class="font-bold font-display font-medium mt-12 text-center text-2xl">Showing results for address:</h3>
 @php
