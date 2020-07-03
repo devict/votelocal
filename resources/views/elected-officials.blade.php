@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<header class="mx-auto my-8 w-1/2">
+<header class="mx-auto my-8 w-5/6 md:w-1/2">
     <p>@lang('resources.elected_officials.page_intro')</p>
     <p class="mt-6">Enter your address below to search.</p>
 </header>
 
-<aside class="mx-auto w-1/2">
+<aside class="mx-auto w-5/6 md:w-1/2">
     <p class="text-right text-xs">Powered by Google Civic Information API</p>
 </aside>
 
-<form action="{{ route('elected-officials.lookup') }}" method="post" class="flex justify-center mt-6 mx-auto w-1/3">
+<form action="{{ route('elected-officials.lookup') }}" method="post" class="flex flex-col md:flex-row items-center justify-center mt-6 mx-auto w-5/6 md:w-1/3">
     @csrf
     <div>
         <input type="text" name="address" id="address" class="border border-black p-2">
@@ -18,7 +18,7 @@
         <p class="mt-2 text-red-500">{{ $errors->first('address') }}</p>
         @endif
     </div>
-    <button type="submit" class="btn block ml-8 sm:inline-block">Submit</button>
+    <button type="submit" class="btn block mt-4 md:mt-0 md:ml-8 sm:inline-block">Submit</button>
 </form>
 
 @if (isset($error))
@@ -41,18 +41,18 @@
 <p class="text-center">{{ $address->line1 }}</p>
 <p class="text-center">{{ "{$address->city}, {$address->state} {$address->zip}" }}</p>
 
-<div class="flex flex-wrap justify-between mt-12 mx-auto w-2/3">
+<div class="flex flex-wrap justify-between mt-12 mx-auto w-full md:w-2/3">
     @foreach ($data->offices as $office)
     @php $official = $data->officials[$office->officialIndices[0]] @endphp
     @if (strpos($official->party, 'Republican') !== false || $official->party === 'Republican Party')
-    <div class="bg-red-100 flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    <div class="bg-red-100 flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
     @elseif (strpos($official->party, 'Democratic') !== false || $official->party === 'Democratic Party')
-    <div class="bg-blue-100 flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    <div class="bg-blue-100 flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
     @else
-    <div class="bg-white flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    <div class="bg-white flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
     @endif
         @if (isset($official->photoUrl))
-        <div class="w-1/4">
+        <div class="mx-auto md:mx-0 mb-4 md:mb-0 w-1/4">
             <img src="{{ $official->photoUrl }}" alt="{{ $official->name }}">
         </div>
         @endif
@@ -68,7 +68,7 @@
 
             @if (isset($official->urls) && count($official->urls))
                 @foreach ($official->urls as $url)
-                    <p class="italic text-sm hover:text-blue-500"><a href="{{ $url }}">{{ $url }}</a></p>
+                    <p class="italic text-sm hover:text-blue-500"><a href="{{ $url }}">Official Website</a></p>
                 @endforeach
             @endif
         </div>
