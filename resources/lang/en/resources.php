@@ -15,7 +15,7 @@ return [
     'kansas_section_title' => 'Kansas Resources',
     'elected_officials' => [
         'name' => 'Find Your Elected Officials',
-        'link' => route('elected-officials'),
+        'link' => route('elected-officials.index'),
     ],
     'vote411' => [
         'name' => 'Vote 411',

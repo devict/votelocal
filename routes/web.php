@@ -48,4 +48,5 @@ Route::prefix($locale)->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
 });
 
-Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials');
+Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
+Route::post('/elected-officials', 'ElectedOfficialsController@lookup')->name('elected-officials.lookup');
