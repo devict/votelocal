@@ -46,7 +46,6 @@ Route::prefix($locale)->group(function () {
     Route::get('/archive', 'ArchiveController@index')->name('archive');
     Route::get('/resources', 'ResourcesController@index')->name('resources');
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
+    Route::post('/elected-officials', 'ElectedOfficialsController@lookup')->name('elected-officials.lookup');
 });
-
-Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
-Route::post('/elected-officials', 'ElectedOfficialsController@lookup')->name('elected-officials.lookup');

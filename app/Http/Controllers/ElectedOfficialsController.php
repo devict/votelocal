@@ -7,7 +7,14 @@ use Illuminate\Http\Request;
 
 class ElectedOfficialsController extends Controller
 {
-    private $apiKey = 'AIzaSyCWFfPa90ifFbT8HiSPkb1VjPfWECGHkro';
+    private $apiEndpoint;
+    private $apiKey;
+
+    public function __construct()
+    {
+        $this->apiEndpoint = 'https://www.googleapis.com/civicinfo/v2/representatives';
+        $this->apiKey = config('services.googleCivicApi.key');
+    }
 
     public function index()
     {
@@ -22,7 +29,7 @@ class ElectedOfficialsController extends Controller
             return response('Invalid Address', 400);
         }
 
-        $response = $client->request('GET', 'https://www.googleapis.com/civicinfo/v2/representatives', [
+        $response = $client->request('GET', $this->apiEndpoint, [
             'query' => [
                 'address' => $request->address,
                 'key' => $this->apiKey
