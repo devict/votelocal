@@ -47,7 +47,7 @@ class ScheduledMessagesTest extends TestCase
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->make([
-            'send_at' => Carbon::create()->subMinutes(1)->toDateTimeString(),
+            'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
         $request = $this
@@ -133,7 +133,7 @@ class ScheduledMessagesTest extends TestCase
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->create([
             'sent' => true,
-            'send_at' => Carbon::create()->subMinutes(1)->toDateTimeString(),
+            'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
         $messageAttrCheck = [

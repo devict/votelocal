@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Subscriber;
+use Illuminate\Support\Str;
 
 class TwilioTest extends TestCase
 {
@@ -76,7 +77,7 @@ class TwilioTest extends TestCase
     /**
      * Test that a message from a new number that isn't a subscribe keyword
      * does not create a new subscriber.
-     * 
+     *
      * @return void
      */
     public function testNoSubscribeMessage()
@@ -95,7 +96,7 @@ class TwilioTest extends TestCase
     /**
      * Test receiving unsubscribe message from existing subscriber will mark
      * them as unsubscribed in the database.
-     * 
+     *
      * @return void
      */
     public function testUnsubscribeActiveSusbcriber()
@@ -126,7 +127,7 @@ class TwilioTest extends TestCase
      private function createTwilioIncomingSms($attrs)
      {
          $defaults = [
-             'MessageSid' => str_random(32),
+             'MessageSid' => Str::random(32),
              'From' => '+15555555555',
              'To' => '+12222222222',
              'Body' => 'Test message',

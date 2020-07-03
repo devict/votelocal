@@ -3,6 +3,7 @@
 namespace App\Filters;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 abstract class AbstractFilters
 {
@@ -54,7 +55,7 @@ abstract class AbstractFilters
      */
     public function all()
     {
-        $filters = array_pluck(
+        $filters = Arr::pluck(
             (new \ReflectionClass($this))->getMethods(\ReflectionMethod::IS_PROTECTED),
             'name'
         );
@@ -69,7 +70,7 @@ abstract class AbstractFilters
      */
     public function get($key, $default = null)
     {
-        return array_get($this->all(), $key, $default);
+        return Arr::get($this->all(), $key, $default);
     }
 
     /**
