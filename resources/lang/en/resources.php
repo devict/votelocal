@@ -9,7 +9,9 @@ return [
     */
 
     'page_title' => 'Voting Resources',
-    'tranlations_in_progress' => '',
+    'intro' => 'Voting Resources',
+    'translations_in_progress' => '',
+    'tagline' => 'Find useful information about voting and elections in Wichita, KS at the links below.',
     'general_section_title' => 'General Resources',
     'voting_section_title' => 'Voting Registration',
     'kansas_section_title' => 'Kansas Resources',
@@ -17,39 +19,24 @@ return [
         'name' => 'Find Your Elected Officials',
         'page_intro' => '<p>For any U.S. residential address, you can look up who represents that address at each elected level of government.</p><p class="mt-6">Enter your address below to search.</p>'
     ],
-    'vote411' => [
-        'name' => 'Vote 411',
-        'link' => 'https://www.vote411.org/',
-        'description' => '<ul><li>Ballot guides</li><li>Check voter registration and polling places</li><li>Find local debates</li></ul>'
-    ],
-    'voteorg' => [
-        'name' => 'Vote.org',
-        'link' => 'https://www.vote.org/',
-        'description' => '<ul><li>Ballot guides</li><li>Check voter registration and requirements</li><li>Set up election reminders</li><li>Request absentee ballots</li></ul>'
-    ],
-    'ksgov' => [
-        'name' => 'Kansas Online Registration Portal',
-        'link' => 'https://www.kdor.ks.gov/Apps/VoterReg/Default.aspx',
-        'description' => 'The official voter registration page for the state of Kansas'
-    ],
     'ksvotes' => [
-        'name' => 'KS Votes',
+        'name' => 'Kansas Voter Registration',
         'link' => 'https://ksvotes.org/',
-        'description' => 'A user-friendly voter registration service for Kansas voters'
+        'description' => 'Check your status and get registered'
+    ],
+    'sedgwickcounty' => [
+        'name' => 'Sedgwick County Election Page',
+        'link' => 'https://www.sedgwickcounty.org/elections/how-do-i-vote',
+        'description' => 'Information provided by the Sedgwick County Election Office.'
+    ],
+    'gotvoterid' => [
+        'name' => 'Kansas Voter ID Information',
+        'link' => 'http://www.gotvoterid.com',
+        'description' => 'List of valid photo IDs, requirements, exemptions, and how to get a free ID.'
     ],
     'lwvk' => [
         'name' => 'League of Women Voters in Kansas',
         'link' => 'http://lwvk.org/elections-and-voting/voting',
         'description' => 'An organization (not just for women) that works to empower voters and encourage civic engagement.'
     ],
-    'voteks' => [
-        'name' => 'Vote KS',
-        'link' => 'https://myvoteinfo.voteks.org/VoterView/Home.do',
-        'description' => 'Another resource for finding registration information, polling places, and ballots for Kansas.'
-    ],
-    'wichitaeagle' => [
-        'name' => 'Wichita Eagle\'s Voting Guide',
-        'link' => 'http://c3.thevoterguide.org/v/wichita18/m/build.do#',
-        'description' => ''
-    ]
 ];

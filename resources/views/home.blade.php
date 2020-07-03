@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="relative">
+<header class="relative">
     <svg class="absolute top-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 524" fill="none" preserveAspectRatio="none">
         <path d="M-2.29048e-05 6.10352e-05L0.000755813 524C0.000755813 524 208.527 439.984 382.411 428.445C556.189 416.913 626.874 463.72 859.963 399.76C1093.05 335.8 1280 128.084 1280 128.084L1280 5.08459e-06L798.707 2.61226e-05L463.791 4.07622e-05L-2.29048e-05 6.10352e-05Z" fill="#C7E6FA"/>
     </svg>
@@ -30,8 +30,7 @@
             </div>
         </div>
     </div>
-</section>
-
+</header>
 
 <section id="steps" class="max-w-5xl mx-auto px-8 py-10 sm:py-20">
     <div class="sm:flex -mx-4">

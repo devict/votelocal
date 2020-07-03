@@ -10,6 +10,12 @@
                 "
                 href="{{ route('resources') }}"
             >
+                @include('partials.icon', [
+                    'name' => 'arrow-up-right',
+                    'width' => '20',
+                    'height' => '20',
+                    'class' => 'inline-block mr-2'
+                ])
                 @lang('resources.page_title')
             </a>
             <a
