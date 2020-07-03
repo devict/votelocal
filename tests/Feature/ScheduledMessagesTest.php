@@ -20,6 +20,7 @@ class ScheduledMessagesTest extends TestCase
     public function testAdminCreateScheduledMessage()
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
+        $tomorrow = today()->addDay();
 
         $response = $this
             ->actingAs($user)
@@ -28,18 +29,18 @@ class ScheduledMessagesTest extends TestCase
                 'body_es'  => 'Test spanish',
                 'target_sms' => 1,
                 'target_twitter' => 1,
-                'send_at'  => '2020-07-03T06:46',
+                'send_at' => $tomorrow->toW3cString(),
             ]);
 
-        $response->assertRedirect('/admin/scheduled_messages');
         $response->assertSessionHasNoErrors();
+        $response->assertRedirect('/admin/scheduled_messages');
 
-        tap(ScheduledMessage::first(), function($message) {
+        tap(ScheduledMessage::first(), function($message) use ($tomorrow) {
             $this->assertEquals('Test english', $message->body_en);
             $this->assertEquals('Test spanish', $message->body_es);
             $this->assertEquals(1, $message->target_sms);
             $this->assertEquals(1, $message->target_twitter);
-            $this->assertEquals('2020-07-03 06:46:00', $message->send_at);
+            $this->assertEquals($tomorrow, $message->send_at);
             $this->assertEquals(false, $message->sent);
         });
     }
