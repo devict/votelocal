@@ -10,7 +10,7 @@ return [
 
     'intro' => 'Welcome to VoteICT.org',
     'tagline' => 'Get text message notifications with relevant information about local elections in Wichita, KS.',
-    'text_to' => 'Get informed now!',
+    'text_to' => 'Get started now!',
     'learn_more' => 'Learn more',
     'step' => 'Step',
     'step_1' => '<a href=":link" class="text-link">Click here</a> to provide your number and start your subscription (100% free).',

@@ -10,7 +10,7 @@ return [
 
     'intro' => 'Bienvenido a VoteICT.org',
     'tagline' => 'Recibe mensajes de texto con información importante sobre nuestras elecciones en Wichita, KS.',
-    'text_to' => '¡Infórmese ahora!',
+    'text_to' => '¡Empieza ahora!',
     'learn_more' => 'Aprende más',
     'step' => 'Paso',
     'step_1' => '<a href=":link" class="text-link">Haga clic aquí</a> para proporcionar su número y comenzar su suscripción (100% gratis).',
