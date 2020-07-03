@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="mb-6 flex justify-between items-center">
+<div class="mb-6 flex justify-between items-center max-w-xl">
     <h1 class="font-bold text-2xl">Tags</h1>
     <a href="{{ route('tags.admin.new') }}" class="btn">
         <span>Create</span> <span class="hidden md:inline">Tag</span>
@@ -10,7 +10,7 @@
 
 @include('partials.flash')
 
-<div class="bg-white rounded shadow overflow-x-auto max-w-lg">
+<div class="bg-white rounded shadow overflow-x-auto max-w-xl">
     <h1 class="text-2xl mt-6 mx-6 font-bold">Locations</h1>
     <table class="w-full">
         <thead>
@@ -18,7 +18,6 @@
                 <th class="px-6 pt-6 pb-4">Name</th>
                 <th class="px-6 pt-6 pb-4">Subscriber Default</th>
                 <th class="px-6 pt-6 pb-4">Message Default</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -43,9 +42,6 @@
                             X
                         @endif
                     </td>
-                    <td class="border-t px-6">
-                        <a href="{{ route('tags.admin.destroy', $tag) }}" onclick="return confirm('Are you sure?')">Delete</a>
-                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -60,7 +56,6 @@
                 <th class="px-6 pt-6 pb-4">Name</th>
                 <th class="px-6 pt-6 pb-4">Subscriber Default</th>
                 <th class="px-6 pt-6 pb-4">Message Default</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -84,9 +79,6 @@
                         @if ($tag->message_default)
                             X
                         @endif
-                    </td>
-                    <td class="border-t px-6">
-                        <a href="{{ route('tags.admin.destroy', $tag) }}" onclick="return confirm('Are you sure?')">Delete</a>
                     </td>
                 </tr>
             @endforeach
