@@ -12,14 +12,14 @@
 
 <form action="{{ route('elected-officials.lookup') }}" method="post" class="flex justify-center mt-6 mx-auto w-1/3">
     @csrf
-    <input type="text" name="address" id="address" class="border border-black m-4">
-    <button type="submit">Submit</button>
+    <input type="text" name="address" id="address" class="border border-black p-2">
+    <button type="submit" class="btn block ml-8 sm:inline-block">Submit</button>
 </form>
 
 @if (isset($error))
     @foreach ($error->errors as $errorMessage)
         @if ($errorMessage->reason == 'parseError')
-            <p class="text-center text-red-500">I had some trouble reading that address.</p>
+            <p class="mt-6 text-center text-red-500">I had some trouble reading that address.</p>
             <p class="text-center text-red-500">Make sure to use the format "&lt;House Number&gt; &lt;Street&gt; &lt;City&gt; &lt;State&gt; &lt;Zip Code&gt;</p>
             <p class="text-center text-xs">Commas are not necessary</p>
         @endif
