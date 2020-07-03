@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\ScheduledMessage;
 use App\Message;
@@ -22,20 +20,28 @@ class ScheduledMessagesTest extends TestCase
     public function testAdminCreateScheduledMessage()
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->make();
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
-            ->post('/admin/scheduled_messages', $message->toArray());
+            ->post('/admin/scheduled_messages', [
+                'body_en'  => 'Test english',
+                'body_es'  => 'Test spanish',
+                'target_sms' => 1,
+                'target_twitter' => 1,
+                'send_at'  => '2020-07-03T06:46',
+            ]);
 
-        $request->assertRedirect('/admin/scheduled_messages');
+        $response->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasNoErrors();
 
-        $this->assertDatabaseHas('scheduled_messages', [
-            'body_en' => $message->body_en,
-            'body_es' => $message->body_es,
-            'send_at' => $message->send_at,
-            'sent' => false,
-        ]);
+        tap(ScheduledMessage::first(), function($message) {
+            $this->assertEquals('Test english', $message->body_en);
+            $this->assertEquals('Test spanish', $message->body_es);
+            $this->assertEquals(1, $message->target_sms);
+            $this->assertEquals(1, $message->target_twitter);
+            $this->assertEquals('2020-07-03 06:46:00', $message->send_at);
+            $this->assertEquals(false, $message->sent);
+        });
     }
 
     /**
@@ -50,11 +56,11 @@ class ScheduledMessagesTest extends TestCase
             'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->post('/admin/scheduled_messages', $message->toArray());
 
-        $request->assertRedirect('/admin/scheduled_messages/new');
+        $response->assertRedirect('/admin/scheduled_messages/new');
 
         $this->assertDatabaseMissing('scheduled_messages', [
             'body_en' => $message->body_en,
@@ -75,7 +81,7 @@ class ScheduledMessagesTest extends TestCase
         $newBodyEN = 'New!';
         $newBodyES = 'Nuevo!';
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
                 'body_en' => $newBodyEN,
@@ -85,7 +91,7 @@ class ScheduledMessagesTest extends TestCase
                 'send_at' => $message->send_at,
             ]);
 
-        $request->assertRedirect('/admin/scheduled_messages/');
+        $response->assertRedirect('/admin/scheduled_messages');
 
         $this->assertDatabaseHas('scheduled_messages', [
             'id' => $message->id,
@@ -115,11 +121,11 @@ class ScheduledMessagesTest extends TestCase
 
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/' . $message->id . '/delete');
 
-        $request->assertRedirect('/admin/scheduled_messages');
+        $response->assertRedirect('/admin/scheduled_messages');
         $this->assertDatabaseMissing('scheduled_messages', $messageAttrCheck);
     }
 
@@ -144,22 +150,22 @@ class ScheduledMessagesTest extends TestCase
 
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/' . $message->id . '/delete');
 
-        $request->assertRedirect('/admin/scheduled_messages');
-        $request->assertSessionHasErrors('cant_change_sent_message');
+        $response->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasErrors('cant_change_sent_message');
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
                 'body_en' => 'sup',
             ]);
 
-        $request->assertRedirect('/admin/scheduled_messages');
-        $request->assertSessionHasErrors('cant_change_sent_message');
+        $response->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasErrors('cant_change_sent_message');
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
     }
 
@@ -180,15 +186,15 @@ class ScheduledMessagesTest extends TestCase
         ]);
 
         // go to /messages on the scheduled message
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/'.$scheduled_message->id);
 
         // expect to see each of the messages sent
         foreach ($messages as $message) {
-            $request->assertSee($message->body_en);
-            $request->assertSee($message->body_es);
-            $request->assertSee($message->to);
+            $response->assertSee($message->body_en);
+            $response->assertSee($message->body_es);
+            $response->assertSee($message->to);
         }
     }
 

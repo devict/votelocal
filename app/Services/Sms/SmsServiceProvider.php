@@ -3,6 +3,8 @@
 namespace App\Services\Sms;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\Sms\Contracts\Sms;
+use App\Services\Sms\TwilioAdapter;
 
 class SmsServiceProvider extends ServiceProvider
 {
@@ -13,9 +15,6 @@ class SmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            'App\Services\Sms\Contracts\Sms',
-            'App\Services\Sms\TwilioAdapter'
-        );
+        $this->app->bind(Sms::class, TwilioAdapter::class);
     }
 }

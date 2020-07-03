@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Message;
+use App\Subscriber;
 
 class SubscriberTest extends TestCase
 {
@@ -23,7 +25,7 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanViewSubscriberMessages()
     {
-        $message = create('App\Message');
+        $message = factory(Message::class)->create();
         $this->signIn(['admin' => 1])
             ->get(route('subscribers.admin.edit', $message->subscriber))
             ->assertSee($message->subscriber->number);
@@ -36,7 +38,7 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanCreateSubscriber()
     {
-        $subscriber = make('App\Subscriber');
+        $subscriber = factory(Subscriber::class)->make();
         $this->signIn(['admin' => 1])
             ->withoutExceptionHandling()
             ->post(route('subscribers.admin.create'), $subscriber->toArray())
@@ -51,13 +53,13 @@ class SubscriberTest extends TestCase
     {
         $this->assertAdminOnly(
             'put',
-            route('subscribers.admin.update', create('App\Subscriber'))
+            route('subscribers.admin.update', factory(Subscriber::class)->create())
         );
     }
 
     public function testAdminCanUpdateSubscriber()
     {
-        $subscriber = create('App\Subscriber', ['subscribed' => true]);
+        $subscriber = factory(Subscriber::class)->create(['subscribed' => true]);
         $this->signIn(['admin' => 1])
             ->withoutExceptionHandling()
             ->put(route('subscribers.admin.update', $subscriber), [])

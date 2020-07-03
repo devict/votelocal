@@ -63,7 +63,7 @@ class TwilioTest extends TestCase
      */
     public function testSubscriberCanChangeLocale()
     {
-        $subscriber = create('App\Subscriber', ['locale' => 'en']);
+        $subscriber = factory(Subscriber::class)->create(['locale' => 'en']);
         $twilioSms  = $this->createTwilioIncomingSms([
             'From' => $subscriber->number,
             'Body' => 'coMiEnZo',
