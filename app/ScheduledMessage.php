@@ -27,6 +27,16 @@ class ScheduledMessage extends Model
         return $this->belongsToMany('App\Tag');
     }
 
+    public function locationTags()
+    {
+        return $this->tags()->where('category', 'location');
+    }
+
+    public function topicTags()
+    {
+        return $this->tags()->where('category', 'topic');
+    }
+
     public function hasTag($tag)
     {
         return $this->tags()->where('tag_id', $tag->id)->exists();

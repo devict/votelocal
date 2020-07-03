@@ -43,17 +43,26 @@ class SendScheduledMessages extends Command
     public function handle(Sms $sms)
     {
         $scheduled_messages = ScheduledMessage::readyToSend()->get();
+        $subscribers = Subscriber::where('subscribed', true)->get();
 
         if ($scheduled_messages->count()) {
             foreach ($scheduled_messages as $message) {
                 if ($message->target_sms) {
-                    $subscribers = Subscriber::where('subscribed', true)->get();
+                    $locationTags = $message->locationTags()->get();
+                    $topicTags = $message->topicTags()->get();
 
-                    // Send to subscribers
-                    if ($subscribers->count()) {
-                        Log::info('Sending ' . $scheduled_messages->count() . ' scheduled messages to ' . $subscribers->count() . ' subscribers.');
+                    // Filter subscribers that have at least one of each matching.
+                    $filteredSubscribers = $subscribers->filter(function ($sub) use ($locationTags, $topicTags) {
+                        $locationTagMatches = $sub->locationTags()->get()->intersect($locationTags);
+                        $topicTagMatches = $sub->topicTags()->get()->intersect($topicTags);
+                        return $locationTagMatches->count() > 0 && $topicTagMatches->count() > 0;
+                    });
 
-                        foreach ($subscribers as $subscriber) {
+                    // Send to filtered subscribers.
+                    if ($filteredSubscribers->count()) {
+                        Log::info('Sending message ' . $message->id . ' to ' . $filteredSubscribers->count() . ' subscribers.');
+
+                        foreach ($filteredSubscribers as $subscriber) {
                             $body = $message->body_en;
                             switch ($subscriber->locale) {
                             case 'es':
@@ -67,10 +76,6 @@ class SendScheduledMessages extends Command
                                 $body,
                                 ['scheduled_message_id' => $message->id]
                             );
-
-                            // Mark it as sent
-                            $message->sent = true;
-                            $message->save();
                         }
                     }
                 }
@@ -83,6 +88,9 @@ class SendScheduledMessages extends Command
                     }
                 }
 
+                // Mark it as sent.
+                $message->sent = true;
+                $message->save();
             }
         }
 

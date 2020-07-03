@@ -40,6 +40,16 @@ class Subscriber extends Authenticatable
         return $this->belongsToMany('App\Tag');
     }
 
+    public function locationTags()
+    {
+        return $this->tags()->where('category', 'location');
+    }
+
+    public function topicTags()
+    {
+        return $this->tags()->where('category', 'topic');
+    }
+
     public function tagIds()
     {
         $data = collect($this->tags()->select('id')->get());
