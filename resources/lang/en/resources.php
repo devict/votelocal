@@ -9,10 +9,14 @@ return [
     */
 
     'page_title' => 'Voting Resources',
-    'tranlations_in_progress' => '', 
+    'tranlations_in_progress' => '',
     'general_section_title' => 'General Resources',
     'voting_section_title' => 'Voting Registration',
     'kansas_section_title' => 'Kansas Resources',
+    'elected_officials' => [
+        'name' => 'Find Your Elected Officials',
+        'link' => route('elected-officials'),
+    ],
     'vote411' => [
         'name' => 'Vote 411',
         'link' => 'https://www.vote411.org/',
