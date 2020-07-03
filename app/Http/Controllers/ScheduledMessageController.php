@@ -106,7 +106,7 @@ class ScheduledMessageController extends Controller
             ->with('status', 'Message updated.');
     }
 
-    public function destroy(ScheduledMessage $scheduled_message, Request $request)
+    public function destroy(ScheduledMessage $scheduled_message)
     {
         if ($scheduled_message->sent) {
             $errors = new MessageBag();
@@ -116,9 +116,6 @@ class ScheduledMessageController extends Controller
         }
 
         $scheduled_message->delete();
-        session('status', 'Message deleted.');
-
-        return redirect('/admin/scheduled_messages')
-            ->with('status', 'Message deleted.');
+        return redirect('/admin/scheduled_messages')->with('status', 'Message deleted.');
     }
 }

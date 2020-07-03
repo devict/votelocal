@@ -11,7 +11,8 @@ class TagController extends Controller
     public function index()
     {
         return view('admin.tags.index', [
-            'tags' => Tag::all(),
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 
@@ -77,4 +78,11 @@ class TagController extends Controller
         return redirect('/admin/tags')
             ->with('status', 'Tag updated.');
     }
+
+    public function destroy(Tag $tag)
+    {
+        $tag->delete();
+        return redirect('/admin/tags')->with('status', 'Tag deleted.');
+    }
+
 }
