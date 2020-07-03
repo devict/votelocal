@@ -19,6 +19,9 @@
                 <h3 class="resource-title"><a href="@lang('resources.voteorg.link')">@lang('resources.voteorg.name')</a></h3>
                 @lang('resources.voteorg.description')
             </li>
+            <li>
+                <h3 class="resource-title"><a href="{{ route('elected-officials.index') }}">@lang('resources.elected_officials.name')</a></h3>
+            </li>
         </ul>
     </div>
 

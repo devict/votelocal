@@ -38,5 +38,9 @@ return [
         'sid'    => env('TWILIO_ACCOUNT_SID'),
         'token'  => env('TWILIO_AUTH_TOKEN'),
         'number' => env('TWILIO_FROM_NUMBER')
+    ],
+
+    'googleCivicApi' => [
+        'key' => env('GOOGLE_CIVIC_API_KEY')
     ]
 ];
