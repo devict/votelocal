@@ -2,7 +2,7 @@
 
 @section('content')
 <header class="mx-auto my-8 w-1/2">
-    <p>For any U.S. residential address, you can look up who represents that address at each elected level of government. During supported elections, you can also look up polling places, early vote location, candidate data, and other election official information.</p>
+    <p>@lang('resources.elected_officials.page_intro')</p>
     <p class="mt-6">Enter your address below to search.</p>
 </header>
 

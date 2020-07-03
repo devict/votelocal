@@ -16,6 +16,7 @@ return [
     'elected_officials' => [
         'name' => 'Find Your Elected Officials',
         'link' => route('elected-officials.index'),
+        'page_intro' => 'For any U.S. residential address, you can look up who represents that address at each elected level of government. '
     ],
     'vote411' => [
         'name' => 'Vote 411',
