@@ -55,7 +55,7 @@
 
             @if (isset($official->urls) && count($official->urls))
                 @foreach ($official->urls as $url)
-                    <p class="italic hover:text-blue-500"><a href="tel:{{ $url }}">{{ $url }}</a></p>
+                    <p class="italic hover:text-blue-500"><a href="{{ $url }}">{{ $url }}</a></p>
                 @endforeach
             @endif
         </div>
