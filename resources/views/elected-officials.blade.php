@@ -36,7 +36,13 @@
 <div class="flex flex-wrap justify-between mt-12 mx-auto w-2/3">
     @foreach ($data->offices as $office)
     @php $official = $data->officials[$office->officialIndices[0]] @endphp
-    <div class="flex justify-between mb-8 w-2/3 bg-white max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    @if (strpos($official->party, 'Republican') !== false || $official->party === 'Republican Party')
+    <div class="bg-red-100 flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    @elseif (strpos($official->party, 'Democratic') !== false || $official->party === 'Democratic Party')
+    <div class="bg-blue-100 flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    @else
+    <div class="bg-white flex justify-between mb-8 w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
+    @endif
         @if (isset($official->photoUrl))
         <div class="w-1/4">
             <img src="{{ $official->photoUrl }}" alt="{{ $official->name }}">
@@ -45,17 +51,16 @@
         <div class="px-4 w-3/4">
             <p class="font-bold font-display">{{ $office->name }}</p>
             <p>{{ $official->name }}</p>
-            <p>{{ $official->party }}</p>
-            {{-- <p><a href="tel:{{ $official->"></a></p> --}}
+            <p class="text-sm">{{ $official->party }}</p>
             @if (isset($official->phones))
                 @foreach ($official->phones as $phone)
-                    <p class="italic mt-6 hover:text-blue-500"><a href="tel:{{ $phone }}">{{ $phone }}</a></p>
+                    <p class="italic mt-6 text-sm hover:text-blue-500"><a href="tel:{{ $phone }}">{{ $phone }}</a></p>
                 @endforeach
             @endif
 
             @if (isset($official->urls) && count($official->urls))
                 @foreach ($official->urls as $url)
-                    <p class="italic hover:text-blue-500"><a href="{{ $url }}">{{ $url }}</a></p>
+                    <p class="italic text-sm hover:text-blue-500"><a href="{{ $url }}">{{ $url }}</a></p>
                 @endforeach
             @endif
         </div>
