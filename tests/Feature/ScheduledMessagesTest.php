@@ -80,7 +80,8 @@ class ScheduledMessagesTest extends TestCase
             ->put('/admin/scheduled_messages/' . $message->id, [
                 'body_en' => $newBodyEN,
                 'body_es' => $newBodyES,
-                'target_sms' => true,
+                'target_sms' => 1,
+                'target_twitter' => 0,
                 'send_at' => $message->send_at,
             ]);
 
@@ -90,7 +91,8 @@ class ScheduledMessagesTest extends TestCase
             'id' => $message->id,
             'body_en' => $newBodyEN,
             'body_es' => $newBodyES,
-            'target_sms' => true,
+            'target_sms' => 1,
+            'target_twitter' => 0,
             'send_at' => $message->send_at,
         ]);
     }

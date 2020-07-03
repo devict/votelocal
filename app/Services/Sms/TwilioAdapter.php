@@ -3,9 +3,9 @@
 namespace App\Services\Sms;
 
 use App\Message;
-use Twilio\Twiml;
-use Twilio\Rest\Client;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
+use Twilio\TwiML\MessagingResponse;
 
 class TwilioAdapter implements Contracts\Sms
 {
@@ -63,7 +63,7 @@ class TwilioAdapter implements Contracts\Sms
             'incoming'          => false
         ]);
 
-        $response = new Twiml();
+        $response = new MessagingResponse();
         $response->message($body);
 
         return response($response, 200)->header('content-type', 'text/xml');
