@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\ScheduledMessage;
 use App\Message;
 use App\User;
+use App\Tag;
 
 class ScheduledMessagesTest extends TestCase
 {
