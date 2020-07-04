@@ -19,7 +19,7 @@
             "
             href="{{ route('scheduled_messages.admin.index') }}"
         >
-            Scheduled Messages
+            Messages
         </a>
         <a
             class="
