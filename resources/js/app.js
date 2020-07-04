@@ -1,12 +1,16 @@
-import './bootstrap';
-import Vue from 'vue';
-import PortalVue from 'portal-vue';
+import 'alpinejs';
 
-Vue.use(PortalVue);
-
-Vue.component('character-count', () => import('./components/CharacterCount'));
-Vue.component('dropdown', () => import('./components/Dropdown'));
-
-const app = new Vue({
-    el: '#app',
-});
+window.dropdown = () => {
+    return {
+        show: false,
+        open() {
+            this.show = true;
+        },
+        close() {
+            this.show = false;
+        },
+        isOpen() {
+            return this.show === true;
+        },
+    };
+};
