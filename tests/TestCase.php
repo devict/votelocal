@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
             return $this;
         }
 
-        $this->actingAs(create($namespace, $attributes));
+        $this->actingAs(factory($namespace)->create($attributes));
 
         return $this;
     }

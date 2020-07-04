@@ -5,7 +5,7 @@ jobs:
   build:
     docker:
       # Specify the version you desire here
-      - image: circleci/php:7.1-jessie-node-browsers
+      - image: circleci/php:7.4-node-browsers
       - image: circleci/mysql:5.7-ram
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
@@ -24,9 +24,9 @@ jobs:
 
     steps:
       - checkout
-
-      - run: sudo apt update && sudo apt install -y --force-yes zlib1g-dev mysql-client
-      - run: sudo docker-php-ext-install zip pdo pdo_mysql mysqli mbstring tokenizer ctype json
+      # libonig-dev is required for mbstring
+      - run: sudo apt update && sudo apt install default-mysql-client libonig-dev
+      - run: sudo docker-php-ext-install pdo pdo_mysql mysqli mbstring tokenizer ctype json
       - run:
           # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: Waiting for MySQL to be ready

@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use Carbon\Carbon;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\ScheduledMessage;
 use App\Message;
@@ -22,20 +20,29 @@ class ScheduledMessagesTest extends TestCase
     public function testAdminCreateScheduledMessage()
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->make();
+        $tomorrow = today()->addDay();
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
-            ->post('/admin/scheduled_messages', $message->toArray());
+            ->post('/admin/scheduled_messages', [
+                'body_en'  => 'Test english',
+                'body_es'  => 'Test spanish',
+                'target_sms' => 1,
+                'target_twitter' => 1,
+                'send_at' => $tomorrow->toW3cString(),
+            ]);
 
-        $request->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect('/admin/scheduled_messages');
 
-        $this->assertDatabaseHas('scheduled_messages', [
-            'body_en' => $message->body_en,
-            'body_es' => $message->body_es,
-            'send_at' => $message->send_at,
-            'sent' => false,
-        ]);
+        tap(ScheduledMessage::first(), function($message) use ($tomorrow) {
+            $this->assertEquals('Test english', $message->body_en);
+            $this->assertEquals('Test spanish', $message->body_es);
+            $this->assertEquals(1, $message->target_sms);
+            $this->assertEquals(1, $message->target_twitter);
+            $this->assertEquals($tomorrow, $message->send_at);
+            $this->assertEquals(false, $message->sent);
+        });
     }
 
     /**
@@ -47,14 +54,14 @@ class ScheduledMessagesTest extends TestCase
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->make([
-            'send_at' => Carbon::create()->subMinutes(1)->toDateTimeString(),
+            'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->post('/admin/scheduled_messages', $message->toArray());
 
-        $request->assertRedirect('/admin/scheduled_messages/new');
+        $response->assertRedirect('/admin/scheduled_messages/new');
 
         $this->assertDatabaseMissing('scheduled_messages', [
             'body_en' => $message->body_en,
@@ -75,22 +82,24 @@ class ScheduledMessagesTest extends TestCase
         $newBodyEN = 'New!';
         $newBodyES = 'Nuevo!';
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
                 'body_en' => $newBodyEN,
                 'body_es' => $newBodyES,
-                'target_sms' => true,
+                'target_sms' => 1,
+                'target_twitter' => 0,
                 'send_at' => $message->send_at,
             ]);
 
-        $request->assertRedirect('/admin/scheduled_messages/');
+        $response->assertRedirect('/admin/scheduled_messages');
 
         $this->assertDatabaseHas('scheduled_messages', [
             'id' => $message->id,
             'body_en' => $newBodyEN,
             'body_es' => $newBodyES,
-            'target_sms' => true,
+            'target_sms' => 1,
+            'target_twitter' => 0,
             'send_at' => $message->send_at,
         ]);
     }
@@ -113,11 +122,11 @@ class ScheduledMessagesTest extends TestCase
 
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/' . $message->id . '/delete');
 
-        $request->assertRedirect('/admin/scheduled_messages');
+        $response->assertRedirect('/admin/scheduled_messages');
         $this->assertDatabaseMissing('scheduled_messages', $messageAttrCheck);
     }
 
@@ -131,7 +140,7 @@ class ScheduledMessagesTest extends TestCase
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->create([
             'sent' => true,
-            'send_at' => Carbon::create()->subMinutes(1)->toDateTimeString(),
+            'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
         $messageAttrCheck = [
@@ -142,22 +151,22 @@ class ScheduledMessagesTest extends TestCase
 
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/' . $message->id . '/delete');
 
-        $request->assertRedirect('/admin/scheduled_messages');
-        $request->assertSessionHasErrors('cant_change_sent_message');
+        $response->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasErrors('cant_change_sent_message');
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
 
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->put('/admin/scheduled_messages/' . $message->id, [
                 'body_en' => 'sup',
             ]);
 
-        $request->assertRedirect('/admin/scheduled_messages');
-        $request->assertSessionHasErrors('cant_change_sent_message');
+        $response->assertRedirect('/admin/scheduled_messages');
+        $response->assertSessionHasErrors('cant_change_sent_message');
         $this->assertDatabaseHas('scheduled_messages', $messageAttrCheck);
     }
 
@@ -178,15 +187,15 @@ class ScheduledMessagesTest extends TestCase
         ]);
 
         // go to /messages on the scheduled message
-        $request = $this
+        $response = $this
             ->actingAs($user)
             ->get('/admin/scheduled_messages/'.$scheduled_message->id);
 
         // expect to see each of the messages sent
         foreach ($messages as $message) {
-            $request->assertSee($message->body_en);
-            $request->assertSee($message->body_es);
-            $request->assertSee($message->to);
+            $response->assertSee($message->body_en);
+            $response->assertSee($message->body_es);
+            $response->assertSee($message->to);
         }
     }
 

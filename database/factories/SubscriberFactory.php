@@ -1,8 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Subscriber;
 
-$factory->define(App\Subscriber::class, function (Faker $faker) {
+$factory->define(Subscriber::class, function (Faker $faker) {
     return [
         'number'     => $faker->unique()->phoneNumber(),
         'subscribed' => true,

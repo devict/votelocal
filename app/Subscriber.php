@@ -32,7 +32,7 @@ class Subscriber extends Authenticatable
 
     public function messages()
     {
-        return $this->hasMany('App\Message', 'subscriber_number', 'number');
+        return $this->hasMany(Message::class, 'subscriber_number', 'number');
     }
 
     public function tags()

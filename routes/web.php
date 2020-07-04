@@ -54,9 +54,11 @@ if ($locale === 'en') {
 }
 
 Route::prefix($locale)->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/archive', 'ArchiveController@index')->name('archive');
     Route::get('/resources', 'ResourcesController@index')->name('resources');
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
+    Route::post('/elected-officials', 'ElectedOfficialsController@lookup')->name('elected-officials.lookup');
 
     Route::get('/subscriber/login', 'Auth\SubscriberLoginController@loginForm')->name('subscriber.loginForm'); // TODO: Temp route.
     Route::post('/subscriber/login', 'Auth\SubscriberLoginController@login')->name('subscriber.login');
