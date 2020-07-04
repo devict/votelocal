@@ -84,6 +84,10 @@ class ScheduledMessagesTest extends TestCase
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->create();
+
+        $locationTag = factory(Tag::class)->create([ 'name' => 'Location', 'category' => 'location' ]);
+        $topicTag = factory(Tag::class)->create([ 'name' => 'Topic', 'category' => 'topic' ]);
+
         $newBodyEN = 'New!';
         $newBodyES = 'Nuevo!';
 
@@ -95,6 +99,7 @@ class ScheduledMessagesTest extends TestCase
                 'target_sms' => 1,
                 'target_twitter' => 0,
                 'send_at' => $message->send_at,
+                'tags' => [$locationTag->id, $topicTag->id],
             ]);
 
         $response->assertRedirect('/admin/scheduled_messages');
@@ -106,6 +111,16 @@ class ScheduledMessagesTest extends TestCase
             'target_sms' => 1,
             'target_twitter' => 0,
             'send_at' => $message->send_at,
+        ]);
+
+        $this->assertDatabaseHas('scheduled_message_tag', [
+            'tag_id' => $locationTag->id,
+            'scheduled_message_id' => $message->id,
+        ]);
+
+        $this->assertDatabaseHas('scheduled_message_tag', [
+            'tag_id' => $topicTag->id,
+            'scheduled_message_id' => $message->id,
         ]);
     }
 
