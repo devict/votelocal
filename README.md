@@ -6,30 +6,33 @@ A service for being an informed voter in the Wichita, KS area.
 
 ## Primary Goals
 
-- Receive SMS reminders on important voting dates and information
-- Provide access to important information on local elections and voting
+-   Receive SMS reminders on important voting dates and information
+-   Provide access to important information on local elections and voting
 
 ## Built With..
 
-- [Laravel](https://laravel.com/docs/5.7)
-- [Twilio](https://twilio.com)
-- [Tailwind CSS](https://tailwindcss.com/)
+-   [Laravel](https://laravel.com/docs/5.7)
+-   [Twilio](https://twilio.com)
+-   [Tailwind CSS](https://tailwindcss.com/)
 
 ## Configuration
 
 In addition to the normal Laravel configuration stuff, this application also needs to set a few things:
 
-- `TIMEZONE`, defaults to America/Chicago, but should be local to wherever this service is used.
-- `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` should be your Twilio account credentials, get them from your Twilio Dashboard.
-- `TWILIO_FROM_NUMBER` should be the Twilio number that messages are sent out from. This must be a number owned by the configured account.
-- `TWITTER_*` config values should be filled in using details from an app in the [Twitter Developer](https://developer.twitter.com/en/apps) portal.
-  - Twitter integration is optional. If the config values are not set, the application will simply not attempt to send messages out as tweets.
+-   `TIMEZONE`, defaults to America/Chicago, but should be local to wherever this service is used.
+-   `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` should be your Twilio account credentials, get them from your Twilio Dashboard.
+-   `TWILIO_FROM_NUMBER` should be the Twilio number that messages are sent out from. This must be a number owned by the configured account.
+-   `TWITTER_*` config values should be filled in using details from an app in the [Twitter Developer](https://developer.twitter.com/en/apps) portal.
+    -   Twitter integration is optional. If the config values are not set, the application will simply not attempt to send messages out as tweets.
+-   `GOOGLE_CIVIC_API_KEY` should be an API key setup through the [Google Developer](https://console.developers.google.com) portal. Your API project should have the [Google Civic Information API](https://console.developers.google.com/apis/library/civicinfo.googleapis.com) enabled.
+    -   Google Civic Info integration is optional. If this config value is not set, the application will simply not search for local representatives.
 
 ## Developing
 
 There are currently two ways of running VoteICT locally.
-- [Docker](./DOCKER.md)
-- [Homestead](./HOMESTEAD.md)
+
+-   [Docker](./DOCKER.md)
+-   [Homestead](./HOMESTEAD.md)
 
 ### Twilio Integration
 
