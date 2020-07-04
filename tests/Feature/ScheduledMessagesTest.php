@@ -21,8 +21,8 @@ class ScheduledMessagesTest extends TestCase
     public function testAdminCreateScheduledMessage()
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
-        $locationTag = factory(Tag::class)->create([ 'name' => 'Location', 'category' => 'location' ]);
-        $topicTag = factory(Tag::class)->create([ 'name' => 'Topic', 'category' => 'topic' ]);
+        $locationTag = factory(Tag::class)->create([ 'category' => 'location' ]);
+        $topicTag = factory(Tag::class)->create([ 'category' => 'topic' ]);
 
         $tomorrow = today()->addDay();
 
@@ -85,8 +85,8 @@ class ScheduledMessagesTest extends TestCase
         $user = factory(User::class)->create([ 'admin' => true ]);
         $message = factory(ScheduledMessage::class)->create();
 
-        $locationTag = factory(Tag::class)->create([ 'name' => 'Location', 'category' => 'location' ]);
-        $topicTag = factory(Tag::class)->create([ 'name' => 'Topic', 'category' => 'topic' ]);
+        $locationTag = factory(Tag::class)->create([ 'category' => 'location' ]);
+        $topicTag = factory(Tag::class)->create([ 'category' => 'topic' ]);
 
         $newBodyEN = 'New!';
         $newBodyES = 'Nuevo!';
