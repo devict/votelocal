@@ -70,7 +70,7 @@ jobs:
             - ~/.yarn
 
       # prepare the database
-      - run: php artisan migrate --env=testing --database=mysql_testing --force
+      - run: php artisan migrate --env=testing --database=docker_testing --force
 
       # run tests with phpunit or codecept
       - run: ./vendor/bin/phpunit
