@@ -30,6 +30,6 @@ $ artisan db:seed
 $ npm i
 ```
 
-- To run tests, run `phpunit`.
+- To run tests, run `php artisan test`.
 - To connect to the database, `mysql homestead`.
 - To follow the logs, use `tail -f storage/logs/laravel.log`.

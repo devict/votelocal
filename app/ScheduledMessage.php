@@ -19,7 +19,7 @@ class ScheduledMessage extends Model
 
     public function messages()
     {
-        return $this->hasMany('App\Message');
+        return $this->hasMany(Message::class);
     }
 
     public static function scopeReadyToSend($query)

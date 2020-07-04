@@ -27,7 +27,7 @@ class Message extends Model
 
     public function subscriber()
     {
-        return $this->belongsTo('App\Subscriber', 'subscriber_number', 'number');
+        return $this->belongsTo(Subscriber::class, 'subscriber_number', 'number');
     }
 
     /*
