@@ -20,6 +20,9 @@ class ScheduledMessagesTest extends TestCase
     public function testAdminCreateScheduledMessage()
     {
         $user = factory(User::class)->create([ 'admin' => true ]);
+        $locationTag = factory(Tag::class)->create([ 'name' => 'Location', 'category' => 'location' ]);
+        $topicTag = factory(Tag::class)->create([ 'name' => 'Topic', 'category' => 'topic' ]);
+
         $tomorrow = today()->addDay();
 
         $response = $this
@@ -30,6 +33,7 @@ class ScheduledMessagesTest extends TestCase
                 'target_sms' => 1,
                 'target_twitter' => 1,
                 'send_at' => $tomorrow->toW3cString(),
+                'tags' => [$locationTag->id, $topicTag->id],
             ]);
 
         $response->assertSessionHasNoErrors();
