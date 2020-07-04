@@ -40,8 +40,8 @@ class TagController extends Controller
         Tag::create([
             'name' => $request->input('name'),
             'category' => $request->input('category'),
-            'subscriber_default' => $request->input('subscriber_default'),
-            'message_default' => $request->input('message_default'),
+            'subscriber_default' => $request->input('subscriber_default') === 'on',
+            'message_default' => $request->input('message_default') === 'on',
         ]);
 
         return redirect('/admin/tags')
@@ -72,8 +72,10 @@ class TagController extends Controller
 
         $tag->name = $request->input('name');
         $tag->category = $request->input('category');
-        $tag->subscriber_default = $request->input('subscriber_default');
-        $tag->message_default = $request->input('message_default');
+        $tag->subscriber_default = $request->input('subscriber_default') === 'on';
+        $tag->message_default = $request->input('message_default') === 'on';
+
+        $tag->save();
 
         return redirect('/admin/tags')
             ->with('status', 'Tag updated.');

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Tag extends Model
 {
     protected $fillable = [
-        'name', 'category', 'default'
+        'name', 'category', 'subscriber_default', 'message_default',
     ];
 
     public static function categoryOptions()
@@ -27,5 +27,15 @@ class Tag extends Model
     public static function scopeTopics($query)
     {
         return $query->where('category', 'topic');
+    }
+
+    public static function scopeSubscriberDefaults($query)
+    {
+        return $query->where('subscriber_default', true);
+    }
+
+    public static function scopeMessageDefaults($query)
+    {
+        return $query->where('message_default', true);
     }
 }
