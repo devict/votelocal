@@ -16,12 +16,7 @@
                     </a>
                     <a class="btn block sm:inline-block" href="#steps">
                         @lang('home.learn_more')
-                        @include('partials.icon', [
-                            'width' => 16,
-                            'height' => 16,
-                            'name' => 'arrow-down-circle',
-                            'class' => 'inline-block'
-                        ])
+                        <x-icon-arrow-downward width="16" class="text-current inline-block" />
                     </a>
                 </div>
             </div>

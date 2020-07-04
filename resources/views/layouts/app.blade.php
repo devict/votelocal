@@ -10,12 +10,7 @@
                 "
                 href="{{ route('resources') }}"
             >
-                @include('partials.icon', [
-                    'name' => 'arrow-up-right',
-                    'width' => '20',
-                    'height' => '20',
-                    'class' => 'inline-block mr-2'
-                ])
+                <x-icon-diagonal-arrow-right-up width="20" class="text-current inline-block mr-2" />
                 @lang('resources.page_title')
             </a>
             <a
@@ -25,12 +20,7 @@
                 "
                 href="{{ route('archive') }}"
             >
-                @include('partials.icon', [
-                    'name' => 'archive',
-                    'width' => '20',
-                    'height' => '20',
-                    'class' => 'inline-block mr-2'
-                ])
+                <x-icon-archive width="20" class="text-current inline-block mr-2" />
                 Message Archive
             </a>
             @foreach(config('voteict.locales') as $name => $locale)
@@ -53,12 +43,7 @@
                     "
                     href="{{ url(implode('/', $segments)) }}"
                 >
-                    @include('partials.icon', [
-                        'name' => $locale,
-                        'width' => '20',
-                        'height' => '20',
-                        'class' => 'inline-block mr-2'
-                    ])
+                    @svg($locale, 'text-current inline-block mr-2', ['width' => 20])
                     <span class="sm:hidden">{{ $name }}</span>
                 </a>
             @endforeach
