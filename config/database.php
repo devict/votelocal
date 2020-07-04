@@ -85,6 +85,7 @@ return [
 
         'docker_testing' => [
             'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', 'db'),
             'port' => env('DB_PORT', '3306'),
             'database' => 'voteict_testing',
