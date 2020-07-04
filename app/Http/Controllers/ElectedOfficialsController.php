@@ -7,6 +7,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\ValidationException;
 
 class ElectedOfficialsController extends Controller
 {
@@ -40,13 +42,28 @@ class ElectedOfficialsController extends Controller
                 ]
             ]);
 
-            $data = json_decode($response->getBody()->getContents());
+            $data = Cache::remember($validated['address'], now()->addHour(), function () use ($response) {
+                return json_decode($response->getBody()->getContents());
+            });
 
             return view('elected-officials', ['data' => $data]);
         } catch (ClientException $e) {
-            $error = json_decode($e->getResponse()->getBody()->getContents());
+            $response = json_decode($e->getResponse()->getBody()->getContents());
+            $reasons = collect();
 
-            return view('elected-officials', ['error' => $error->error]);
+            if (property_exists($response, 'error')) {
+                $reasons = collect($response->error->errors)->map(function ($error) {
+                    if ($error->reason === 'parseError') {
+                        $error->reason = 'Make sure to include your house number, street, city, state, and zip code.';
+                    }
+
+                    return $error->reason;
+                });
+            }
+
+            throw ValidationException::withMessages([
+                'address' => 'We had some trouble reading that address. '.$reasons->implode('. ')
+            ]);
         }
     }
 }
