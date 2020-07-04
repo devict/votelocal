@@ -51,7 +51,14 @@
             @foreach ($locationTags as $tag)
                 <div>
                     <label class="pr-4" for="tags[{{ $tag->id }}]">
-                        <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
+                        <input
+                          type="checkbox"
+                          class="form-checkbox"
+                          name="tags[{{ $tag->id }}]"
+                          id="tags[{{ $tag->id }}]"
+                          @if($scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default))
+                              checked
+                          @endif>
                         <span>{{ ucwords($tag->name) }}</span>
                     </label>
                 </div>
@@ -62,8 +69,14 @@
             @foreach ($topicTags as $tag)
                 <div>
                     <label class="pr-4" for="tags[{{ $tag->id }}]">
-                        <input type="checkbox" class="form-checkbox" name="tags[{{ $tag->id }}]" id="tags[{{ $tag->id }}]" @if($scheduled_message->hasTag($tag)) checked @endif>
-                        <span>{{ ucwords($tag->name) }}</span>
+                        <input
+                          type="checkbox"
+                          class="form-checkbox"
+                          name="tags[{{ $tag->id }}]"
+                          id="tags[{{ $tag->id }}]"
+                          @if($scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default))
+                              checked
+                          @endif>                        <span>{{ ucwords($tag->name) }}</span>
                     </label>
                 </div>
             @endforeach
