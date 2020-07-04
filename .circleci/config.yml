@@ -10,17 +10,18 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: voteict_testing
-          MYSQL_USER: circleci
-          MYSQL_PASSWORD: circleci
+          MYSQL_USER: voteict
+          MYSQL_PASSWORD: secret
 
     environment:
       # These need to be set, even if not valid Twilio creds
       TWILIO_ACCOUNT_SID: supsupsup
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
+      DB_HOST: 127.0.0.1
       DB_DATABASE: voteict_testing
-      DB_USERNAME: circleci
-      DB_PASSWORD: circleci
+      DB_USERNAME: voteict
+      DB_PASSWORD: secret
 
     steps:
       - checkout
