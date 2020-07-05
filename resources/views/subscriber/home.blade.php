@@ -24,12 +24,50 @@
                 Your subscription is <span class="font-bold">active</span>.
             </p>
 
-            <tag-manager
-                update-endpoint="{{ route('subscriber.updateTags') }}"
-                v-bind:location-tags='{!! json_encode($locationTags) !!}'
-                v-bind:topic-tags='{!! json_encode($topicTags) !!}'
-                v-bind:current-tags='{!! json_encode($subscriber->tagIds()) !!}'>
-            </tag-manager>
+<div
+    x-data="tagManager({
+        updateEndpoint: '{{ route('subscriber.updateTags') }}',
+        activeTags: {{ json_encode($subscriber->tagIds()) }}
+    })"
+    class="flex"
+>
+    <div class="w-1/2">
+        <label class="font-bold">Locations</label>
+        <ul>
+            @foreach($locationTags as $tag)
+                <li>
+                    <label>
+                        <input type="checkbox"
+                            value="{{ $tag->id }}"
+                            :disabled="loading"
+                            @change="updateTags"
+                            :checked="isChecked({{ $tag->id }})"
+                        >
+                        {{ $tag->name }}
+                    </label>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+    <div class="w-1/2">
+        <label class="font-bold">Topics</label>
+        <ul>
+            @foreach($topicTags as $tag)
+                <li>
+                    <label>
+                        <input type="checkbox"
+                            value="{{ $tag->id }}"
+                            :disabled="loading"
+                            @change="updateTags"
+                            :checked="isChecked({{ $tag->id }})"
+                        >
+                        {{ $tag->name }}
+                    </label>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</div>
 
             <hr class="mt-6">
 

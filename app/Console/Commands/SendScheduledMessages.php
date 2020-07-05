@@ -45,7 +45,7 @@ class SendScheduledMessages extends Command
         $scheduled_messages = ScheduledMessage::readyToSend()->get();
         $subscribers = Subscriber::where('subscribed', true)->get();
 
-        if ($scheduled_messages->count()) {
+        if ($scheduled_messages->isNotEmpty()) {
             foreach ($scheduled_messages as $message) {
                 if ($message->target_sms) {
                     $locationTags = $message->locationTags()->get();
@@ -53,9 +53,9 @@ class SendScheduledMessages extends Command
 
                     // Filter subscribers that have at least one of each matching.
                     $filteredSubscribers = $subscribers->filter(function ($sub) use ($locationTags, $topicTags) {
-                        $locationTagMatches = $sub->locationTags()->get()->intersect($locationTags);
-                        $topicTagMatches = $sub->topicTags()->get()->intersect($topicTags);
-                        return $locationTagMatches->count() > 0 && $topicTagMatches->count() > 0;
+                        $locationTagMatches = $sub->locationTags->intersect($locationTags);
+                        $topicTagMatches = $sub->topicTags->intersect($topicTags);
+                        return $locationTagMatches->isNotEmpty() && $topicTagMatches->isNotEmpty();
                     });
 
                     // Send to filtered subscribers.

@@ -26,16 +26,10 @@ class TagController extends Controller
 
     public function create(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'category' => 'required',
         ]);
-
-        if ($validator->fails()) {
-            return redirect('/admin/tags/new')
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         Tag::create([
             'name' => $request->input('name'),
@@ -59,16 +53,10 @@ class TagController extends Controller
 
     public function update(Tag $tag, Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required',
             'category' => 'required',
         ]);
-
-        if ($validator->fails()) {
-            return redirect('/admin/tags/'.$tag->id)
-                ->withErrors($validator)
-                ->withInput();
-        }
 
         $tag->name = $request->input('name');
         $tag->category = $request->input('category');
