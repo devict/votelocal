@@ -57,7 +57,7 @@ class ScheduledMessageController extends Controller
             'send_at' => new Carbon($request->input('send_at')),
         ]);
 
-        $message->tags()->attach(array_keys($request->input('tags')));
+        $message->tags()->attach($request->input('tags'));
 
         return redirect('/admin/scheduled_messages')
             ->with('status', 'Message scheduled.');
@@ -99,7 +99,7 @@ class ScheduledMessageController extends Controller
         $scheduled_message->target_sms = $request->input('target_sms');
         $scheduled_message->target_twitter = $request->input('target_twitter');
         $scheduled_message->send_at = new Carbon($request->input('send_at'));
-        $scheduled_message->tags()->sync(array_keys($request->input('tags')));
+        $scheduled_message->tags()->sync($request->input('tags'));
         $scheduled_message->save();
 
         return redirect('/admin/scheduled_messages')
