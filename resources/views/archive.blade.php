@@ -3,7 +3,7 @@
 @section('content')
 <div class="py-8 md:p-12">
     <div class="max-w-xl mx-auto">
-        <h1 class="mb-6 font-bold text-2xl">Message Archive</h1>
+        <h1 class="text-2xl font-medium leading-tight font-display sm:text-4xl">Message Archive</h1>
         <div class="bg-white rounded shadow">
             @foreach($messages as $message)
                 <div class="border-t px-6 py-6 leading-normal ">

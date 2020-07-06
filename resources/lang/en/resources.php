@@ -17,7 +17,7 @@ return [
     'kansas_section_title' => 'Kansas Resources',
     'elected_officials' => [
         'name' => 'Find Your Elected Officials',
-        'page_intro' => '<p>For any U.S. residential address, you can look up who represents that address at each elected level of government.</p><p class="mt-6">Enter your address below to search.</p>'
+        'page_intro' => 'For any U.S. residential address, you can look up who represents that address at each elected level of government.'
     ],
     'ksvotes' => [
         'name' => 'Kansas Voter Registration',

@@ -1,78 +1,109 @@
-@extends('layouts.app')
+@extends('layouts.app', ['background' => 'bg-gray-200'])
 
 @section('content')
-<header class="mx-auto my-8 w-5/6 md:w-1/2">
-    @lang('resources.elected_officials.page_intro')
-</header>
-
-<aside class="mx-auto w-5/6 md:w-1/2">
-    <p class="text-right text-xs">Powered by Google Civic Information API</p>
-</aside>
-
-<form action="{{ route('elected-officials.lookup') }}" method="post" class="flex flex-col md:flex-row items-center justify-center mt-6 mx-auto w-5/6 md:w-1/3">
-    @csrf
-    <div>
-        <input type="text" name="address" id="address" class="border border-black p-2">
-        @if($errors->has('address'))
-        <p class="mt-2 text-red-500">{{ $errors->first('address') }}</p>
-        @endif
-    </div>
-    <button type="submit" class="btn block mt-4 md:mt-0 md:ml-8 sm:inline-block">Submit</button>
-</form>
-
-@if (isset($error))
-    @foreach ($error->errors as $errorMessage)
-        @if ($errorMessage->reason == 'parseError')
-            <p class="mt-6 text-center text-red-500">I had some trouble reading that address.</p>
-            <p class="text-center text-red-500">Make sure to use the format "&lt;House Number&gt; &lt;Street&gt; &lt;City&gt; &lt;State&gt; &lt;Zip Code&gt;</p>
-            <p class="text-center text-xs">Commas are not necessary</p>
-        @endif
-    @endforeach
-@endif
-
-@if (isset($data))
-<h3 class="font-bold font-display font-medium mt-12 text-center text-2xl">Showing results for address:</h3>
-
-@php
-    $address = $data->normalizedInput
-@endphp
-
-<p class="text-center">{{ $address->line1 }}</p>
-<p class="text-center">{{ "{$address->city}, {$address->state} {$address->zip}" }}</p>
-
-<div class="flex flex-wrap justify-between mt-12 mx-auto w-full md:w-2/3">
-    @foreach ($data->offices as $office)
-    @php $official = $data->officials[$office->officialIndices[0]] @endphp
-    @if (strpos($official->party, 'Republican') !== false || $official->party === 'Republican Party')
-    <div class="bg-red-100 flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
-    @elseif (strpos($official->party, 'Democratic') !== false || $official->party === 'Democratic Party')
-    <div class="bg-blue-100 flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
-    @else
-    <div class="bg-white flex flex-col md:flex-row justify-between mb-8 w-5/6 md:w-2/3 max-w-md mx-auto px-6 py-6 rounded-lg shadow-lg relative z-10">
-    @endif
-        @if (isset($official->photoUrl))
-        <div class="mx-auto md:mx-0 mb-4 md:mb-0 w-1/4">
-            <img src="{{ $official->photoUrl }}" alt="{{ $official->name }}">
-        </div>
-        @endif
-        <div class="px-4 w-3/4">
-            <p class="font-bold font-display">{{ $office->name }}</p>
-            <p>{{ $official->name }}</p>
-            <p class="text-sm">{{ $official->party }}</p>
-            @if (isset($official->phones))
-                @foreach ($official->phones as $phone)
-                    <p class="italic mt-6 text-sm hover:text-blue-500"><a href="tel:{{ $phone }}">{{ $phone }}</a></p>
-                @endforeach
-            @endif
-
-            @if (isset($official->urls) && count($official->urls))
-                @foreach ($official->urls as $url)
-                    <p class="italic text-sm hover:text-blue-500"><a href="{{ $url }}">Official Website</a></p>
-                @endforeach
-            @endif
-        </div>
-    </div>
-    @endforeach
+<div class="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
+    <header class="mr-auto sm:w-2/3">
+        <h1 class="text-2xl font-medium leading-tight font-display sm:text-4xl">@lang('resources.elected_officials.name')</h1>
+        <p class="text-lg leading-normal">@lang('resources.elected_officials.page_intro')</p>
+    </header>
 </div>
-@endif
+
+
+<section class="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:py-16 lg:px-8 space-y-8">
+    <form action="{{ route('elected-officials.lookup') }}" method="post">
+        @csrf
+        <label for="address">Your full address</label>
+        <div class="sm:flex mt-1">
+            <input type="text" id="address" name="address" value="{{ old('address') }}" placeholder="123 Fake St. Wichita KS 67202" class="form-input w-full flex-1 flex-shink-0 sm:rounded-r-none sm:text-lg sm:p-4" autofocus>
+            <button type="submit" class="btn sm:rounded-l-none block w-full mt-3 sm:w-auto sm:text-lg sm:mt-0">
+                <x-icon-search width="20" class="-ml-1 mr-1 inline-block sm:w-6" />
+                Search
+            </button>
+        </div>
+        <aside class="text-center">
+            <small class="text-gray-500">Powered by Google Civic Information API</small>
+        </aside>
+    </form>
+    @error('address')
+        <div role="alert" class="text-red-800 my-8">{{ $message }}</div>
+    @enderror
+    @if (isset($data))
+        <header>
+            <h2 class="font-bold font-display font-medium text-center text-2xl">Elected officials for:</h2>
+
+            @php $address = $data->normalizedInput; @endphp
+            <p class="text-center">{{ $address->line1 }}</p>
+            <p class="text-center">{{ $address->city }}, {{ $address->state }} {{ $address->zip }}</p>
+        </header>
+
+        <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+            @foreach ($data->offices as $office)
+                @php
+                    $official = $data->officials[$office->officialIndices[0]];
+                    $color = 'gray';
+                    if (strpos($official->party, 'Republican') !== false) {
+                        $color = 'red';
+                    } elseif (strpos($official->party, 'Democratic') !== false) {
+                        $color = 'blue';
+                    }
+                @endphp
+                <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow">
+                    <div class="flex-1 flex flex-col p-8">
+                        <div class="relative w-24 h-24 flex-shrink-0 mx-auto rounded-full overflow-hidden">
+                            <img class="bg-black block w-full" src="{{ isset($official->photoUrl) ? $official->photoUrl : '/img/anonymous.png' }}" alt="{{ $official->name }}">
+                        </div>
+                        <h3 class="mt-6 text-gray-900 text-sm leading-5 font-medium">{{ $official->name }}</h3>
+                        <dl class="mt-1 flex-grow flex flex-col justify-between">
+                            <dt class="sr-only">Office</dt>
+                            <dd class="text-gray-600 text-sm leading-5">{{ $office->name }}</dd>
+                            <dt class="sr-only">Party affiliation</dt>
+                            <dd class="mt-3">
+                                <span class="px-2 py-1 text-{{ $color }}-800 text-xs leading-4 font-medium bg-{{ $color }}-200 rounded-full">
+                                    {{ $official->party }}
+                                </span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="border-t border-gray-200">
+                        <div class="-mt-px flex">
+                            @if (isset($official->urls) && count($official->urls))
+                                <div class="w-0 flex-1 flex border-r border-gray-200">
+                                    <a href="{{ $official->urls[0] }}" class="group relative -mr-px w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-bl-lg hover:text-red-500 focus:outline-none focus:border-red-300 focus:z-10 transition ease-in-out duration-150">
+                                        <x-icon-globe-2 class="w-5 h-5 text-gray-500 group-hover:text-red-500" />
+                                        <span class="ml-2">Website</span>
+                                    </a>
+                                </div>
+                            @endif
+                            @if (isset($official->phones) && count($official->phones))
+                                <div class="-ml-px w-0 flex-1 flex">
+                                    <a href="tel:{{ $official->phones[0] }}" class="group relative w-0 flex-1 inline-flex items-center justify-center py-4 text-sm leading-5 text-gray-700 font-medium border border-transparent rounded-br-lg hover:text-red-500 focus:outline-none focus:border-red-300 focus:z-10 transition ease-in-out duration-150">
+                                        <x-icon-phone class="w-5 h-5 text-gray-500 group-hover:text-red-500" />
+                                        <span class="ml-2">Call</span>
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    {{-- <div class="w-full flex items-center justify-between p-6 space-x-6">
+                        <div class="flex-1 truncate">
+                            <div class="flex items-center space-x-3">
+                                <h3 class="text-gray-900 text-sm leading-5 font-medium truncate">{{ $official->name }}</h3>
+                                <span class="flex-shrink-0 inline-block px-2 py-0.5 text-gray-800 text-xs leading-4 font-medium bg-{{ $color }}-200 rounded-full">
+                                    {{ $official->party }}
+                                </span>
+                            </div>
+                            <p class="mt-1 text-gray-600 text-sm leading-5 truncate">{{ $office->name }}</p>
+                        </div>
+                        @if (isset($official->photoUrl))
+                            <div class="w-10 h-10 overflow-hidden rounded-full shadow-inner flex-shrink-0">
+                                <img class="block w-full" src="{{ $official->photoUrl }}" alt="{{ $official->name }}">
+                            </div>
+                        @endif
+                    </div> --}}
+
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</section>
 @endsection

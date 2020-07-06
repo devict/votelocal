@@ -72,8 +72,9 @@
       </div>
       <div class="mt-8 flex lg:flex-shrink-0 lg:mt-0">
         <div class="inline-flex rounded-md shadow">
-        <a href="{{ route('elected-officials.index') }}" class="btn bg-red-500 font-bold px-6 py-4">
-          Search now
+        <a href="{{ route('elected-officials.index') }}" class="btn bg-red-500 font-medium px-6 py-4">
+          Get Started
+          <x-icon-arrow-forward width="20" class="inline-block ml-2 -mr-1" />
         </a>
       </div>
       </div>
