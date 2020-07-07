@@ -25,7 +25,47 @@
                 'rows' => 5,
             ]
         ])
+    </div>
 
+    <div class="px-8 py-8 flex">
+        <div class="w-1/2">
+            <label class="font-bold">Locations</label>
+            @foreach ($locationTags as $tag)
+                <div>
+                    <label class="pr-4" for="tags[{{ $tag->id }}]">
+                        <input
+                          type="checkbox"
+                          class="form-checkbox"
+                          name="tags[{{ $tag->id }}]"
+                          id="tags[{{ $tag->id }}]"
+                          @if($scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default))
+                              checked
+                          @endif>
+                        <span>{{ ucwords($tag->name) }}</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        <div class="w-1/2">
+            <label class="font-bold">Topics</label>
+            @foreach ($topicTags as $tag)
+                <div>
+                    <label class="pr-4" for="tags[{{ $tag->id }}]">
+                        <input
+                          type="checkbox"
+                          class="form-checkbox"
+                          name="tags[{{ $tag->id }}]"
+                          id="tags[{{ $tag->id }}]"
+                          @if($scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default))
+                              checked
+                          @endif>                        <span>{{ ucwords($tag->name) }}</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="px-8 pb-8">
         @include('partials/fields/input', [
             'label' => __('Send At'),
             'name' => 'send_at',

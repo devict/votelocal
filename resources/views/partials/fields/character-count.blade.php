@@ -13,6 +13,7 @@
         <textarea
             id="{{ $name }}"
             name="{{ $name }}"
+            x-model="text"
             @foreach($attributes as $attrKey => $attrValue)
                 @if ($attrValue === false) @continue @endif
                 {{ $attrKey }}="{{ $attrValue }}"

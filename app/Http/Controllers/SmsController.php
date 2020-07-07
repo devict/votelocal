@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Subscriber;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\Services\Sms\Contracts\Sms;
-use Illuminate\Support\Facades\App;
 
 class SmsController extends Controller
 {
@@ -72,6 +72,8 @@ class SmsController extends Controller
                     'number' => $message->from,
                     'locale' => $locale
                 ]);
+
+                $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
             }
             $subscriber->update([
                 'subscribed' => true,

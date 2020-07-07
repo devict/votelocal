@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Carbon\Carbon;
 use App\ScheduledMessage;
+use App\Tag;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
@@ -27,6 +28,8 @@ class ScheduledMessageController extends Controller
 
         return view('admin.scheduled_messages.new', [
             'scheduled_message' => $scheduled_message,
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 
@@ -46,7 +49,7 @@ class ScheduledMessageController extends Controller
                 ->withInput();
         }
 
-        ScheduledMessage::create([
+        $message = ScheduledMessage::create([
             'body_en' => $request->input('body_en'),
             'body_es' => $request->input('body_es'),
             'target_sms' => $request->input('target_sms'),
@@ -54,14 +57,18 @@ class ScheduledMessageController extends Controller
             'send_at' => new Carbon($request->input('send_at')),
         ]);
 
+        $message->tags()->attach($request->input('tags'));
+
         return redirect('/admin/scheduled_messages')
             ->with('status', 'Message scheduled.');
     }
 
-    public function edit(ScheduledMessage $scheduled_message, Request $request)
+    public function edit(ScheduledMessage $scheduled_message)
     {
         return view('admin.scheduled_messages.edit', [
             'scheduled_message' => $scheduled_message,
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
         ]);
     }
 
@@ -92,13 +99,14 @@ class ScheduledMessageController extends Controller
         $scheduled_message->target_sms = $request->input('target_sms');
         $scheduled_message->target_twitter = $request->input('target_twitter');
         $scheduled_message->send_at = new Carbon($request->input('send_at'));
+        $scheduled_message->tags()->sync($request->input('tags'));
         $scheduled_message->save();
 
         return redirect('/admin/scheduled_messages')
             ->with('status', 'Message updated.');
     }
 
-    public function destroy(ScheduledMessage $scheduled_message, Request $request)
+    public function destroy(ScheduledMessage $scheduled_message)
     {
         if ($scheduled_message->sent) {
             $errors = new MessageBag();
@@ -108,9 +116,6 @@ class ScheduledMessageController extends Controller
         }
 
         $scheduled_message->delete();
-        session('status', 'Message deleted.');
-
-        return redirect('/admin/scheduled_messages')
-            ->with('status', 'Message deleted.');
+        return redirect('/admin/scheduled_messages')->with('status', 'Message deleted.');
     }
 }

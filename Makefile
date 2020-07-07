@@ -30,3 +30,9 @@ db-seed:
 
 app-key:
 	docker-compose run --rm php php artisan key:generate
+
+docker-process-messages:
+	docker-compose run --rm php php artisan schedule:run
+
+docker-mysql:
+	docker run --network=voteict_default -it --rm mysql mysql -hdb -uroot --password=supersecret voteict
