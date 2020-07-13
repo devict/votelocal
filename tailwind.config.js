@@ -2,13 +2,13 @@ module.exports = {
     purge: [
         './resources/**/*.blade.php',
         './resources/**/*.js',
-        './app/View/Components/*.php',
+        './app/View/Components/*.php'
     ],
     theme: {
         extend: {
             fontFamily: {
                 sans: ['Inter, sans-serif'],
-                display: ['Rubik', 'sans-serif'],
+                display: ['Rubik', 'sans-serif']
             },
             colors: {
                 red: {
@@ -20,7 +20,7 @@ module.exports = {
                     '600': '#D90E4C',
                     '700': '#BB0646',
                     '800': '#960441',
-                    '900': '#6E0636',
+                    '900': '#6E0636'
                 },
                 blue: {
                     '100': '#F5FBFF',
@@ -31,13 +31,23 @@ module.exports = {
                     '600': '#0190BC',
                     '700': '#047A9F',
                     '800': '#095F79',
-                    '900': '#0B3F4F',
-                },
-            },
+                    '900': '#0B3F4F'
+                }
+            }
         },
+        customForms: theme => ({
+            default: {
+                input: {
+                    '&:disabled': {
+                        backgroundColor: theme('colors.gray.100'),
+                        color: theme('colors.gray.600')
+                    }
+                }
+            }
+        })
     },
     variants: {
         textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover']
     },
-    plugins: [require('@tailwindcss/custom-forms')],
+    plugins: [require('@tailwindcss/custom-forms')]
 };

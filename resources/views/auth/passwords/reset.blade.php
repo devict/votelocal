@@ -11,44 +11,20 @@
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
 
                 @include('partials.flash')
-
                 @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
 
-                @include('partials/fields/input', [
-                    'label' => '',
-                    'type' => 'hidden',
-                    'name' => 'token',
-                    'value' => $token,
-                    'class' => '',
-                ])
-
-                @include('partials/fields/input', [
-                    'label' => __('E-Mail Address'),
-                    'type' => 'email',
-                    'name' => 'email',
-                    'value' => $email ?? old('email'),
-                    'class' => 'mt-6',
-                    'attributes' => ['required' => true, 'autofocus' => true]
-                ])
-
-                @include('partials/fields/input', [
-                    'type' => 'password',
-                    'label' => __('Password'),
-                    'name' => 'password',
-                    'value' => '',
-                    'class' => 'mt-6',
-                    'attributes' => ['required' => true]
-                ])
-
-                @include('partials/fields/input', [
-                    'type' => 'password',
-                    'label' => __('Confirm Password'),
-                    'name' => 'password_confirmation',
-                    'value' => '',
-                    'class' => 'mt-6',
-                    'attributes' => ['required' => true]
-                ])
-
+                <div class="mt-6 space-y-4">
+                    <div>
+                        <x-text :label="__('E-Mail Address')" type="email" name="email" :value="old('email', $email)" required autofocus />
+                    </div>
+                    <div>
+                        <x-text :label="__('Password')" type="password" name="password" required />
+                    </div>
+                    <div>
+                        <x-text :label="__('Password')" type="password" name="password_confirmation" required />
+                    </div>
+                </div>
             </div>
             <div class="bg-gray-100 border-t border-gray-200 flex justify-end items-center px-4 py-4 sm:px-6">
                 <button type="submit" class="btn">
