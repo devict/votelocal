@@ -18,10 +18,10 @@ class HomeController extends Controller
         try {
             $contributors = Cache::remember('contributors', now()->addDay(), function () {
                 $curl = curl_init();
-                curl_setopt($curl, CURLOPT_USERAGENT, 'VoteICTBot/1.0');
+                curl_setopt($curl, CURLOPT_USERAGENT, 'VoteLocalBot/1.0');
                 curl_setopt($curl, CURLOPT_HEADER, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_URL, 'https://api.github.com/repos/devict/voteict/contributors');
+                curl_setopt($curl, CURLOPT_URL, 'https://api.github.com/repos/devict/votelocal/contributors');
                 $response = curl_exec($curl);
                 curl_close($curl);
 

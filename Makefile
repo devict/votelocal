@@ -35,4 +35,4 @@ docker-process-messages:
 	docker-compose run --rm php php artisan schedule:run
 
 docker-mysql:
-	docker run --network=voteict_default -it --rm mysql mysql -hdb -uroot --password=supersecret voteict
+	docker run --network=votelocal_default -it --rm mysql mysql -hdb -uroot --password=supersecret votelocal

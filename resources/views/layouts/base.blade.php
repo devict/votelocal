@@ -21,18 +21,18 @@
 
     <!-- Twitter card data -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@VoteICT">
-    <meta name="twitter:creator" content="@VoteICT">
+    <meta name="twitter:site" content="@VoteLocalKS">
+    <meta name="twitter:creator" content="@VoteLocalKS">
     <meta name="twitter:image" content="{{ asset('img/social.png') }}">
-    <meta name="twitter:image:alt" content="VoteICT: Wichtia election info via text message">
+    <meta name="twitter:image:alt" content="Vote Local KS: Voter information for South Central KS">
 
     <!-- Open Graph data -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="VoteICT">
+    <meta property="og:title" content="Vote Local">
     <meta property="og:url" content="{{ request()->url() }}">
     <meta property="og:description" content="Get text message notifications with relevant information about local elections in Wichita.">
     <meta property="og:image" content="{{ asset('img/social.png') }}">
-    <meta property="og:site_name" content="VoteICT">
+    <meta property="og:site_name" content="Vote Local">
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>

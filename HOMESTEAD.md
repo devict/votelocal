@@ -1,14 +1,14 @@
 # Developing with Homestead
 
-There are instructions for running VoteICT locally using [Homestead](https://laravel.com/docs/5.6/homestead).
+There are instructions for running Vote Local locally using [Homestead](https://laravel.com/docs/5.6/homestead).
 
 _Note: if you have a global Homestead setup already, these instructions may not work correctly._
 
-As a quickstart, you can copy `Homestead.yaml.example` to `Homestead.yaml`, and update the line pointing to where the voteict code is stored locally. For example, if you installed Homestead into `~/Homestead` and your cloned repo is in `~/projects/voteict`, you should have a `~/Homestead/Homestead.yaml` file with a `folders` entry like...
+As a quickstart, you can copy `Homestead.yaml.example` to `Homestead.yaml`, and update the line pointing to where the votelocal code is stored locally. For example, if you installed Homestead into `~/Homestead` and your cloned repo is in `~/projects/votelocal`, you should have a `~/Homestead/Homestead.yaml` file with a `folders` entry like...
 
 ```
 folders:
-    - map: ~/projects/voteict
+    - map: ~/projects/votelocal
       to: /home/vagrant/code
 ```
 
