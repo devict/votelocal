@@ -41,7 +41,7 @@
                             tabindex="-1"
                         >
                             @if ($scheduled_message->sent)
-                                <svg class="fill-current block h-8" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z" /></svg>
+                                <x-icon-checkmark width="24" />
                             @else
                                 <div class="w-8 text-center">—</div>
                             @endif
