@@ -14,11 +14,11 @@
     <table class="w-full">
         <thead>
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4">Subscriber Number</th>
-                <th class="px-6 pt-6 pb-4">Subscribed</th>
-                <th class="px-6 pt-6 pb-4">Locale</th>
-                <th class="px-6 pt-6 pb-4">Created</th>
-                <th class="px-6 pt-6 pb-4">Updated</th>
+                <th class="px-4 py-4 sm:px-6">Subscriber Number</th>
+                <th class="px-4 py-4 sm:px-6">Subscribed</th>
+                <th class="px-4 py-4 sm:px-6">Locale</th>
+                <th class="px-4 py-4 sm:px-6">Created</th>
+                <th class="px-4 py-4 sm:px-6">Updated</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +26,7 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center focus:text-blue-500 focus:outline-0"
+                            class="px-4 py-4 sm:px-6 flex items-center focus:text-blue-500 focus:outline-0"
                             href="{{ route('subscribers.admin.edit', $subscriber) }}"
                         >
                             {{ $subscriber->number }}
@@ -48,7 +48,7 @@
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center"
+                            class="px-4 py-4 sm:px-6 flex items-center"
                             href="{{ route('subscribers.admin.edit', $subscriber) }}"
                             tabindex="-1"
                         >
@@ -57,7 +57,7 @@
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center"
+                            class="px-4 py-4 sm:px-6 flex items-center"
                             href="{{ route('subscribers.admin.edit', $subscriber) }}"
                             tabindex="-1"
                         >
@@ -66,7 +66,7 @@
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center"
+                            class="px-4 py-4 sm:px-6 flex items-center"
                             href="{{ route('subscribers.admin.edit', $subscriber) }}"
                             tabindex="-1"
                         >

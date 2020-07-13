@@ -84,23 +84,6 @@
                             @endif
                         </div>
                     </div>
-                    {{-- <div class="w-full flex items-center justify-between p-6 space-x-6">
-                        <div class="flex-1 truncate">
-                            <div class="flex items-center space-x-3">
-                                <h3 class="text-gray-900 text-sm leading-5 font-medium truncate">{{ $official->name }}</h3>
-                                <span class="flex-shrink-0 inline-block px-2 py-0.5 text-gray-800 text-xs leading-4 font-medium bg-{{ $color }}-200 rounded-full">
-                                    {{ $official->party }}
-                                </span>
-                            </div>
-                            <p class="mt-1 text-gray-600 text-sm leading-5 truncate">{{ $office->name }}</p>
-                        </div>
-                        @if (isset($official->photoUrl))
-                            <div class="w-10 h-10 overflow-hidden rounded-full shadow-inner flex-shrink-0">
-                                <img class="block w-full" src="{{ $official->photoUrl }}" alt="{{ $official->name }}">
-                            </div>
-                        @endif
-                    </div> --}}
-
                 </li>
             @endforeach
         </ul>

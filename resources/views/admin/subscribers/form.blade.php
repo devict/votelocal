@@ -21,7 +21,7 @@
             'checked' => old('subscribed', $subscriber->subscribed),
         ])
     </div>
-    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center">
+    <div class="bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center px-4 py-4 sm:px-6">
         @if ($subscriber->exists)
             <a
                 href="{{ route('subscribers.admin.destroy', $subscriber) }}"

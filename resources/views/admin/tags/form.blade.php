@@ -1,6 +1,5 @@
 <form action="{{ $tag->exists ? route('tags.admin.update', $tag) : route('tags.admin.create') }}" method="POST">
     @csrf
-    <div class="px-8">
         @include('partials/fields/input', [
             'label' => __('Name'),
             'name' => 'name',
@@ -8,6 +7,7 @@
             'class' => 'mt-6',
             'attributes' => [ 'required' => true ],
         ])
+    <div class="space-y-4 px-4 py-5 sm:px-6">
     </div>
 
     <div class="px-8">
@@ -35,7 +35,7 @@
         </label>
     </div>
 
-    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $tag->exists ? 'between' : 'end' }} items-center">
+    <div class="bg-gray-100 border-t border-gray-200 flex justify-{{ $tag->exists ? 'between' : 'end' }} items-center px-4 py-4 sm:px-6">
         @if ($tag->exists)
             <a
                 href="{{ route('tags.admin.destroy', $tag) }}"

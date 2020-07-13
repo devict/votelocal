@@ -34,7 +34,7 @@
 
 <div class="max-w-xl bg-white rounded shadow overflow-x-auto">
     @foreach ($messages as $message)
-        <div class="border-t px-6 py-6 leading-normal {{ $message->to !== $subscriber->number ? 'bg-gray-100' : '' }}">
+        <div class="border-t leading-normal px-4 py-4 sm:px-6 {{ $message->to !== $subscriber->number ? 'bg-gray-100' : '' }}">
             {{ $message->body }}
             <div class="text-sm text-gray-600 mt-4">
                 <div class="text-sm text-gray-600 border-gray-200 flex justify-between items-center">

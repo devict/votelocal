@@ -12,8 +12,10 @@
 
 <div class="max-w-xl bg-white rounded shadow overflow-hidden">
     @if ($scheduled_message->sent)
-        <div class="p-4 mx-8 mt-8 bg-yellow-400 text-yellow-800 rounded border border-yellow-600 flex items-center justify-between">
-            This message has been sent and can no longer be changed.
+        <div class="px-4 pt-4 sm:pt-5 sm:px-6">
+            <div class="p-4 bg-yellow-400 text-yellow-800 rounded border border-yellow-600 flex items-center justify-between">
+                This message has been sent and can no longer be changed.
+            </div>
         </div>
     @endif
     @include('admin.scheduled_messages.form', compact('scheduled_message'))
@@ -25,9 +27,9 @@
     <table class="w-full whitespace-no-wrap">
         <thead>
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4">Sent At</th>
-                <th class="px-6 pt-6 pb-4">To</th>
-                <th class="px-6 pt-6 pb-4">From</th>
+                <th class="px-4 py-4 sm:px-6">Sent At</th>
+                <th class="px-4 py-4 sm:px-6">To</th>
+                <th class="px-4 py-4 sm:px-6">From</th>
             </tr>
         </thead>
         <tbody>
@@ -35,17 +37,17 @@
                 @if ($message->subscriber)
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <a class="px-6 py-4 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
+                            <a class="px-4 py-4 sm:px-6 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
                                 {{ $message->created_at->format('m/d/Y g:i A') }}
                             </a>
                         </td>
                         <td class="border-t">
-                            <a class="px-6 py-4 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
+                            <a class="px-4 py-4 sm:px-6 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
                                 {{ $message->to }}
                             </a>
                         </td>
                         <td class="border-t">
-                            <a class="px-6 py-4 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
+                            <a class="px-4 py-4 sm:px-6 flex items-center" href="{{ route('subscribers.admin.edit',  $message->subscriber) }}">
                                 {{ $message->from }}
                             </a>
                         </td>
@@ -61,20 +63,20 @@
                     </tr>
                 @else
                     <tr>
-                        <td class="border-t px-6 py-4">
+                        <td class="border-t px-4 py-4 sm:px-6">
                             {{ $message->created_at->format('m/d/Y g:i A') }}
                         </td>
-                        <td class="border-t px-6 py-4">
+                        <td class="border-t px-4 py-4 sm:px-6">
                             {{ $message->to }}
                         </td>
-                        <td class="border-t px-6 py-4">
+                        <td class="border-t px-4 py-4 sm:px-6">
                             {{ $message->from }}
                         </td>
                     </tr>
                 @endif
             @empty
                 <tr>
-                    <td colspan="3" class="border-t px-6 py-4">
+                    <td colspan="3" class="border-t px-4 py-4 sm:px-6">
                         @if($scheduled_message->sent)
                             No sent messages recorded.
                         @else

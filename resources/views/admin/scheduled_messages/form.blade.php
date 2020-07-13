@@ -93,7 +93,7 @@
     </div>
 
     @if (! $scheduled_message->sent)
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $scheduled_message->exists ? 'between' : 'end' }} items-center">
+        <div class="bg-gray-100 border-t border-gray-200 flex justify-{{ $scheduled_message->exists ? 'between' : 'end' }} items-center px-4 py-4 sm:px-6">
             @if ($scheduled_message->exists && ! $scheduled_message->sent)
                 <a href="{{ route('scheduled_messages.admin.destroy', $scheduled_message) }}" onclick="return confirm('Are you sure?');" class="focus:text-red-500 hover:text-red-500">
                     Delete Message
