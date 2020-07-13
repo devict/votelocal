@@ -19,7 +19,7 @@ class SubscriberController extends Controller
         ]);
     }
 
-    public function adminNew()
+    public function new()
     {
         return view('admin.subscribers.new', [
             'subscriber' => new Subscriber(['subscribed' => true]),
