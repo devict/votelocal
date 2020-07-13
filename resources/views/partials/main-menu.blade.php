@@ -1,6 +1,6 @@
 <nav class="flex items-center justify-between flex-wrap bg-white shadow py-3 px-4 md:px-12">
     <a href="{{ route('home') }}" class="block">
-        <img class="h-8" src="https://www.votelocalks.org/img/logo.svg" title="Vote Local KS">
+        <img class="h-8" src="{{ asset('img/logo.svg') }}" title="Vote Local KS">
     </a>
     <div class="flex">
         <div class="hidden md:flex leading-loose order-1 w-full items-center mt-4 -mx-3 sm:flex sm:mx-0 sm:mt-0 sm:ml-auto sm:w-auto sm:order-none">
