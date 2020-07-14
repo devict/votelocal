@@ -30,7 +30,7 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Vote Local">
     <meta property="og:url" content="{{ request()->url() }}">
-    <meta property="og:description" content="Get text message notifications with relevant information about local elections in Wichita.">
+    <meta property="og:description" content="Get text message notifications with relevant information about local elections in Kansas.">
     <meta property="og:image" content="{{ asset('img/social.png') }}">
     <meta property="og:site_name" content="Vote Local">
 

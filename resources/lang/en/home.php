@@ -9,12 +9,12 @@ return [
     */
 
     'intro' => 'Welcome to VoteLocalKS.org',
-    'tagline' => 'Get text message notifications with relevant information about local elections in Wichita, KS.',
+    'tagline' => 'Get text message notifications with relevant information about local elections in Kansas.',
     'text_to' => 'Get started now!',
     'learn_more' => 'Learn more',
     'step' => 'Step',
     'step_1' => '<a href=":link" class="text-link">Click here</a> to provide your number and start your subscription (100% free).',
-    'step_2' => 'Get up to date news about Wichita voter registration, elections, candidates and&nbsp;more.',
+    'step_2' => 'Get up to date news about KS voter registration, elections, candidates and&nbsp;more.',
     'step_3' => 'Stay locally active and engaged. It couldn’t be&nbsp;easier!',
     'text_subscribe_keyword' => 'START',
     'add_to_contacts_cta' => '..and be sure to <a href=":link">add Vote Local to your contacts</a>!',

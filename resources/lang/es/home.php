@@ -9,12 +9,12 @@ return [
     */
 
     'intro' => 'Bienvenido a VoteLocalKS.org',
-    'tagline' => 'Recibe mensajes de texto con información importante sobre nuestras elecciones en Wichita, KS.',
+    'tagline' => 'Recibe mensajes de texto con información importante sobre nuestras elecciones en Kansas.',
     'text_to' => '¡Empieza ahora!',
     'learn_more' => 'Aprende más',
     'step' => 'Paso',
     'step_1' => '<a href=":link" class="text-link">Haga clic aquí</a> para proporcionar su número y comenzar su suscripción (100% gratis).',
-    'step_2' => 'Mantente informado en cosas como registrarse para votar en Wichita, elecciones, candidatos y más',
+    'step_2' => 'Mantente informado en cosas como registrarse para votar en Kansas, elecciones, candidatos y más',
     'step_3' => '¡Nunca ha sido más fácil estar activo e involucrado en el&nbsp;proceso!',
     'text_subscribe_keyword' => 'INICIAR',
     'add_to_contacts_cta' => '..y asegúrese de <a href=":link">agregar Vote Local a sus contactos</a>!',

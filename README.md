@@ -1,6 +1,6 @@
 # Vote Local
 
-A service for being an informed voter in the South Central KS area.
+A site for pushing voting related reminders and information through SMS.
 
 [votelocalks.org](https://www.votelocalks.org)
 
