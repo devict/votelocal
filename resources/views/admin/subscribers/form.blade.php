@@ -1,27 +1,27 @@
 @include ('partials.flash')
 
 <form action="{{ $subscriber->exists ? route('subscribers.admin.update', $subscriber) : route('subscribers.admin.create') }}" method="POST">
-    <div class="p-8">
-        @csrf
-        @include('partials/fields/input', [
-            'label' => __('Number'),
-            'name' => 'number',
-            'value' => old('number', $subscriber->number),
-            'attributes' => [
-                'required' => true,
-                'disabled' => $subscriber->exists,
-                'class' => $subscriber->exists ? 'bg-gray-300' : '',
-            ]
-        ])
-
-        @include('partials/fields/checkbox', [
-            'label' => __('Subscribed'),
-            'name' => 'subscribed',
-            'class' => 'mt-6',
-            'checked' => old('subscribed', $subscriber->subscribed),
-        ])
+    @csrf
+    <div class="space-y-4 px-4 py-5 sm:p-6">
+        <div>
+            <x-text
+                type="tel"
+                :label="__('Number')"
+                name="number"
+                :value="old('number', $subscriber->number)"
+                :disabled="$subscriber->exists"
+                required
+            />
+        </div>
+        <div>
+            <x-checkbox
+                :label="__('Subscribed')"
+                name="subscribed"
+                :checked="old('subscribed', $subscriber->subscribed)"
+            />
+        </div>
     </div>
-    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center">
+    <div class="bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center px-4 py-4 sm:px-6">
         @if ($subscriber->exists)
             <a
                 href="{{ route('subscribers.admin.destroy', $subscriber) }}"

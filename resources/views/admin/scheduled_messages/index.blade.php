@@ -14,12 +14,12 @@
     <table class="w-full">
         <thead>
             <tr class="text-left font-bold">
-                <th class="px-6 pt-6 pb-4">#</th>
-                <th class="px-6 pt-6 pb-4">Sent</th>
-                <th class="px-6 pt-6 pb-4">Target</th>
-                <th class="px-6 pt-6 pb-4">Send At</th>
-                <th class="px-6 pt-6 pb-4">Body (en)</th>
-                <th class="px-6 pt-6 pb-4">Body (es)</th>
+                <th class="px-4 py-4 sm:px-6">#</th>
+                <th class="px-4 py-4 sm:px-6">Sent</th>
+                <th class="px-4 py-4 sm:px-6">Target</th>
+                <th class="px-4 py-4 sm:px-6">Send At</th>
+                <th class="px-4 py-4 sm:px-6">Body (en)</th>
+                <th class="px-4 py-4 sm:px-6">Body (es)</th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center"
+                            class="px-4 py-4 sm:px-6 flex items-center"
                             href="{{ route('scheduled_messages.admin.edit', $scheduled_message) }}"
                             tabindex="-1"
                         >
@@ -41,20 +41,20 @@
                             tabindex="-1"
                         >
                             @if ($scheduled_message->sent)
-                                <svg class="fill-current block h-8" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z" /></svg>
+                                <x-icon-checkmark width="24" />
                             @else
                                 <div class="w-8 text-center">—</div>
                             @endif
                         </a>
                     </td>
                     <td class="border-t">
-                        @if( $scheduled_message->target_sms ) SMS @endif 
-                        @if( $scheduled_message->target_sms and $scheduled_message->target_twitter ) / @endif 
+                        @if( $scheduled_message->target_sms ) SMS @endif
+                        @if( $scheduled_message->target_sms and $scheduled_message->target_twitter ) / @endif
                         @if( $scheduled_message->target_twitter ) Twitter @endif
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center"
+                            class="px-4 py-4 sm:px-6 flex items-center"
                             href="{{ route('scheduled_messages.admin.edit', $scheduled_message) }}"
                             tabindex="-1"
                         >
@@ -63,7 +63,7 @@
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center focus:text-blue-500 focus:outline-0"
+                            class="px-4 py-4 sm:px-6 flex items-center focus:text-blue-500 focus:outline-0"
                             href="{{ route('scheduled_messages.admin.edit', $scheduled_message) }}"
                         >
                             {{ $scheduled_message->body_en }}
@@ -71,7 +71,7 @@
                     </td>
                     <td class="border-t">
                         <a
-                            class="px-6 py-4 flex items-center focus:text-blue-500 focus:outline-0"
+                            class="px-4 py-4 sm:px-6 flex items-center focus:text-blue-500 focus:outline-0"
                             href="{{ route('scheduled_messages.admin.edit', $scheduled_message) }}"
                         >
                             {{ $scheduled_message->body_es }}

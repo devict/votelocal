@@ -1,26 +1,28 @@
-@extends('layouts.app')
+@extends('layouts.app', ['background' => 'bg-gray-200'])
 
 @section('content')
-<main class="px-4 py-8 md:p-12">
-    <h1 class="font-bold text-2xl">
-        @lang('subscriber.welcome')
-    </h1>
-    <h2 class="mb-6 text-xl">
-        @lang('subscriber.login_start')
-    </h2>
-
-    <div class="bg-white overflow-hidden max-w-sm">
-        <form action="{{ route('subscriber.login') }}" method="POST">
-            @csrf
-            @include('partials/fields/input', [
-                'label' => '',
-                'name' => 'number',
-                'type' => 'number',
-                'value' => '',
-                'attributes' => [ 'required' => true ],
-            ])
-
-            <button class="btn mt-4 text-lg">@lang('subscriber.login')</button>
+<main class="mt-16 sm:px-6 lg:px-8">
+    <div class="w-full max-w-sm mx-auto">
+        <form action="{{ route('subscriber.login') }}" method="POST" class="mt-16 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="px-4 py-5 sm:p-6">
+                <h1 class="text-center font-bold text-3xl">@lang('subscriber.welcome')</h1>
+                <div class="mx-auto mt-6 w-24 border-b-2"></div>
+                @include('partials.flash')
+                @csrf
+                <div class="mt-6 space-y-4">
+                    <x-text
+                        type="tel"
+                        :label="__('subscriber.login_start')"
+                        name="number"
+                        :value="old('number')"
+                        autofocus
+                        required
+                    />
+                </div>
+            </div>
+            <div class="bg-gray-100 border-t border-gray-200 flex justify-end items-center px-4 py-4 sm:px-6">
+                <button class="btn">@lang('subscriber.login')</button>
+            </div>
         </form>
     </div>
 </main>

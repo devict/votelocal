@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +24,6 @@ Route::middleware(['auth', 'require-admin'])->group(function () {
     Route::get('/admin', 'AdminController@index')->name('dashboard');
 
     Route::get('/admin/subscribers', 'SubscriberController@index')->name('subscribers.admin.index');
-    Route::get('/admin/subscribers/new', 'SubscriberController@new')->name('subscribers.admin.new');
     Route::post('/admin/subscribers', 'SubscriberController@create')->name('subscribers.admin.create');
     Route::get('/admin/subscribers/new', 'SubscriberController@new')->name('subscribers.admin.new');
     Route::get('/admin/subscribers/{subscriber}', 'SubscriberController@edit')->name('subscribers.admin.edit');
