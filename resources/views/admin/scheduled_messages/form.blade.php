@@ -61,7 +61,7 @@
                 :label="__('Send At')"
                 name="sent_at"
                 :value="old('send_at', $scheduled_message->send_at->format('Y-m-d\TH:i'))"
-                disabled="(bool) $scheduled_message->sent"
+                :disabled="(bool) $scheduled_message->sent"
                 required
             />
         </div>
