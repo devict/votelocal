@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 use Carbon\Carbon;
 
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -48,9 +49,9 @@ class SubscriberLoginController extends Controller
     public function login(Request $request, Sms $sms)
     {
         $number = $request->get('number');
-        $subscriber = Subscriber::firstOrNew(['number' => $number]);
 
-        $subscriber->locale = App::getLocale();
+        $subscriber = Subscriber::firstOrNew(['number' => $number]);
+        $new = !$subscriber->exists;
 
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
@@ -60,6 +61,11 @@ class SubscriberLoginController extends Controller
             'login_attempt' => Carbon::now(),
             'password' => Hash::make($pin),
         ])->save();
+
+        if ($new) {
+            $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
+            $subscriber->locale = App::getLocale();
+        }
 
         // Text it to the number.
         $sms->send($number, $pin);
