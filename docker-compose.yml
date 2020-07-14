@@ -36,7 +36,7 @@ services:
     env_file:
       - .db.env
     volumes:
-      - voteict-data:/var/lib/mysql
+      - votelocal-data:/var/lib/mysql
 
   # This service is just used for running artisan commands
   php:
@@ -56,4 +56,4 @@ services:
       - 4040
 
 volumes:
-  voteict-data:
+  votelocal-data:

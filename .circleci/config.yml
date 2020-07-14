@@ -9,8 +9,8 @@ jobs:
       - image: circleci/mysql:5.7-ram
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: voteict_testing
-          MYSQL_USER: voteict
+          MYSQL_DATABASE: votelocal_testing
+          MYSQL_USER: votelocal
           MYSQL_PASSWORD: secret
 
     environment:
@@ -19,8 +19,8 @@ jobs:
       TWILIO_AUTH_TOKEN: yoyoyo
       TWILIO_FROM_NUMBER: +15555555555
       DB_HOST: 127.0.0.1
-      DB_DATABASE: voteict_testing
-      DB_USERNAME: voteict
+      DB_DATABASE: votelocal_testing
+      DB_USERNAME: votelocal
       DB_PASSWORD: secret
 
     steps:

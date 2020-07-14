@@ -100,7 +100,7 @@
                     </a>
                 @empty
                     <div class="text-center">
-                        <a class="btn" href="https://github.com/devict/voteict/graphs/contributors">
+                        <a class="btn" href="https://github.com/devict/votelocal/graphs/contributors">
                             View contributors on GitHub
                         </a>
                     </div>

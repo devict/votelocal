@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $locale = Request::segment(1);
-        if (in_array($locale, config('voteict.locales'))) {
+        if (in_array($locale, config('votelocal.locales'))) {
             App::setLocale($locale);
         }
 

@@ -36,7 +36,7 @@
                 </a>
             @endif
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
-            @foreach(config('voteict.locales') as $name => $locale)
+            @foreach(config('votelocal.locales') as $name => $locale)
                 @php
                     $current = App::getLocale();
                     $segments = Request::segments();

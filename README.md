@@ -1,8 +1,8 @@
-# Vote ICT
+# Vote Local
 
-A service for being an informed voter in the Wichita, KS area.
+A site for pushing voting related reminders and information through SMS.
 
-[voteict.org](https://www.voteict.org)
+[votelocalks.org](https://www.votelocalks.org)
 
 ## Primary Goals
 
@@ -29,7 +29,7 @@ In addition to the normal Laravel configuration stuff, this application also nee
 
 ## Developing
 
-There are currently two ways of running VoteICT locally.
+There are currently two ways of running Vote Local locally.
 
 -   [Docker](./DOCKER.md)
 -   [Homestead](./HOMESTEAD.md)
@@ -50,14 +50,14 @@ Twitter messages will automatically be sent out to an account if the necessary T
 
 ## Design
 
-Interested in helping boost the design of VoteICT? Local designers interested in contributing their ideas, talents, and time to this effort now can! The homepage design and additional brand assets are managed in [a community Figma file](https://www.figma.com/c/file/804929533491978159) for anyone to duplicate and make changes to.
+Interested in helping boost the design of Vote Local? Local designers interested in contributing their ideas, talents, and time to this effort now can! The homepage design and additional brand assets are managed in [a community Figma file](https://www.figma.com/c/file/804929533491978159) for anyone to duplicate and make changes to.
 
 SVG icons are located in `/resources/svg`. Use `<x-icon-filename-of-icon />` within a blade template to render an icon. Most of the icons in this project are provided by the [Eva Icons](https://akveo.github.io/eva-icons) set.
 
-We're open to any ideas that would improve the current state of the VoteICT service; icons, illustrations, or even new pages and additional resources that could be added to the site!
+We're open to any ideas that would improve the current state of the Vote Local service; icons, illustrations, or even new pages and additional resources that could be added to the site!
 
 ## Getting Involved
 
-VoteICT is a project maintained by part of [devICT](https://devict.org), Wichita's developer community. To get involved, join the [devICT Slack](https://devict.org/slack)!
+Vote Local is a project maintained by part of [devICT](https://devict.org), Wichita's developer community. To get involved, join the [devICT Slack](https://devict.org/slack)!
 
-Also feel free to jump into [the issues](https://github.com/devict/voteict/issues)!
+Also feel free to jump into [the issues](https://github.com/devict/votelocal/issues)!

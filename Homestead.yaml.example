@@ -11,7 +11,7 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: ~/code/voteict
+    - map: ~/code/votelocal
       to: /home/vagrant/code
 
 sites:
