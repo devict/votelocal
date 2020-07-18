@@ -36,6 +36,7 @@
                                 :label="ucwords($tag->name)"
                                 name="tags[{{ $tag->id }}]"
                                 :checked="$scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default)"
+                                :disabled="(bool) $scheduled_message->sent"
                             />
                         </li>
                     @endforeach
@@ -49,6 +50,7 @@
                                 :label="ucwords($tag->name)"
                                 name="tags[{{ $tag->id }}]"
                                 :checked="$scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default)"
+                                :disabled="(bool) $scheduled_message->sent"
                             />
                         </li>
                     @endforeach
