@@ -74,6 +74,7 @@
                     label="SMS"
                     name="target_sms"
                     :checked="$scheduled_message->target_sms"
+                    :disabled="(bool) $scheduled_message->sent"
                 />
             </div>
             <div>
@@ -81,6 +82,7 @@
                     :label="__('Twitter')"
                     name="target_twitter"
                     :checked="$scheduled_message->target_twitter"
+                    :disabled="(bool) $scheduled_message->sent"
                 />
             </div>
         </x-fieldset>
