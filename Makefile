@@ -31,6 +31,9 @@ deps:
 build:
 	docker-compose build
 
+mysql:
+	docker-compose run --rm db mysql --host=db --user=votelocal --password votelocal
+
 .PHONY: db-migrate
 db-migrate:
 	docker-compose run --rm php php artisan migrate
