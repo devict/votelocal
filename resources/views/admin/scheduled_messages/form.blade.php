@@ -17,7 +17,7 @@
                 <div>
                     <x-character-count
                         :label="__('Body (Spanish)')"
-                        name="body_en"
+                        name="body_es"
                         :value="old('body_es', $scheduled_message->body_es)"
                         :disabled="(bool) $scheduled_message->sent"
                         rows="5"
@@ -59,7 +59,7 @@
         <div>
             <x-text
                 :label="__('Send At')"
-                name="sent_at"
+                name="send_at"
                 :value="old('send_at', $scheduled_message->send_at->format('Y-m-d\TH:i'))"
                 :disabled="(bool) $scheduled_message->sent"
                 required
