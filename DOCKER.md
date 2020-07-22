@@ -7,6 +7,7 @@ These are instructions for running this application locally using docker and doc
 Copy the two configuration files into place (note: `.db.env` is not required for non-docker setup).
 - `.env.docker.example` -> `.env`
 - `.db.env.docker.example` -> `.db.env`.
+- `.my.cnf.example` -> `.my.cnf`.
 
 If you're looking to test out the **Twilio** and/or **Twitter** integrations locally, you will need to configure the appropriate sections in your new `.env` file.
 

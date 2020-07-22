@@ -1,0 +1,4 @@
+[client]
+user = votelocal
+password = secret
+host = db

@@ -12,9 +12,11 @@
 .DS_Store
 .env
 .db.env
+.my.cnf
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 Thumbs.db
 yarn-error.log
+backups
