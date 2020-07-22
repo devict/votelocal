@@ -21,7 +21,7 @@ return [
     'locale_support_head' => '¡Disponible en Español!',
     'locale_support_body' => '¡<a href=":link" class="text-link">Inicie sesión</a> para administrar sus preferencias de idioma!',
     'contributors_head' => 'Colaboradores del proyecto',
-    'contributors_body' => 'Estas personas han estado involucradas en la creación y mantenimiento de la plataforma de Vote Local.',
+    'contributors_body' => '<p class="mb-4">Estas personas han estado involucradas en la creación y mantenimiento de la plataforma de Vote Local.</p><p>¿Tienes ganas de ayudar? Consulte nuestra lista de <a href="https://github.com/devict/votelocal/issues" class="font-bold text-gray-600 hover:text-blue-500">problemas</a> en nuestro <a href="https://github.com/devict/votelocal" class="font-bold text-gray-600 hover:text-blue-500">GitHub</a>.</p>',
     'partners_head' => 'Presentado por la comunidad',
     'partners_body' => 'Vote Local es creado y operado por organizaciones comunitarias locales <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.kmuw.org" target="_blank">KMUW</a>, <a class="font-bold text-gray-600 hover:text-blue-500" href="https://devict.org" target="_blank">devICT</a>, y <a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.abcbilingualresources.com/" target="_blank">AB&C Bilingual Resources</a>.',
 
