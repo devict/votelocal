@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 use App\Tag;
 
 class TagsTableSeeder extends Seeder
@@ -20,13 +19,56 @@ class TagsTableSeeder extends Seeder
             'message_default' => true,
         ]);
         Tag::create([
-            'name' => 'Wichita',
+            'name' => 'Sedgwick County',
             'category' => 'location',
             'subscriber_default' => true,
             'message_default' => false,
         ]);
         Tag::create([
+            'name' => 'Sumner County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Butler County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Harvey County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Cowley County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Reno County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Kingman County',
+            'category' => 'location',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+
+        Tag::create([
             'name' => 'Voting Reminders',
+            'category' => 'topic',
+            'subscriber_default' => true,
+            'message_default' => false,
+        ]);
+        Tag::create([
+            'name' => 'Election Info',
             'category' => 'topic',
             'subscriber_default' => true,
             'message_default' => false,
@@ -38,7 +80,7 @@ class TagsTableSeeder extends Seeder
             'message_default' => false,
         ]);
         Tag::create([
-            'name' => 'Informative Events',
+            'name' => 'Events',
             'category' => 'topic',
             'subscriber_default' => true,
             'message_default' => false,
