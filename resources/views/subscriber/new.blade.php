@@ -17,6 +17,7 @@
                         :value="old('number')"
                         autofocus
                         required
+                        pattern=".{10}"
                     />
                 </div>
             </div>

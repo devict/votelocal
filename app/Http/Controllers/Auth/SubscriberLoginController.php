@@ -48,6 +48,8 @@ class SubscriberLoginController extends Controller
 
     public function login(Request $request, Sms $sms)
     {
+        $request->validate([ 'number' => 'required|digits:10' ]);
+
         $number = $request->get('number');
 
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
