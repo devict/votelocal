@@ -11,7 +11,7 @@
                 @csrf
                 <input type="hidden" name="number" value="{{ session('number' )}}">
                 <div class="mt-6 space-y-4">
-                    <x-text :label="@lang('Enter the code you received')" name="password" inputmode="numeric" required autofocus />
+                    <x-text :label="__('Enter the code you received')" name="password" inputmode="numeric" required autofocus />
                 </div>
             </div>
             <div class="bg-gray-100 border-t border-gray-200 flex justify-end items-center px-4 py-4 sm:px-6">
