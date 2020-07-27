@@ -11,7 +11,7 @@
                 href="{{ route('resources') }}"
             >
                 <x-icon-diagonal-arrow-right-up width="20" class="text-current inline-block mr-2" />
-                @lang('resources.page_title')
+                @lang('Voting Resources')
             </a>
             <a
                 class="
