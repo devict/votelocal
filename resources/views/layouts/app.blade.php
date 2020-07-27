@@ -32,7 +32,7 @@
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                     href="#"
                 >
-                    @lang('subscriber.logout')
+                    @lang('Logout')
                 </a>
             @endif
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
