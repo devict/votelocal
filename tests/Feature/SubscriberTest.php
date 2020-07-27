@@ -70,6 +70,6 @@ class SubscriberTest extends TestCase
 
     public function testSubscribeFromSite()
     {
-        $this->get(route('home'));
+        $this->get(route('home'))->assertOk();
     }
 }
