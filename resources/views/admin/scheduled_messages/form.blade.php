@@ -34,7 +34,8 @@
                         <li>
                             <x-checkbox
                                 :label="ucwords($tag->name)"
-                                name="tags[{{ $tag->id }}]"
+                                name="tags[]"
+                                value="{{ $tag->id }}"
                                 :checked="$scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default)"
                                 :disabled="(bool) $scheduled_message->sent"
                             />
@@ -48,7 +49,8 @@
                         <li>
                             <x-checkbox
                                 :label="ucwords($tag->name)"
-                                name="tags[{{ $tag->id }}]"
+                                name="tags[]"
+                                value="{{ $tag->id }}"
                                 :checked="$scheduled_message->hasTag($tag) || (!$scheduled_message->exists && $tag->message_default)"
                                 :disabled="(bool) $scheduled_message->sent"
                             />
