@@ -74,7 +74,7 @@
                 <h2 class="text-3xl sm:text-4xl font-medium font-display leading-tight mb-4">
                     @lang('Brought to you by the&nbsp;community')
                 </h2>
-                <p>@lang('Vote Local is created and operated by local community organizations :kmuw, :devict, and :abc', [
+                <p>@lang('Vote Local is created and operated by local community organizations :kmuw, :devict, and :abc.', [
                     'kmuw' => '<a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.kmuw.org" target="_blank">KMUW</a>',
                     'devict' => '<a class="font-bold text-gray-600 hover:text-blue-500" href="https://devict.org" target="_blank">devICT</a>',
                     'abc' => '<a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.abcbilingualresources.com/" target="_blank">AB&C Bilingual Resources</a>'
