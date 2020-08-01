@@ -114,4 +114,18 @@ class SubscriberController extends Controller
             ->route('subscribers.admin.index')
             ->with('status', 'Subscriber deleted.');
     }
+
+    public function pledge(Request $request)
+    {
+        $subscriber = Auth::guard('subscriber')->user();
+        $validatedRequest = $request->validate([
+            'name' => 'required',
+            'hide_from_pledge_board' => 'boolean',
+        ]);
+        $subscriber->name = $validatedRequest['name'];
+        $subscriber->pledged = true;
+        $subscriber->hide_from_pledge_board = $validatedRequest['hide_from_pledge_board'];
+        $subscriber->save();
+        return response()->json(['result' => 'ok']);
+    }
 }
