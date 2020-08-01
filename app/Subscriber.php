@@ -13,7 +13,15 @@ class Subscriber extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'number', 'subscribed', 'locale', 'password', 'login_attempt',
+        'number',
+        'name',
+        'subscribed',
+        'locale',
+        'password',
+        'login_attempt',
+        'pledged',
+        'referred_by',
+        'hide_from_pledge_board',
     ];
 
     /**

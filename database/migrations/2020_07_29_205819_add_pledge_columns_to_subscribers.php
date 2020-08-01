@@ -14,6 +14,7 @@ class AddPledgeColumnsToSubscribers extends Migration
     public function up()
     {
         Schema::table('subscribers', function (Blueprint $table) {
+            $table->string('name')->nullable();
             $table->boolean('pledged')->default(false);
             $table->string('referrer_id');
             $table->string('referred_by')->nullable();
@@ -29,6 +30,7 @@ class AddPledgeColumnsToSubscribers extends Migration
     public function down()
     {
         Schema::table('subscribers', function (Blueprint $table) {
+            $table->dropColumn('name');
             $table->dropColumn('pledged');
             $table->dropColumn('referrer_id');
             $table->dropColumn('referred_by');
