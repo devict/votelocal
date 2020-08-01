@@ -68,6 +68,7 @@ Route::prefix($locale)->group(function () {
         Route::get('/subscriber', 'SubscriberController@home')->name('subscriber.home');
         Route::post('/subscriber/tags', 'SubscriberController@updateTags')->name('subscriber.updateTags');
         Route::post('/subscriber/pledge', 'SubscriberController@pledge')->name('subscriber.pledge');
+        Route::post('/subscriber/pledge/update', 'SubscriberController@pledgeDisplayUpdate')->name('subscriber.pledgeDisplayUpdate');
         Route::post('/subscriber/enable', 'SubscriberController@enable')->name('subscriber.enable');
         Route::post('/subscriber/disable', 'SubscriberController@disable')->name('subscriber.disable');
     });

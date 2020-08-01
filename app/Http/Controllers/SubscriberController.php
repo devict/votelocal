@@ -126,11 +126,18 @@ class SubscriberController extends Controller
 
         $subscriber->name = $request->input('name');
         $subscriber->pledged = true;
-        $subscriber->hide_from_pledge_board =
-            $request->input('hide_from_pledge_board') ? false : true;
+        $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
 
         $subscriber->save();
 
         return redirect()->route('subscriber.home')->with('status', 'Thanks for your pledge!');
+    }
+
+    public function pledgeDisplayUpdate(Request $request)
+    {
+        $subscriber = Auth::guard('subscriber')->user();
+        $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
+        $subscriber->save();
+        return redirect()->route('subscriber.home')->with('status', 'Pledge board display status updated.');
     }
 }
