@@ -119,7 +119,6 @@ class SubscriberController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'hide_from_pledge_board' => 'boolean',
         ]);
 
         $subscriber = Auth::guard('subscriber')->user();

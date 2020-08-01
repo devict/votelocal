@@ -87,4 +87,14 @@ class Subscriber extends Authenticatable
     {
         return $query->where('created_at', '>', Carbon::now()->subDays(7));
     }
+
+    public static function newReferrerId()
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $id = substr(str_shuffle($chars), 0, 8);
+        while (self::where('referrer_id', $id)->count() > 0) {
+            $id = substr(str_shuffle($chars), 0, 8);
+        }
+        return $id;
+    }
 }

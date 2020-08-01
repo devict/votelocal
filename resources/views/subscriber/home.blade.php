@@ -32,27 +32,28 @@
 
                         <div class="mx-auto mt-6 w-24 border-b-2"></div>
 
-                        <div class="justify-center">
+                        <div class="justify-center mt-8">
                             @if (!$subscriber->pledged)
                                 <form class="" method="POST" action="{{ route('subscriber.pledge') }}">
                                     @csrf
                                     <x-text
-                                        :label="__('Name')"
                                         name="name"
                                         :value="old('name', $subscriber->name)"
                                         required
+                                        placeholder="Your Name"
                                     />
-                                    <div class="text-xs">
+                                    <div class="text-xs text-gray-600">
                                         <x-checkbox
                                             :label="__('Don\'t display my name publicly')"
                                             name="hide_from_pledge_board"
-                                            :value="old('hide_from_pledge_board', $subscriber->hide_from_pledge_board)"
                                         />
                                     </div>
-                                    <button class="btn text-xl font-bold mt-6">Pledge to Vote!</button>
+                                    <button class="btn text-xl font-bold mt-6 w-full">Pledge to Vote!</button>
                                 </form>
                             @else
                                 <h2 class="text-xl font-bold mt-6">Thanks for pledging, {{ $subscriber->name }}!</h2>
+                                <p class="w-full justify-center my-4 p-3 border-gray-500 rounded-md text-sm">https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}</p>
+                                <p>Get others to pledge, share this link!</p>
                             @endif
                         </div>
 
@@ -104,17 +105,17 @@
                                 <form action="{{ route('subscriber.pledgeDisplayUpdate')}}" method="POST" class="mt-16 text-center">
                                     @csrf
                                     <input type="hidden" name="hide_from_pledge_board" value="true">
-                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Hide my name from the pledge board</button>
+                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Hide your name from the pledge board</button>
                                 </form>
                             @else
                                 <form action="{{ route('subscriber.pledgeDisplayUpdate')}}" method="POST" class="mt-16 text-center">
                                     @csrf
                                     <input type="hidden" name="hide_from_pledge_board" value="false">
-                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Show my name on the pledge board</button>
+                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-green-600">Show your name on the pledge board</button>
                                 </form>
                             @endif
                         @endif
-                        <form action="{{ route('subscriber.disable')}}" method="POST" class="mt-4 mb-16 text-center">
+                        <form action="{{ route('subscriber.disable')}}" method="POST" class="mt-{{ $subscriber->pledged ? '4' : '16' }} mb-16 text-center">
                             @csrf
                             <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Disable your subscription</button>
                         </form>

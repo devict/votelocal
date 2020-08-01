@@ -64,11 +64,6 @@ class SubscriberLoginController extends Controller
             'password' => Hash::make($pin),
         ])->save();
 
-        if ($new) {
-            $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
-            $subscriber->locale = App::getLocale();
-        }
-
         // Text it to the number.
         $sms->send($number, $pin);
 
