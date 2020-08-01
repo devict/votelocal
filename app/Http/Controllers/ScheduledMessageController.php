@@ -43,6 +43,12 @@ class ScheduledMessageController extends Controller
             'send_at' => 'required|date|after:now',
         ]);
 
+        $validator->after(function ($validator) use ($request) {
+            if (!Tag::validateRequiredTags($request->input('tags'))) {
+                $validator->errors()->add('tags[]', 'Must select one of each tag type.');
+            }
+        });
+
         if ($validator->fails()) {
             return redirect('/admin/scheduled_messages/new')
                 ->withErrors($validator)
@@ -87,7 +93,14 @@ class ScheduledMessageController extends Controller
             'target_sms' => 'required_without:target_twitter',
             'target_twitter' => 'required_without:target_sms',
             'send_at' => 'required|date|after:now',
+            'tags' => 'required',
         ]);
+
+        $validator->after(function ($validator) use ($request) {
+            if (!Tag::validateRequiredTags($request->input('tags'))) {
+                $validator->errors()->add('tags[]', 'Must select one of each tag type.');
+            }
+        });
 
         if ($validator->fails()) {
             return redirect('/admin/scheduled_messages/'.$scheduled_message->id)
