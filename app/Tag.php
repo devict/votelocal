@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Tag extends Model
 {
@@ -37,5 +36,13 @@ class Tag extends Model
     public static function scopeMessageDefaults($query)
     {
         return $query->where('message_default', true);
+    }
+
+    public static function validateRequiredTags($ids)
+    {
+        // Validates at least one tag is selected per category.
+        if (!$ids) return false;
+        $cats = self::select('category')->distinct()->whereIn('id', $ids)->get();
+        return $cats->count() == count(self::categoryOptions());
     }
 }
