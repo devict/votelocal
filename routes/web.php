@@ -54,6 +54,7 @@ if ($locale === 'en') {
 
 Route::prefix($locale)->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/pledge/{referred_by?}', 'HomeController@pledge')->name('pledge');
     Route::get('/archive', 'ArchiveController@index')->name('archive');
     Route::get('/resources', 'ResourcesController@index')->name('resources');
     Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
@@ -67,6 +68,8 @@ Route::prefix($locale)->group(function () {
     Route::middleware(['require-subscriber'])->group(function () {
         Route::get('/subscriber', 'SubscriberController@home')->name('subscriber.home');
         Route::post('/subscriber/tags', 'SubscriberController@updateTags')->name('subscriber.updateTags');
+        Route::post('/subscriber/pledge', 'SubscriberController@pledge')->name('subscriber.pledge');
+        Route::post('/subscriber/pledge/update', 'SubscriberController@pledgeDisplayUpdate')->name('subscriber.pledgeDisplayUpdate');
         Route::post('/subscriber/enable', 'SubscriberController@enable')->name('subscriber.enable');
         Route::post('/subscriber/disable', 'SubscriberController@disable')->name('subscriber.disable');
     });

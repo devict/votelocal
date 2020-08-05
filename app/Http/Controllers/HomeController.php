@@ -35,4 +35,9 @@ class HomeController extends Controller
             'contributors' => $contributors,
         ]);
     }
+
+    public function pledge($referred_by = null)
+    {
+        return view('pledge', [ 'referred_by' => $referred_by ]);
+    }
 }

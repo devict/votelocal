@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 use Carbon\Carbon;
 
-use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\App;
 use App\Services\Sms\Contracts\Sms;
 
 use App\Subscriber;
@@ -58,16 +56,25 @@ class SubscriberLoginController extends Controller
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
 
+        // TODO: better checking that we came from pledge page
+        if ($request->has('referred_by') && $request->has('name')) {
+            $subscriber->pledged = true;
+        }
+        if ($request->has('referred_by')) {
+            $subscriber->referred_by = $request->input('referred_by');
+        }
+        if ($request->has('name')) {
+            $subscriber->name = $request->input('name');
+        }
+        if ($request->has('hide_from_pledge_board')) {
+            $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
+        }
+
         // Save it as the subscriber's password.
         $subscriber->fill([
             'login_attempt' => Carbon::now(),
             'password' => Hash::make($pin),
         ])->save();
-
-        if ($new) {
-            $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
-            $subscriber->locale = App::getLocale();
-        }
 
         // Text it to the number.
         $sms->send($number, $pin);
