@@ -57,7 +57,9 @@
                             @endif
                         </div>
 
-                        <h2 class="text-xl font-bold mt-6">Preferences</h2>
+                        <div class="mx-auto mt-6 w-24 border-b-2"></div>
+
+                        <h2 class="text-xl font-bold mt-6">Notification Preferences</h2>
                         <div
                             x-data="tagManager({
                                 updateEndpoint: '{{ route('subscriber.updateTags') }}',
