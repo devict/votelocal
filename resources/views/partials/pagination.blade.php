@@ -3,14 +3,14 @@
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <span class="mr-1 mb-1 px-3 py-2 text-sm border border-gray-400 rounded text-gray-500">
-                @lang('pagination.previous')
+                &laquo; @lang('Previous')
             </span>
         @else
             <a
                 class="mr-1 mb-1 px-3 py-2 text-sm border border-gray-400 rounded hover:bg-white focus:border-blue-500 focus:text-blue-500"
                 href="{{ $paginator->previousPageUrl() }}"
                 rel="prev"
-            >@lang('pagination.previous')</a>
+            >&laquo;  @lang('Previous')</a>
         @endif
 
         {{-- Pagination Elements --}}
@@ -45,10 +45,10 @@
                 class="mr-1 mb-1 px-3 py-2 text-sm border border-gray-400 rounded hover:bg-white focus:border-blue-500 focus:text-blue-500 ml-auto"
                 href="{{ $paginator->nextPageUrl() }}"
                 rel="next"
-            >@lang('pagination.next')</a>
+            >@lang('Next') &raquo;</a>
         @else
             <span class="mr-1 mb-1 px-3 py-2 text-sm border border-gray-400 rounded text-gray-500 ml-auto">
-                @lang('pagination.next')
+                @lang('Next') &raquo;
             </span>
         @endif
     </div>

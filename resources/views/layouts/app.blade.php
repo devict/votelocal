@@ -11,7 +11,7 @@
                 href="{{ route('resources') }}"
             >
                 <x-icon-diagonal-arrow-right-up width="20" class="text-current inline-block mr-2" />
-                @lang('resources.page_title')
+                @lang('Voting Resources')
             </a>
             <a
                 class="
@@ -32,7 +32,7 @@
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                     href="#"
                 >
-                    @lang('subscriber.logout')
+                    @lang('Logout')
                 </a>
             @endif
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
