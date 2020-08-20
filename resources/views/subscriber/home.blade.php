@@ -51,9 +51,9 @@
                                     <button class="btn text-xl font-bold mt-6 w-full">Pledge to Vote!</button>
                                 </form>
                             @else
-                                <h2 class="text-xl font-bold mt-6">Thanks for pledging, {{ $subscriber->name }}!</h2>
-                                <p class="w-full justify-center my-4 p-3 border-gray-500 rounded-md text-sm">https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}</p>
-                                <p>Get others to pledge, share this link!</p>
+                                {{-- <h2 class="text-xl font-bold mt-6">Thanks for pledging, {{ $subscriber->name }}!</h2> --}}
+                                <p><strong class="text-lg justify-center">Thanks for pledging!</strong><br>Now share this link and boost your impact.</p>
+                                <p class="referral-link w-full justify-center my-4 p-3 bg-gray-100 border border-gray-500 rounded-md text-sm">https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}</p>
                             @endif
                         </div>
 
@@ -70,7 +70,7 @@
                             <x-fieldset label="Locations">
                                 <ul>
                                     @foreach($locationTags as $tag)
-                                        <li>
+                                        <li class="text-sm">
                                             <label>
                                                 <input type="checkbox"
                                                     value="{{ $tag->id }}"
@@ -87,7 +87,7 @@
                             <x-fieldset label="Topics">
                                 <ul>
                                     @foreach($topicTags as $tag)
-                                        <li>
+                                        <li class="text-sm">
                                             <label>
                                                 <input type="checkbox"
                                                     value="{{ $tag->id }}"
@@ -107,19 +107,19 @@
                                 <form action="{{ route('subscriber.pledgeDisplayUpdate')}}" method="POST" class="mt-16 text-center">
                                     @csrf
                                     <input type="hidden" name="hide_from_pledge_board" value="true">
-                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Hide your name from the pledge board</button>
+                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-sm text-red-400">Hide name from the pledge board.</button>
                                 </form>
                             @else
                                 <form action="{{ route('subscriber.pledgeDisplayUpdate')}}" method="POST" class="mt-16 text-center">
                                     @csrf
                                     <input type="hidden" name="hide_from_pledge_board" value="false">
-                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-green-600">Show your name on the pledge board</button>
+                                    <button onclick="return confirm('Are you sure?')" class="hover:underline text-sm text-green-600">Show name on the pledge board.</button>
                                 </form>
                             @endif
                         @endif
                         <form action="{{ route('subscriber.disable')}}" method="POST" class="mt-{{ $subscriber->pledged ? '4' : '16' }} mb-16 text-center">
                             @csrf
-                            <button onclick="return confirm('Are you sure?')" class="hover:underline text-red-400">Disable your subscription</button>
+                            <button onclick="return confirm('Are you sure?')" class="hover:underline text-sm text-red-400">Disable subscription.</button>
                         </form>
                     </div>
                 @endif
