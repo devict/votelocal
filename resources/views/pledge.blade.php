@@ -6,8 +6,8 @@
         <div class="mt-16 bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="px-4 py-5 sm:p-6">
                 <h1 class="text-center font-bold text-3xl">
-                    Vote the Plains
-                    <span class="block text-base text-gray-600">Do you pledge to vote this November?</span>
+                    <img src="{{ asset('img/votetheplains.png') }}" alt="Vote The Plains">
+                    <span class="block text-base pt-8 text-gray-600">Do you pledge to vote this November?</span>
                 </h1>
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
 
