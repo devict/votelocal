@@ -90,7 +90,7 @@ class Subscriber extends Authenticatable
 
     public static function newReferrerId()
     {
-        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $id = substr(str_shuffle($chars), 0, 8);
         while (self::where('referrer_id', $id)->count() > 0) {
             $id = substr(str_shuffle($chars), 0, 8);
