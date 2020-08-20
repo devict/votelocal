@@ -52,8 +52,17 @@
                                 </form>
                             @else
                                 {{-- <h2 class="text-xl font-bold mt-6">Thanks for pledging, {{ $subscriber->name }}!</h2> --}}
-                                <p><strong class="text-lg justify-center">Thanks for pledging!</strong><br>Now share this link and boost your impact.</p>
-                                <p class="referral-link w-full justify-center my-4 p-3 bg-gray-100 border border-gray-500 rounded-md text-sm">https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}</p>
+                                <p class="text-center">
+                                    <strong class="text-lg">Thanks for pledging!</strong>
+                                    <br>Now share this link to boost your impact.
+                                </p>
+                                <div x-data="copyOnClick({ showMsg: false, text: 'https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}' })">
+                                    <p @click="copyToClipboard" class="referral-link w-full justify-center my-4 p-3 bg-blue-100 border border-blue-500 rounded-md text-sm mb-0">
+                                        https://votelocalks.org/pledge/{{ $subscriber->referrer_id }}
+                                    </p>
+                                    <p :class="{ 'hidden': !showMsg }"
+                                        class="text-xs tex-bold text-gray-800 mt-2 pt-0">Copied to clipboard!</p>
+                                </div>
                             @endif
                         </div>
 
