@@ -11,7 +11,7 @@
                 </h1>
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
 
-                <form class="mt-8" method="POST" action="{{ route('subscriber.login') }}">
+                <form class="mt-8" method="POST" action="{{ route('subscriber.login') }}?pledge=1">
                     @csrf
                     @if ($referred_by)
                         <input type="hidden" name="referred_by" value="{{ $referred_by }}">

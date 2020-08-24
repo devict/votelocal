@@ -57,7 +57,7 @@ class SubscriberLoginController extends Controller
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
 
         // TODO: better checking that we came from pledge page
-        if ($request->has('referred_by') && $request->has('name')) {
+        if ($request->has('pledge')) {
             $subscriber->pledged = true;
         }
         if ($request->has('referred_by')) {
