@@ -31,7 +31,10 @@
                             name="hide_from_pledge_board"
                         />
                     </div>
-                    <button class="btn text-xl font-bold mt-6 w-full">Pledge to Vote!</button>
+                    <button class="btn text-xl font-bold mt-6 w-full">@lang('Pledge to Vote!')</button>
+					<p class="text-sm text-gray-600 text-center mt-2 px-4">
+						@lang('You will also receive important election reminders and voting information.')
+					</p>
                 </form>
             </div>
         </div>
