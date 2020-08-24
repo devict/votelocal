@@ -60,7 +60,7 @@ class SubscriberLoginController extends Controller
         if ($request->has('pledge')) {
             $subscriber->pledged = true;
         }
-        if ($request->has('referred_by')) {
+        if ($request->has('referred_by') && !$subscriber->referred_by) {
             $subscriber->referred_by = $request->input('referred_by');
         }
         if ($request->has('name')) {
