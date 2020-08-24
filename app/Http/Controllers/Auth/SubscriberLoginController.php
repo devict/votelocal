@@ -51,12 +51,10 @@ class SubscriberLoginController extends Controller
         $number = $request->get('number');
 
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
-        $new = !$subscriber->exists;
 
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
 
-        // TODO: better checking that we came from pledge page
         if ($request->has('pledge')) {
             $subscriber->pledged = true;
         }
@@ -80,7 +78,7 @@ class SubscriberLoginController extends Controller
         $sms->send($number, $pin);
 
         // redirect to /subscriber/verify, passing along the phone number
-        return redirect(route('subscriber.verifyForm'))->with('number', $number);
+        return redirect(route('subscriber.verifyForm'))->with('number', $number)->with('fromPledge', true);
     }
 
     public function verifyForm()
@@ -97,6 +95,6 @@ class SubscriberLoginController extends Controller
 
             return redirect()->intended($this->redirectTo);
         }
-        return redirect(route('subscriber.login'))->with('notify', 'Login failed, give it another shot.');
+        return redirect()->back()->with('notify', 'Login failed, give it another shot.');
     }
 }
