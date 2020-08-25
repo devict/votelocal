@@ -52,6 +52,10 @@ class SubscriberLoginController extends Controller
 
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
 
+        if ($subscriber->exists && !$subscriber->referrer_id == '') {
+            $subscriber->referrer_id = Subscriber::newReferrerId();
+        }
+
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
 
