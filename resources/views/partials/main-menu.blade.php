@@ -3,10 +3,10 @@
         <img class="h-8" src="{{ asset('img/logo.svg') }}" title="Vote Local KS">
     </a>
     <div class="flex">
-        <div class="hidden md:flex leading-loose order-1 w-full items-center mt-4 -mx-3 sm:flex sm:mx-0 sm:mt-0 sm:ml-auto sm:w-auto sm:order-none">
+        <div class="hidden lg:flex leading-loose order-1 w-full items-center mt-4 -mx-3 md:flex md:mx-0 md:mt-0 md:ml-auto md:w-auto md:order-none">
             {!! $slot !!}
         </div>
-        <div class="sm:hidden">
+        <div class="md:hidden">
             @component('components.dropdown', [
                 'buttonClass' => 'flex items-center text-gray-500 hover:text-red-500',
                 'position' => 'right-0',

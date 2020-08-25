@@ -5,13 +5,23 @@
         @component('partials/main-menu')
             <a
                 class="
+                    flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*pledge') ? 'text-red-500' : '' }}
+                    sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
+                "
+                href="{{ route('pledge') }}"
+            >
+                <x-icon-checkmark-circle width="20" class="text-current inline-block mr-2" />
+                @lang('Pledge To Vote')
+            </a>
+            <a
+                class="
                     flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-red-500' : '' }}
                     sm:px-2 sm:py-0 sm:hover:text-red-500 sm:focus:text-red-500 sm:hover:bg-transparent sm:focus:bg-transparent
                 "
                 href="{{ route('resources') }}"
             >
                 <x-icon-diagonal-arrow-right-up width="20" class="text-current inline-block mr-2" />
-                @lang('Voting Resources')
+                @lang('Resources')
             </a>
             <a
                 class="
@@ -21,7 +31,7 @@
                 href="{{ route('archive') }}"
             >
                 <x-icon-archive width="20" class="text-current inline-block mr-2" />
-                Message Archive
+                @lang('Archive')
             </a>
             @if (Auth::guard('subscriber')->check())
                 <a
