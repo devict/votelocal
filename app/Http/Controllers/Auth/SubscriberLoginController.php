@@ -52,7 +52,7 @@ class SubscriberLoginController extends Controller
 
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
 
-        if ($subscriber->exists && !$subscriber->referrer_id == '') {
+        if ($subscriber->exists && $subscriber->referrer_id == '') {
             $subscriber->referrer_id = Subscriber::newReferrerId();
         }
 
