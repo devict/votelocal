@@ -36,9 +36,6 @@
 						@lang('You will also receive important election reminders, opt out at any time.')
 					</p>
                 </form>
-
-                <div class="mx-auto mt-6 w-24 border-b-2"></div>
-
             </div>
         </div>
     </div>
