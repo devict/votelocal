@@ -97,4 +97,9 @@ class Subscriber extends Authenticatable
         }
         return $id;
     }
+
+    public function numReferrals()
+    {
+        return self::where('referred_by', $this->referrer_id)->count();
+    }
 }

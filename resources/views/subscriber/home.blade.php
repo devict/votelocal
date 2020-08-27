@@ -63,6 +63,7 @@
                                     <p :class="{ 'hidden': !showMsg }"
                                         class="text-xs tex-bold text-gray-800 mt-2 pt-0">Copied to clipboard!</p>
                                 </div>
+                                <p class="text-center mt-4">@lang('Great job! Your pledge has echoed<br><strong>:num times</strong> across the plains.', [ 'num' => $subscriber->numReferrals() ])</p>
                             @endif
                         </div>
 
