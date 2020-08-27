@@ -97,6 +97,7 @@ class SubscriberLoginController extends Controller
                 return redirect()->back()->with('notify', 'Verification timed out, please try again.');
             }
 
+            $request->session()->remove('fromPledge');
             return redirect()->intended($this->redirectTo);
         }
         return redirect()->back()->with('notify', 'Login failed, give it another shot.');
