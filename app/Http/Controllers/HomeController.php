@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use App\Subscriber;
 
 class HomeController extends Controller
 {
@@ -39,5 +40,19 @@ class HomeController extends Controller
     public function pledge($referred_by = null)
     {
         return view('pledge', [ 'referred_by' => $referred_by ]);
+    }
+
+    public function pledgeProgress()
+    {
+        /* $pledgeCount = Subscriber::where('pledged', true)->count(); */
+        $pledgeCount = 54;
+        $pledgeGoal = 2020;
+        $pledgePercent = round(($pledgeCount / $pledgeGoal) * 100);
+
+        return view('pledge-progress', [
+            'pledgeCount' => $pledgeCount,
+            'pledgeGoal' => $pledgeGoal,
+            'pledgePercent' => $pledgePercent,
+        ]);
     }
 }
