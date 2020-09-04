@@ -29,6 +29,12 @@
                 'url' => 'https://www.sedgwickcounty.org/elections/how-do-i-vote',
                 'color' => 'red',
             ])
+            @include('partials.resource-link', [
+                'title' => __('KMUW’s 2020 Election Blueprint'),
+                'description' => __('Wichita’s NPR station provides election news, information and resources.'),
+                'url' => 'https://www.kmuw.org/topic/election-2020',
+                'color' => 'blue',
+            ])
         </div>
         <div class="sm:w-1/2 sm:mx-6">
             @include('partials.resource-link', [
