@@ -82,7 +82,9 @@ class SubscriberLoginController extends Controller
         $sms->send($number, $pin);
 
         // redirect to /subscriber/verify, passing along the phone number
-        return redirect(route('subscriber.verifyForm'))->with('number', $number)->with('fromPledge', true);
+        return redirect(route('subscriber.verifyForm'))
+            ->with('number', $number)
+            ->with('fromPledge', $request->has('pledge'));
     }
 
     public function verifyForm()
