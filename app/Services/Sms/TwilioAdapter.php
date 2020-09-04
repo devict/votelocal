@@ -4,6 +4,7 @@ namespace App\Services\Sms;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Instasent\SMSCounter\SMSCounter;
 use Twilio\Rest\Client;
 use Twilio\TwiML\MessagingResponse;
 
@@ -39,7 +40,7 @@ class TwilioAdapter implements Contracts\Sms
         ], $options));
     }
 
-    public function messageFromRequest(Request $request) : Message
+    public function messageFromRequest(Request $request): Message
     {
         $to = $request->input('To');
 
@@ -67,6 +68,13 @@ class TwilioAdapter implements Contracts\Sms
         $response->message($body);
 
         return response($response, 200)->header('content-type', 'text/xml');
+    }
+
+    public function getMessageCount(string $message): object
+    {
+        $smsCounter = new SMSCounter();
+
+        return $smsCounter->count($message);
     }
 
     protected function store($data)
