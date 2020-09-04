@@ -3,8 +3,8 @@
 @section('content')
 <div class="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
     <header class="mr-auto sm:w-2/3">
-        <h1 class="text-2xl font-medium leading-tight font-display sm:text-4xl">@lang('resources.elected_officials.name')</h1>
-        <p class="text-lg leading-normal">@lang('resources.elected_officials.page_intro')</p>
+        <h1 class="text-2xl font-medium leading-tight font-display sm:text-4xl">@lang('Find Your Elected Officials')</h1>
+        <p class="text-lg leading-normal">@lang('For any U.S. residential address, you can look up who represents that address at each elected level of government.')</p>
     </header>
 </div>
 

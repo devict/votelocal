@@ -9,7 +9,6 @@
             <div class="px-4 py-5 sm:p-6">
                 <h1 class="text-center font-bold text-3xl">{{ __('Welcome Back!') }}</h1>
                 <div class="mx-auto mt-6 w-24 border-b-2"></div>
-                @include('partials.flash')
                 @csrf
                 <div class="mt-6 space-y-4">
                     <div>

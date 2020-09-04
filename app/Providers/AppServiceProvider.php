@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
+use App\Subscriber;
+use App\Observers\SubscriberObserver;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
         if (in_array($locale, config('votelocal.locales'))) {
             App::setLocale($locale);
         }
+
+        Subscriber::observe(SubscriberObserver::class);
 
         Paginator::defaultView('partials.pagination');
     }

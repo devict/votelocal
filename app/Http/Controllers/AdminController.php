@@ -15,6 +15,7 @@ class AdminController extends Controller
             'subscribersThisWeek' => Subscriber::newThisWeek()->count(),
             'subscribersEN' => Subscriber::all()->where('locale', 'en')->count(),
             'subscribersES' => Subscriber::all()->where('locale', 'es')->count(),
+            'pledgeCount' => Subscriber::where('pledged', true)->count(),
         ]);
     }
 }

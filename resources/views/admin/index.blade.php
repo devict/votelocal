@@ -29,5 +29,11 @@
             <div class="mt-auto font-bold text-4xl">{{ $subscribersES }}</div>
         </div>
     </div>
+    <div class="w-1/2 lg:w-1/4 px-2 mb-4">
+        <div class="flex flex-col h-full bg-white rounded shadow px-4 py-5 sm:p-6">
+            <h2 class="text-sm text-gray-600 mb-2">Pledges</h2>
+            <div class="mt-auto font-bold text-4xl">{{ $pledgeCount }}</div>
+        </div>
+    </div>
 </div>
 @endsection

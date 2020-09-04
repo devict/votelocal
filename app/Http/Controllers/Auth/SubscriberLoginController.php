@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Auth;
 use Carbon\Carbon;
 
-use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\App;
 use App\Services\Sms\Contracts\Sms;
 
 use App\Subscriber;
@@ -53,10 +51,26 @@ class SubscriberLoginController extends Controller
         $number = $request->get('number');
 
         $subscriber = Subscriber::firstOrNew(['number' => $number]);
-        $new = !$subscriber->exists;
+
+        if ($subscriber->exists && $subscriber->referrer_id == '') {
+            $subscriber->referrer_id = Subscriber::newReferrerId();
+        }
 
         // Generate a verification pin.
         $pin = str_pad(strval(rand(0, 999999)), 6, '0');
+
+        if ($request->has('pledge')) {
+            $subscriber->pledged = true;
+        }
+        if ($request->has('referred_by') && !$subscriber->referred_by) {
+            $subscriber->referred_by = $request->input('referred_by');
+        }
+        if ($request->has('name')) {
+            $subscriber->name = $request->input('name');
+        }
+        if ($request->has('hide_from_pledge_board')) {
+            $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
+        }
 
         // Save it as the subscriber's password.
         $subscriber->fill([
@@ -64,16 +78,13 @@ class SubscriberLoginController extends Controller
             'password' => Hash::make($pin),
         ])->save();
 
-        if ($new) {
-            $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
-            $subscriber->locale = App::getLocale();
-        }
-
         // Text it to the number.
         $sms->send($number, $pin);
 
         // redirect to /subscriber/verify, passing along the phone number
-        return redirect(route('subscriber.verifyForm'))->with('number', $number);
+        return redirect(route('subscriber.verifyForm'))
+            ->with('number', $number)
+            ->with('fromPledge', $request->has('pledge'));
     }
 
     public function verifyForm()
@@ -88,8 +99,9 @@ class SubscriberLoginController extends Controller
                 return redirect()->back()->with('notify', 'Verification timed out, please try again.');
             }
 
+            $request->session()->remove('fromPledge');
             return redirect()->intended($this->redirectTo);
         }
-        return redirect(route('subscriber.login'))->with('notify', 'Login failed, give it another shot.');
+        return redirect()->back()->with('notify', 'Login failed, give it another shot.');
     }
 }

@@ -13,7 +13,15 @@ class Subscriber extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'number', 'subscribed', 'locale', 'password', 'login_attempt',
+        'number',
+        'name',
+        'subscribed',
+        'locale',
+        'password',
+        'login_attempt',
+        'pledged',
+        'referred_by',
+        'hide_from_pledge_board',
     ];
 
     /**
@@ -78,5 +86,20 @@ class Subscriber extends Authenticatable
     public static function scopeNewThisWeek($query)
     {
         return $query->where('created_at', '>', Carbon::now()->subDays(7));
+    }
+
+    public static function newReferrerId()
+    {
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $id = substr(str_shuffle($chars), 0, 8);
+        while (self::where('referrer_id', $id)->count() > 0) {
+            $id = substr(str_shuffle($chars), 0, 8);
+        }
+        return $id;
+    }
+
+    public function numReferrals()
+    {
+        return self::where('referred_by', $this->referrer_id)->count();
     }
 }
