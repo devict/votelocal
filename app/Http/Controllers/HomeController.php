@@ -53,7 +53,7 @@ class HomeController extends Controller
             'pledgeCount' => $pledgeCount,
             'pledgeGoal' => $pledgeGoal,
             'pledgePercent' => $pledgePercent,
-            'subsForLeaderboard' => Subscriber::forLeaderboard()->get(),
+            'subsForLeaderboard' => Subscriber::forLeaderboard(),
         ]);
     }
 }
