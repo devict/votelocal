@@ -12,7 +12,7 @@
                 <div class="mt-6 space-y-4">
                     <x-text
                         type="tel"
-                        :label="__('Enter your number to get started')"
+                        :label="__('Enter your phone number to get started')"
                         name="number"
                         :value="old('number')"
                         autofocus

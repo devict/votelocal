@@ -9,7 +9,9 @@ interface Sms
 {
     public function send($number, $body);
 
-    public function messageFromRequest(Request $request) : Message;
+    public function messageFromRequest(Request $request): Message;
 
     public function response($number, $body);
+
+    public function getMessageCount(string $message): object;
 }
