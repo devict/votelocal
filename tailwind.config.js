@@ -50,7 +50,8 @@ module.exports = {
         })
     },
     variants: {
-        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover']
+        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        zIndex: ['responsive', 'focus']
     },
     plugins: [require('@tailwindcss/custom-forms')]
 };
