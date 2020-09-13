@@ -7,7 +7,7 @@
                 <a
                     class="
                         group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*subscriber') ? 'text-gray-800' : '' }}
-                        sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                        md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                     "
                     href="{{ route('subscriber.home') }}"
                 >
@@ -19,7 +19,7 @@
                 <a
                     class="
                         group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*pledge') ? 'text-gray-800' : '' }}
-                        sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                        md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                     "
                     href="{{ route('pledge') }}"
                 >
@@ -30,7 +30,7 @@
             <a
                 class="
                     group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*resources') ? 'text-gray-800' : '' }}
-                    sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                    md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                 "
                 href="{{ route('resources') }}"
             >
@@ -40,7 +40,7 @@
             <a
                 class="
                     group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*archive') ? 'text-gray-800' : '' }}
-                    sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                    md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                 "
                 href="{{ route('archive') }}"
             >
@@ -51,7 +51,7 @@
                 <a
                     class="
                         group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200
-                        sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                        md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                     "
                     onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                     href="#"
@@ -63,7 +63,7 @@
                 <a
                     class="
                         group flex items-center px-6 py-2 outline-none hover:bg-gray-200 focus:bg-gray-200 {{ Request::is('*login') ? 'text-gray-800' : '' }}
-                        sm:px-2 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                        md:px-2 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                     "
                     href="{{ route('subscriber.login') }}"
                 >
@@ -89,12 +89,12 @@
                 <a
                     class="
                         group flex items-center px-6 py-2 outline-0 hover:bg-gray-200 focus:bg-gray-200
-                        sm:pl-4 sm:py-0 sm:hover:text-gray-800 sm:focus:text-gray-800 sm:hover:bg-transparent sm:focus:bg-transparent
+                        md:pl-4 md:py-0 md:hover:text-gray-800 md:focus:text-gray-800 md:hover:bg-transparent md:focus:bg-transparent
                     "
                     href="{{ url(implode('/', $segments)) }}"
                 >
-                    @svg($locale, 'text-gray-600 group-hover:text-red-500', ['width' => 20])
-                    <span class="sm:hidden">{{ $name }}</span>
+                    @svg($locale, 'text-gray-400 group-hover:text-red-500 mr-2 md:mr-0 md:text-gray-600', ['width' => 20])
+                    <span class="md:hidden">{{ $name }}</span>
                 </a>
             @endforeach
         @endcomponent
