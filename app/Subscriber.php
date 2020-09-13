@@ -94,7 +94,7 @@ class Subscriber extends Authenticatable
             ->where('hide_from_pledge_board', false)->get();
 
         return $subs->sortBy(function ($sub, $key) {
-            return $sub->numPledges() * -1;
+            return $sub->numReferrals() * -1;
         })->values()->all();
     }
 
