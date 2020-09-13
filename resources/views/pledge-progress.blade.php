@@ -19,11 +19,13 @@
     <div class="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:py-16 lg:px-8">
         <div class="relative border border-gray-200 bg-white rounded-lg shadow-lg overflow-hidden">
             <div class="px-4 py-6 sm:p-8">
-                <h2 class="text-2xl font-medium font-display">Help us reach our goal!</h2>
-                <p class="mt-1">First, <a class="text-link" href="{{ route('pledge') }}">pledge to vote this November</a>, then spread the word.</p>
+                <h2 class="text-2xl font-medium font-display">@lang('Help us reach our goal!')</h2>
+                <p class="mt-1">@lang('First, :pledge, then spread the word.', ['pledge' => '<a class="text-link" href="'.route('pledge').'">'.__('pledge to vote this November').'</a>'])</p>
                 <div class="mt-6 shadow-inner w-full bg-red-100 mt-4 rounded-md overflow-hidden relative px-4 py-3">
                     <div class="bg-red-400 absolute left-0 top-0 bottom-0" style="width: {{ $pledgePercent }}%"></div>
-                    <div class="relative leading-none text-xl text-center text-red-900 whitespace-no-wrap"><strong>{{ $pledgeCount }}</strong> of <strong>{{ $pledgeGoal }}</strong> pledges!</div>
+                    <div class="relative leading-none text-xl text-center text-red-900 whitespace-no-wrap">
+                        @lang('<strong>:count</strong> of <strong>:goal</strong> pledges!', ['count' => $pledgeCount, 'goal' => $pledgeGoal])
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,9 +33,9 @@
 </section>
 <section class="bg-gray-200">
     <div class="max-w-5xl mx-auto pt-5 px-8 pb-10 sm:pb-20">
-        <h2 class="text-center text-3xl sm:text-4xl font-medium font-display leading-tight">Pledge Leaderboard</h2>
+        <h2 class="text-center text-3xl sm:text-4xl font-medium font-display leading-tight">@lang('Pledge Leaderboard')</h2>
         <div class="mt-4 mx-auto text-center max-w-xl">
-            <p>Claim the top of the leaderboard by <a class="text-link" href="{{ route('pledge') }}">pledging to vote this November</a> and referring your friends using your unique referral&nbsp;link.</p>
+            <p>@lang('Claim the top of the leaderboard by :pledge and referring your friends using your unique referral link', ['pledge' => '<a class="text-link" href="'.route('pledge').'">'.__('pledging to vote this November').'</a>']).</p>
         </div>
         <div class="mt-6 bg-white rounded-lg shadow-lg overflow-hidden">
             <ol class="divide-y divde-gray-200">
@@ -52,7 +54,7 @@
                             <div class="font-semibold">{{ $sub->name }}</div>
                         </div>
                         @if ($loop->iteration <= 10 && $sub->referrals > 0)
-                            <div class="text-gray-600"><strong>{{ $sub->referrals }}</strong> referrals</div>
+                            <div class="text-gray-600"><strong>{{ $sub->referrals }}</strong> @lang('referrals')</div>
                         @endif
                     </li>
                 @endforeach
