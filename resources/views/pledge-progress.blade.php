@@ -21,7 +21,7 @@
                 <h2 class="text-2xl mt-4">Pledge Leaderboard</h2>
                 <ul>
                     @foreach($subsForLeaderboard as $sub)
-                        <li>{{ $sub->name }} ({{ $sub->numPledges() }})</li>
+                        <li>{{ $sub->name }} ({{ $sub->numReferrals() }})</li>
                     @endforeach
                 </ul>
             </div>
