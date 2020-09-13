@@ -88,6 +88,13 @@ class Subscriber extends Authenticatable
         return $query->where('created_at', '>', Carbon::now()->subDays(7));
     }
 
+    public static function scopeForLeaderboard($query)
+    {
+        return $query
+            ->where('pledged', true)
+            ->where('hide_from_pledge_board', false);
+    }
+
     public static function newReferrerId()
     {
         $chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
