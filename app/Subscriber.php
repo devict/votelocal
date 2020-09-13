@@ -95,7 +95,7 @@ class Subscriber extends Authenticatable
 
         return $subs->sortBy(function ($sub, $key) {
             return $sub->numPledges() * -1;
-        });
+        })->values()->all();
     }
 
     public static function newReferrerId()
