@@ -33,6 +33,9 @@ module.exports = {
                     '800': '#095F79',
                     '900': '#0B3F4F'
                 }
+            },
+            height: {
+                '1/2': '50%'
             }
         },
         customForms: theme => ({
