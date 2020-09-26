@@ -44,8 +44,7 @@ class HomeController extends Controller
 
     public function pledgeProgress()
     {
-        /* $pledgeCount = Subscriber::where('pledged', true)->count(); */
-        $pledgeCount = 54;
+        $pledgeCount = Subscriber::where('pledged', true)->count();
         $pledgeGoal = 2020;
         $pledgePercent = round(($pledgeCount / $pledgeGoal) * 100);
 
