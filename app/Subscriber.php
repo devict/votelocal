@@ -61,6 +61,7 @@ class Subscriber extends Authenticatable
     public function tagIds()
     {
         $data = collect($this->tags()->select('id')->get());
+
         return $data->map(function ($tag) {
             return $tag->id;
         });
@@ -80,6 +81,7 @@ class Subscriber extends Authenticatable
     {
         $oneMinAgo = Carbon::now()->subMinute(1);
         $loginAttempt = Carbon::parse($this->login_attempt);
+
         return $loginAttempt->gt($oneMinAgo);
     }
 
@@ -93,9 +95,11 @@ class Subscriber extends Authenticatable
         $subs = self::where('pledged', true)
             ->where('hide_from_pledge_board', false)->get();
 
-        return $subs->sortBy(function ($sub, $key) {
-            return $sub->numReferrals() * -1;
-        })->values()->all();
+        return $subs->map(function ($sub) {
+            $sub->referrals = $sub->numReferrals();
+
+            return $sub;
+        })->sortByDesc('referrals');
     }
 
     public static function newReferrerId()
@@ -105,6 +109,7 @@ class Subscriber extends Authenticatable
         while (self::where('referrer_id', $id)->count() > 0) {
             $id = substr(str_shuffle($chars), 0, 8);
         }
+
         return $id;
     }
 
