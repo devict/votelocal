@@ -46,7 +46,6 @@
 </head>
 <body class="font-sans text-gray-800 antialiased">
     <div id="app">
-        <portal-target name="dropdown" slim></portal-target>
         @yield('content')
     </div>
 </body>
