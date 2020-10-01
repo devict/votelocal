@@ -47,6 +47,10 @@ class SendScheduledMessages extends Command
 
         if ($scheduled_messages->isNotEmpty()) {
             foreach ($scheduled_messages as $message) {
+                // Mark it as sent first to ensure no duplicate messages.
+                $message->sent = true;
+                $message->save();
+
                 if ($message->target_sms) {
                     $locationTags = $message->locationTags()->get();
                     $topicTags = $message->topicTags()->get();
@@ -71,11 +75,15 @@ class SendScheduledMessages extends Command
                                 }
                                 break;
                             }
-                            $sms->send(
-                                $subscriber->number,
-                                $body,
-                                ['scheduled_message_id' => $message->id]
-                            );
+                            try {
+                                $sms->send(
+                                    $subscriber->number,
+                                    $body,
+                                    ['scheduled_message_id' => $message->id]
+                                );
+                            } catch (\Exception $e) {
+                                Log::info('Failed to send message ' . $message->id . ' to ' . $subscriber->number . ' (' . $subscriber->id . ')');
+                            }
                         }
                     }
                 }
@@ -83,14 +91,10 @@ class SendScheduledMessages extends Command
                 if ($message->target_twitter) {
                     try {
                         Twitter::postTweet(['status' => $message->body_en, 'format' => 'json']);
-                    } catch (Exception $e) {
+                    } catch (\Exception $e) {
                         Log::info('Failed to send message to Twitter. Is the account configured correctly?');
                     }
                 }
-
-                // Mark it as sent.
-                $message->sent = true;
-                $message->save();
             }
         }
 
