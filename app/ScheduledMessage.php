@@ -61,4 +61,16 @@ class ScheduledMessage extends Model
 
         return (new LinkFinder)->process($this->attributes[$key]);
     }
+
+    public function sanitizeBody()
+    {
+        $this->body_en = gsmSanitize($this->body_en);
+        $this->body_es = gsmSanitize($this->body_es);
+        $this->save();
+    }
+}
+
+function gsmSanitize($in)
+{
+    return str_replace(['—', '-', '–'], '-', $in);
 }
