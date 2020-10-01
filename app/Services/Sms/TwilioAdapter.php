@@ -28,6 +28,7 @@ class TwilioAdapter implements Contracts\Sms
         $message = $this->client->messages->create($number, [
             'from' => $this->number,
             'body' => $body,
+            'smartEncoded' => true,
         ]);
 
         return $this->store(array_merge([

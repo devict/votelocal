@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 use App\Subscriber;
-use App\ScheduledMessage;
 use App\Observers\SubscriberObserver;
-use App\Observers\ScheduledMessageObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
         }
 
         Subscriber::observe(SubscriberObserver::class);
-        ScheduledMessage::observe(ScheduledMessageObserver::class);
 
         Paginator::defaultView('partials.pagination');
     }
