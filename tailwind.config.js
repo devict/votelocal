@@ -14,7 +14,7 @@ module.exports = {
                 red: {
                     '100': '#FFF2F4',
                     '200': '#FFC7D0',
-                    '300': '#4A5568',
+                    '300': '#FF9DAF',
                     '400': '#F9587C',
                     '500': '#EE215A',
                     '600': '#D90E4C',
@@ -33,6 +33,9 @@ module.exports = {
                     '800': '#095F79',
                     '900': '#0B3F4F'
                 }
+            },
+            height: {
+                '1/2': '50%'
             }
         },
         customForms: theme => ({
@@ -47,7 +50,8 @@ module.exports = {
         })
     },
     variants: {
-        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover']
+        textColor: ['responsive', 'hover', 'focus', 'active', 'group-hover'],
+        zIndex: ['responsive', 'focus']
     },
     plugins: [require('@tailwindcss/custom-forms')]
 };

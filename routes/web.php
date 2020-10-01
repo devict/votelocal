@@ -55,6 +55,7 @@ if ($locale === 'en') {
 Route::prefix($locale)->group(function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/pledge/{referred_by?}', 'HomeController@pledge')->name('pledge');
+    Route::get('/progress', 'HomeController@pledgeProgress')->name('pledgeProgress');
     Route::get('/archive', 'ArchiveController@index')->name('archive');
     Route::get('/resources', 'ResourcesController@index')->name('resources');
     Route::get('/elected-officials', 'ElectedOfficialsController@index')->name('elected-officials.index');
