@@ -31,6 +31,7 @@ deps:
 build:
 	docker-compose build
 
+.PHONY: mysql
 mysql:
 	docker-compose run --rm db mysql --host=db --user=votelocal --password votelocal
 

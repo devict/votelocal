@@ -7,11 +7,18 @@ These are instructions for running this application locally using docker and doc
 Copy the two configuration files into place (note: `.db.env` is not required for non-docker setup).
 - `.env.docker.example` -> `.env`
 - `.db.env.docker.example` -> `.db.env`.
-- `.my.cnf.example` -> `.my.cnf`.
 
 If you're looking to test out the **Twilio** and/or **Twitter** integrations locally, you will need to configure the appropriate sections in your new `.env` file.
 
 ## Quick Start
+
+First start your containers.
+
+```
+$ make dev
+```
+
+In a separate terminal, run the setup command.
 
 ```
 $ make dev-setup
@@ -22,13 +29,7 @@ This command will..
 - Set the app key in the .env file
 - Migrate and seed the database with the initial user.
 
-To run the system..
-
-```
-$ make dev
-```
-
-This will boot up all containers, and expose the system at http://localhost:8002.
+The system should now be accessible at http://localhost:8002
 
 ## Ngrok for Twilio Integration
 
