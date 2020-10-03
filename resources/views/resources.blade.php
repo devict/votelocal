@@ -22,18 +22,21 @@
                 'description' => __('Check your status and get registered'),
                 'url' => 'https://ksvotes.org/',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('Sedgwick County Election Page'),
                 'description' => __('Information provided by the Sedgwick County Election Office.'),
                 'url' => 'https://www.sedgwickcounty.org/elections/how-do-i-vote',
                 'color' => 'red',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('KMUW’s 2020 Election Blueprint'),
                 'description' => __('Wichita’s NPR station provides election news, information and resources.'),
                 'url' => 'https://www.kmuw.org/topic/election-2020',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
         </div>
         <div class="sm:w-1/2 sm:mx-6">
@@ -42,12 +45,14 @@
                 'description' => __('List of valid photo IDs, requirements, exemptions, and how to get a free ID.'),
                 'url' => 'http://www.gotvoterid.com',
                 'color' => 'red',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('League of Women Voters in Kansas'),
                 'description' => __('An organization (not just for women) that works to empower voters and encourage civic engagement.'),
                 'url' => 'http://lwvk.org/elections-and-voting/voting',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
         </div>
     </div>
