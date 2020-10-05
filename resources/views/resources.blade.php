@@ -66,13 +66,13 @@
           @lang('Find Your Elected Officials')
         </h2>
         <p class="mt-3 max-w-3xl text-lg leading-6 text-blue-700" id="newsletter-headline">
-          Discover who represents you at each level of government.
+          @lang('Discover who represents you at each level of government.')
         </p>
       </div>
       <div class="mt-8 flex lg:flex-shrink-0 lg:mt-0">
         <div class="inline-flex rounded-md shadow">
         <a href="{{ route('elected-officials.index') }}" class="btn bg-red-500 font-medium px-6 py-4">
-          Get Started
+          @lang('Get Started')
           <x-icon-arrow-forward width="20" class="inline-block ml-2 -mr-1" />
         </a>
       </div>
