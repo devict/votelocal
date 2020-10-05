@@ -10,6 +10,12 @@ Copy the two configuration files into place (note: `.db.env` is not required for
 
 If you're looking to test out the **Twilio** and/or **Twitter** integrations locally, you will need to configure the appropriate sections in your new `.env` file.
 
+Laravel requires `storage` and `bootstrap/cache` directories to be writeable by `www-data`. Depending on your environment there may be several ways to accomplish this. One method is:
+```
+$ sudo chgrp -R www-data storage bootstrap/cache
+$ chmod -R g+w storage bootstrap/cache
+```
+
 ## Quick Start
 
 First start your containers.
