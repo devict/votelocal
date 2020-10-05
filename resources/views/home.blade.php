@@ -108,5 +108,23 @@
             </div>
         </div>
     </div>
+    <hr class="border-t-2 my-10 sm:my-20">
+    <div class="px-4">
+        <div class="sm:flex items-center -mx-4">
+            <div class="px-4 sm:w-1/2 mb-8 sm:mb-0 text-center">
+                <a class="inline-block mb-3" href="https://devict.org/" target="_blank">
+                    <img style="max-width: 190px" src="{{ asset('img/digitalocean.png') }}" alt="devICT logo">
+                </a>
+            </div>
+            <div class="px-4 sm:w-1/2 text-center sm:text-left">
+                <h2 class="text-3xl sm:text-4xl font-medium font-display leading-tight mb-4">
+                    @lang('Sponsors')
+                </h2>
+                <p>@lang('Vote Local would also like to thank :digitalocean.', [
+                    'digitalocean' => '<a class="font-bold text-gray-600 hover:text-blue-500" href="https://www.digitalocean.com" target="_blank">Digital Ocean</a>',
+                ])</p>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection
