@@ -22,18 +22,21 @@
                 'description' => __('Check your status and get registered'),
                 'url' => 'https://ksvotes.org/',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('Sedgwick County Election Page'),
                 'description' => __('Information provided by the Sedgwick County Election Office.'),
                 'url' => 'https://www.sedgwickcounty.org/elections/how-do-i-vote',
                 'color' => 'red',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('KMUW’s 2020 Election Blueprint'),
                 'description' => __('Wichita’s NPR station provides election news, information and resources.'),
                 'url' => 'https://www.kmuw.org/topic/election-2020',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
         </div>
         <div class="sm:w-1/2 sm:mx-6">
@@ -42,12 +45,14 @@
                 'description' => __('List of valid photo IDs, requirements, exemptions, and how to get a free ID.'),
                 'url' => 'http://www.gotvoterid.com',
                 'color' => 'red',
+                'target' => '_blank',
             ])
             @include('partials.resource-link', [
                 'title' => __('League of Women Voters in Kansas'),
                 'description' => __('An organization (not just for women) that works to empower voters and encourage civic engagement.'),
                 'url' => 'http://lwvk.org/elections-and-voting/voting',
                 'color' => 'blue',
+                'target' => '_blank',
             ])
         </div>
     </div>
@@ -61,13 +66,13 @@
           @lang('Find Your Elected Officials')
         </h2>
         <p class="mt-3 max-w-3xl text-lg leading-6 text-blue-700" id="newsletter-headline">
-          Discover who represents you at each level of government.
+          @lang('Discover who represents you at each level of government.')
         </p>
       </div>
       <div class="mt-8 flex lg:flex-shrink-0 lg:mt-0">
         <div class="inline-flex rounded-md shadow">
         <a href="{{ route('elected-officials.index') }}" class="btn bg-red-500 font-medium px-6 py-4">
-          Get Started
+          @lang('Get Started')
           <x-icon-arrow-forward width="20" class="inline-block ml-2 -mr-1" />
         </a>
       </div>
