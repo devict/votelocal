@@ -16,14 +16,14 @@
                     @if ($referred_by)
                         <input type="hidden" name="referred_by" value="{{ $referred_by }}">
                     @endif
-                    <x-text class="mt-4 rounded-b-none relative focus:z-10" autofocus name="name" required placeholder="Your Name" />
+                    <x-text class="mt-4 rounded-b-none relative focus:z-10" autofocus name="name" required :placeholder="__('Your Name')" />
                     <x-text
                         type="tel"
                         class="-mt-px rounded-t-none relative focus:z-10"
                         name="number"
                         :value="old('number')"
                         required
-                        placeholder="Phone Number"
+                        :placeholder="__('Phone Number')"
                         pattern=".{10}"
                     />
                     <div class="text-gray-600 mt-4">
