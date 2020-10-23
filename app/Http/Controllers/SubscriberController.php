@@ -83,6 +83,17 @@ class SubscriberController extends Controller
             ->with('status', 'Subscriber updated.');
     }
 
+    public function updateLocale(Request $request)
+    {
+        $request->validate([ 'locale' => 'required|in:en,es' ]);
+
+        $subscriber = Auth::guard('subscriber')->user();
+        $subscriber->locale = $request->get('locale');
+        $subscriber->save();
+
+        return redirect()->route('subscriber.home');
+    }
+
     public function updateTags(Request $request)
     {
         $subscriber = Auth::guard('subscriber')->user();

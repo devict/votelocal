@@ -1,0 +1,74 @@
+@import 'flatpickr/dist/themes/airbnb.css';
+
+.flatpickr-calendar {
+    box-shadow: theme('boxShadow.default');
+    background: theme('colors.white');
+    color: theme('colors.gray.700');
+    border-radius: theme('borderRadius.default');
+    overflow: hidden;
+    & .flatpickr-weekday,
+    & select,
+    & input {
+        color: theme('colors.gray.700');
+    }
+    & .flatpickr-weekday {
+        font-weight: theme('fontWeight.medium');
+    }
+    & .flatpickr-monthDropdown-months {
+        appearance: none;
+        line-height: 1.5;
+    }
+    & .flatpickr-day {
+        color: theme('colors.gray.700');
+        &:hover {
+            background: theme('colors.blue.100');
+        }
+        &.flatpickr-disabled {
+            color: theme('colors.gray.600');
+            &:hover {
+                background: transparent;
+            }
+        }
+        &.today {
+            background: theme('colors.blue.50');
+            &:hover,
+            &:hover:not(.selected) {
+                border-color: transparent;
+            }
+        }
+        &.selected {
+            color: theme('colors.blue.800');
+            background: theme('colors.blue.100');
+            border-color: theme('colors.blue.100');
+            &:hover {
+                background: theme('colors.blue.100');
+                border-color: theme('colors.blue.100');
+            }
+        }
+    }
+    & .flatpickr-prev-month,
+    & .flatpickr-next-month {
+        & svg {
+            fill: theme('colors.gray.600');
+        }
+        &:hover svg {
+            fill: theme('colors.blue.800');
+        }
+    }
+}
+
+.calendar .flatpickr-calendar {
+    box-shadow: none;
+    & .flatpickr-day,
+    & .flatpickr-day:hover,
+    & .flatpickr-day.today,
+    & .flatpickr-day.today:hover {
+        color: theme('colors.red.800');
+        background: theme('colors.red.100');
+        border: none;
+        &.flatpickr-disabled {
+            color: theme('colors.gray.600');
+            background: transparent;
+        }
+    }
+}

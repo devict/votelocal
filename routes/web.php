@@ -73,5 +73,6 @@ Route::prefix($locale)->group(function () {
         Route::post('/subscriber/pledge/update', 'SubscriberController@pledgeDisplayUpdate')->name('subscriber.pledgeDisplayUpdate');
         Route::post('/subscriber/enable', 'SubscriberController@enable')->name('subscriber.enable');
         Route::post('/subscriber/disable', 'SubscriberController@disable')->name('subscriber.disable');
+        Route::post('/subscriber/update-locale', 'SubscriberController@updateLocale')->name('subscriber.updateLocale');
     });
 });
