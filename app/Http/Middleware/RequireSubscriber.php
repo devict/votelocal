@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class RequireSubscriber
 {
@@ -19,6 +20,7 @@ class RequireSubscriber
         if (!Auth::guard('subscriber')->check()) {
             return redirect('/');
         }
+        App::setLocale(Auth::guard('subscriber')->user()->locale);
         return $next($request);
     }
 }
