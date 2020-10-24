@@ -27,7 +27,6 @@ services:
     env_file:
       - .env
     volumes:
-      - /usr/src/app/node_modules
       - .:/usr/src/app
     command: 'npm run watch'
 
