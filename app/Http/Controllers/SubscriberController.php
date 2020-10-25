@@ -15,7 +15,7 @@ class SubscriberController extends Controller
     public function index()
     {
         return view('admin.subscribers.index', [
-            'subscribers' => Subscriber::latest()->paginate(25),
+            'subscribers' => Subscriber::latest()->withCount('tags')->paginate(25),
         ]);
     }
 
