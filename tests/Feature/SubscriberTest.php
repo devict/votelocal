@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Message;
 use App\Subscriber;
+use App\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SubscriberTest extends TestCase
 {
@@ -45,7 +46,7 @@ class SubscriberTest extends TestCase
             ->assertRedirect(route('subscribers.admin.index'));
 
         $this->assertDatabaseHas('subscribers', [
-            'number' => $subscriber->number
+            'number' => $subscriber->number,
         ]);
     }
 
@@ -59,13 +60,17 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanUpdateSubscriber()
     {
+        $tags = factory(Tag::class, 2)->create();
         $subscriber = factory(Subscriber::class)->create(['subscribed' => true]);
         $this->signIn(['admin' => 1])
             ->withoutExceptionHandling()
-            ->put(route('subscribers.admin.update', $subscriber), [])
+            ->put(route('subscribers.admin.update', $subscriber), [
+                'tags' => $tags->pluck('id'),
+            ])
             ->assertRedirect(route('subscribers.admin.index'));
 
         $this->assertDatabaseHas('subscribers', ['subscribed' => false]);
+        $this->assertEquals($subscriber->fresh()->tags->pluck('id'), $tags->pluck('id'));
     }
 
     public function testSubscribeFromSite()

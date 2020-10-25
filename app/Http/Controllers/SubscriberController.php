@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\MessageFilters;
 use App\Message;
 use App\Subscriber;
 use App\Tag;
 use Illuminate\Http\Request;
-use App\Filters\MessageFilters;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriberController extends Controller
 {
@@ -29,6 +29,7 @@ class SubscriberController extends Controller
     public function home()
     {
         $subscriber = Auth::guard('subscriber')->user();
+
         return view('subscriber.home', [
             'subscriber' => $subscriber,
             'locationTags' => Tag::locations()->get(),
@@ -61,6 +62,8 @@ class SubscriberController extends Controller
             'subscriber' => $subscriber,
             'messages' => $subscriber->messages()->filter($filters)->get(),
             'filters' => $filters,
+            'locationTags' => Tag::locations()->get(),
+            'topicTags' => Tag::topics()->get(),
             'types' => [
                 '' => 'Incoming & Outgoing',
                 Message::INCOMING => 'Outgoing', // Relative to subscriber
@@ -77,6 +80,7 @@ class SubscriberController extends Controller
             'number' => 'sometimes|required|max:255|unique:subscribers,number,'.$subscriber->id,
             'subscribed' => 'boolean',
         ]));
+        $subscriber->tags()->sync($request->input('tags'));
 
         return redirect()
             ->route('subscribers.admin.index')
@@ -85,7 +89,7 @@ class SubscriberController extends Controller
 
     public function updateLocale(Request $request)
     {
-        $request->validate([ 'locale' => 'required|in:en,es' ]);
+        $request->validate(['locale' => 'required|in:en,es']);
 
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->locale = $request->get('locale');
@@ -98,7 +102,8 @@ class SubscriberController extends Controller
     {
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->tags()->sync($request->input('tags'));
-        return response()->json($subscriber->tagIds());
+
+        return response()->json($subscriber->tags->pluck('id'));
     }
 
     public function enable()
@@ -106,6 +111,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->subscribed = true;
         $subscriber->save();
+
         return redirect()->route('subscriber.home');
     }
 
@@ -114,6 +120,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->subscribed = false;
         $subscriber->save();
+
         return redirect()->route('subscriber.home');
     }
 
@@ -148,6 +155,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
         $subscriber->save();
+
         return redirect()->route('subscriber.home')->with('status', 'Pledge board display status updated.');
     }
 }
