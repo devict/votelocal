@@ -10,6 +10,11 @@ class Tag extends Model
         'name', 'category', 'subscriber_default', 'message_default',
     ];
 
+    public function subscribers()
+    {
+        return $this->belongsToMany(Subscriber::class);
+    }
+
     public static function categoryOptions()
     {
         return [
@@ -41,8 +46,11 @@ class Tag extends Model
     public static function validateRequiredTags($ids)
     {
         // Validates at least one tag is selected per category.
-        if (!$ids) return false;
+        if (! $ids) {
+            return false;
+        }
         $cats = self::select('category')->distinct()->whereIn('id', $ids)->get();
+
         return $cats->count() == count(self::categoryOptions());
     }
 }
