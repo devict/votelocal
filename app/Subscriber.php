@@ -3,10 +3,13 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Subscriber extends Authenticatable
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

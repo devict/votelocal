@@ -17,13 +17,10 @@ abstract class AbstractFilters
      *
      * @var \Illuminate\Database\Eloquent\Builder
      */
-
     protected $builder;
 
     /**
      * Create a new ThreadFilters instance.
-     *
-     * @param Request $request
      */
     public function __construct(Request $request)
     {

@@ -44,7 +44,7 @@ class ScheduledMessageController extends Controller
         ]);
 
         $validator->after(function ($validator) use ($request) {
-            if (!Tag::validateRequiredTags($request->input('tags'))) {
+            if (! Tag::validateRequiredTags($request->input('tags'))) {
                 $validator->errors()->add('tags[]', 'Must select one of each tag type.');
             }
         });
@@ -97,7 +97,7 @@ class ScheduledMessageController extends Controller
         ]);
 
         $validator->after(function ($validator) use ($request) {
-            if (!Tag::validateRequiredTags($request->input('tags'))) {
+            if (! Tag::validateRequiredTags($request->input('tags'))) {
                 $validator->errors()->add('tags[]', 'Must select one of each tag type.');
             }
         });

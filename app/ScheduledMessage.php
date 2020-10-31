@@ -2,15 +2,18 @@
 
 namespace App;
 
-use LinkFinder;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
+use LinkFinder;
 
 class ScheduledMessage extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'body_en', 'body_es', 'send_at', 'sent', 'target_sms', 'target_twitter'
+        'body_en', 'body_es', 'send_at', 'sent', 'target_sms', 'target_twitter',
     ];
 
     protected $dates = [

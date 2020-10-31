@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'name', 'category', 'subscriber_default', 'message_default',
     ];
@@ -41,8 +44,11 @@ class Tag extends Model
     public static function validateRequiredTags($ids)
     {
         // Validates at least one tag is selected per category.
-        if (!$ids) return false;
+        if (! $ids) {
+            return false;
+        }
         $cats = self::select('category')->distinct()->whereIn('id', $ids)->get();
+
         return $cats->count() == count(self::categoryOptions());
     }
 }
