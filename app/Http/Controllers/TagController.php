@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
-use Validator;
 
 class TagController extends Controller
 {
@@ -42,7 +41,6 @@ class TagController extends Controller
             ->with('status', 'Tag created.');
     }
 
-
     public function edit(Tag $tag)
     {
         return view('admin.tags.edit', [
@@ -72,7 +70,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
         return redirect('/admin/tags')->with('status', 'Tag deleted.');
     }
-
 }

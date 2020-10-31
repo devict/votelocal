@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Subscriber;
 use Exception;
 use Illuminate\Support\Facades\Cache;
-use App\Subscriber;
 
 class HomeController extends Controller
 {
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
     public function pledge($referred_by = null)
     {
-        return view('pledge', [ 'referred_by' => $referred_by ]);
+        return view('pledge', ['referred_by' => $referred_by]);
     }
 
     public function pledgeProgress()

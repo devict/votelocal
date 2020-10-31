@@ -2,9 +2,8 @@
 
 namespace App\Services\Sms;
 
-use Illuminate\Support\ServiceProvider;
 use App\Services\Sms\Contracts\Sms;
-use App\Services\Sms\TwilioAdapter;
+use Illuminate\Support\ServiceProvider;
 
 class SmsServiceProvider extends ServiceProvider
 {

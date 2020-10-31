@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Sms\Contracts\Sms;
 use App\Subscriber;
 use App\Tag;
 use Illuminate\Http\Request;
-use App\Services\Sms\Contracts\Sms;
 
 class SmsController extends Controller
 {
@@ -58,6 +58,7 @@ class SmsController extends Controller
                 }
 
                 $subscriber->unsubscribe();
+
                 return $sms->response($subscriber->number, __('sms.unsubscribed', [], $subscriber->locale));
             }
 
@@ -67,17 +68,17 @@ class SmsController extends Controller
         // Not currently subscribed
         $locale = $message->getLocaleFromTrigger('subscribe');
         if ($locale) {
-            if (!$subscriber) {
+            if (! $subscriber) {
                 $subscriber = Subscriber::create([
                     'number' => $message->from,
-                    'locale' => $locale
+                    'locale' => $locale,
                 ]);
 
                 $subscriber->tags()->sync(Tag::subscriberDefaults()->get());
             }
             $subscriber->update([
                 'subscribed' => true,
-                'locale'     => $locale
+                'locale' => $locale,
             ]);
 
             return $sms->response($subscriber->number, __('sms.subscribed', [], $subscriber->locale));

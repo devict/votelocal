@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\ValidationException;
 
@@ -29,7 +27,7 @@ class ElectedOfficialsController extends Controller
     public function lookup(Request $request)
     {
         $validated = $request->validate([
-            'address' => 'required|string'
+            'address' => 'required|string',
         ]);
 
         $client = new Client();
@@ -38,8 +36,8 @@ class ElectedOfficialsController extends Controller
             $response = $client->request('GET', $this->apiEndpoint, [
                 'query' => [
                     'address' => $validated['address'],
-                    'key' => $this->apiKey
-                ]
+                    'key' => $this->apiKey,
+                ],
             ]);
 
             $data = Cache::remember($validated['address'], now()->addHour(), function () use ($response) {
@@ -61,9 +59,7 @@ class ElectedOfficialsController extends Controller
                 });
             }
 
-            throw ValidationException::withMessages([
-                'address' => 'We had some trouble reading that address. '.$reasons->implode('. ')
-            ]);
+            throw ValidationException::withMessages(['address' => 'We had some trouble reading that address. '.$reasons->implode('. ')]);
         }
     }
 }
