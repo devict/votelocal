@@ -9,6 +9,22 @@ class SubscriberFactory extends Factory
 {
     protected $model = Subscriber::class;
 
+    public function unsubscribed()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'subscribed' => false,
+            ];
+        });
+    }
+
+    public function withTags($tags)
+    {
+        return $this->afterCreating(function ($subscriber) use ($tags) {
+            $subscriber->tags()->attach(array_map(fn ($tag) => $tag->id, $tags));
+        });
+    }
+
     public function definition()
     {
         return [

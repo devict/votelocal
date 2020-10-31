@@ -9,6 +9,13 @@ class ScheduledMessageFactory extends Factory
 {
     protected $model = ScheduledMessage::class;
 
+    public function withTags($tags)
+    {
+        return $this->afterCreating(function ($subscriber) use ($tags) {
+            $subscriber->tags()->attach(array_map(fn ($tag) => $tag->id, $tags));
+        });
+    }
+
     public function definition()
     {
         return [

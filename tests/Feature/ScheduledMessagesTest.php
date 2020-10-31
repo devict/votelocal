@@ -218,15 +218,4 @@ class ScheduledMessagesTest extends TestCase
             $response->assertSee($message->to);
         }
     }
-
-    // /**
-    //  * Test scheduled messages are sent to all active subscribers, and to
-    //  * no inactive subscribers.
-    //  *
-    //  * @return void
-    //  */
-    // public function testScheduledMessageOnlyGoesToActiveSubscribers()
-    // {
-    //     $this->assertTrue(false);
-    // }
 }
