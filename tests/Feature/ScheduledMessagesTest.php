@@ -2,35 +2,35 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\ScheduledMessage;
 use App\Message;
-use App\User;
+use App\ScheduledMessage;
 use App\Tag;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ScheduledMessagesTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
-     * Test admin can create scheduled messages to be sent in the future
+     * Test admin can create scheduled messages to be sent in the future.
      *
      * @return void
      */
     public function testAdminCreateScheduledMessage()
     {
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $locationTag = factory(Tag::class)->create([ 'category' => 'location' ]);
-        $topicTag = factory(Tag::class)->create([ 'category' => 'topic' ]);
+        $user = User::factory()->create(['admin' => true]);
+        $locationTag = Tag::factory()->create(['category' => 'location']);
+        $topicTag = Tag::factory()->create(['category' => 'topic']);
 
         $tomorrow = today()->addDay();
 
         $response = $this
             ->actingAs($user)
             ->post('/admin/scheduled_messages', [
-                'body_en'  => 'Test english',
-                'body_es'  => 'Test spanish',
+                'body_en' => 'Test english',
+                'body_es' => 'Test spanish',
                 'target_sms' => 1,
                 'target_twitter' => 1,
                 'send_at' => $tomorrow->toW3cString(),
@@ -40,7 +40,7 @@ class ScheduledMessagesTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect('/admin/scheduled_messages');
 
-        tap(ScheduledMessage::first(), function($message) use ($tomorrow) {
+        tap(ScheduledMessage::first(), function ($message) use ($tomorrow) {
             $this->assertEquals('Test english', $message->body_en);
             $this->assertEquals('Test spanish', $message->body_es);
             $this->assertEquals(1, $message->target_sms);
@@ -57,8 +57,8 @@ class ScheduledMessagesTest extends TestCase
      */
     public function testCantCreateScheduledMessageInThePast()
     {
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->make([
+        $user = User::factory()->create(['admin' => true]);
+        $message = ScheduledMessage::factory()->make([
             'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
 
@@ -82,18 +82,18 @@ class ScheduledMessagesTest extends TestCase
      */
     public function testAdminCanEditScheduledMessage()
     {
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->create();
+        $user = User::factory()->create(['admin' => true]);
+        $message = ScheduledMessage::factory()->create();
 
-        $locationTag = factory(Tag::class)->create([ 'category' => 'location' ]);
-        $topicTag = factory(Tag::class)->create([ 'category' => 'topic' ]);
+        $locationTag = Tag::factory()->create(['category' => 'location']);
+        $topicTag = Tag::factory()->create(['category' => 'topic']);
 
         $newBodyEN = 'New!';
         $newBodyES = 'Nuevo!';
 
         $response = $this
             ->actingAs($user)
-            ->put('/admin/scheduled_messages/' . $message->id, [
+            ->put('/admin/scheduled_messages/'.$message->id, [
                 'body_en' => $newBodyEN,
                 'body_es' => $newBodyES,
                 'target_sms' => 1,
@@ -131,8 +131,8 @@ class ScheduledMessagesTest extends TestCase
      */
     public function testAdminCanDeleteScheduledMessage()
     {
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->create();
+        $user = User::factory()->create(['admin' => true]);
+        $message = ScheduledMessage::factory()->create();
         $messageAttrCheck = [
             'id' => $message->id,
             'body_en' => $message->body_en,
@@ -144,7 +144,7 @@ class ScheduledMessagesTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/admin/scheduled_messages/' . $message->id . '/delete');
+            ->get('/admin/scheduled_messages/'.$message->id.'/delete');
 
         $response->assertRedirect('/admin/scheduled_messages');
         $this->assertDatabaseMissing('scheduled_messages', $messageAttrCheck);
@@ -157,8 +157,8 @@ class ScheduledMessagesTest extends TestCase
      */
     public function testCantChangeAlreadySentScheduledMessage()
     {
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $message = factory(ScheduledMessage::class)->create([
+        $user = User::factory()->create(['admin' => true]);
+        $message = ScheduledMessage::factory()->create([
             'sent' => true,
             'send_at' => now()->subMinutes(1)->toDateTimeString(),
         ]);
@@ -173,7 +173,7 @@ class ScheduledMessagesTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get('/admin/scheduled_messages/' . $message->id . '/delete');
+            ->get('/admin/scheduled_messages/'.$message->id.'/delete');
 
         $response->assertRedirect('/admin/scheduled_messages');
         $response->assertSessionHasErrors('cant_change_sent_message');
@@ -181,7 +181,7 @@ class ScheduledMessagesTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->put('/admin/scheduled_messages/' . $message->id, [
+            ->put('/admin/scheduled_messages/'.$message->id, [
                 'body_en' => 'sup',
             ]);
 
@@ -198,11 +198,11 @@ class ScheduledMessagesTest extends TestCase
     public function testViewMessagesOfSentScheduledMessage()
     {
         // create scheduled message and a few messages with it's id,
-        $user = factory(User::class)->create([ 'admin' => true ]);
-        $scheduled_message = factory(ScheduledMessage::class)->create([
+        $user = User::factory()->create(['admin' => true]);
+        $scheduled_message = ScheduledMessage::factory()->create([
             'sent' => true,
         ]);
-        $messages = factory(Message::class, 3)->create([
+        $messages = Message::factory()->count(3)->create([
             'scheduled_message_id' => $scheduled_message->id,
         ]);
 

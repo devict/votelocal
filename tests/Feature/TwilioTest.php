@@ -2,10 +2,10 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Subscriber;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class TwilioTest extends TestCase
 {
@@ -49,9 +49,9 @@ class TwilioTest extends TestCase
         $response = $this->json('POST', '/sms/receive', $twilioSms);
 
         $this->assertDatabaseHas('subscribers', [
-            'number'     => $twilioSms['From'],
+            'number' => $twilioSms['From'],
             'subscribed' => true,
-            'locale'     => 'es'
+            'locale' => 'es',
         ]);
     }
 
@@ -63,8 +63,8 @@ class TwilioTest extends TestCase
      */
     public function testSubscriberCanChangeLocale()
     {
-        $subscriber = factory(Subscriber::class)->create(['locale' => 'en']);
-        $twilioSms  = $this->createTwilioIncomingSms([
+        $subscriber = Subscriber::factory()->create(['locale' => 'en']);
+        $twilioSms = $this->createTwilioIncomingSms([
             'From' => $subscriber->number,
             'Body' => 'coMiEnZo',
         ]);
@@ -101,7 +101,7 @@ class TwilioTest extends TestCase
      */
     public function testUnsubscribeActiveSusbcriber()
     {
-        $subscriber = factory(Subscriber::class)->create();
+        $subscriber = Subscriber::factory()->create();
         $twilioSms = $this->createTwilioIncomingSms([
             'From' => $subscriber->number,
             'Body' => 'UnSubScribe',
@@ -121,17 +121,17 @@ class TwilioTest extends TestCase
 
     /**
      * Util!
-     * -------------------
+     * -------------------.
      */
-
-     private function createTwilioIncomingSms($attrs)
-     {
-         $defaults = [
+    private function createTwilioIncomingSms($attrs)
+    {
+        $defaults = [
              'MessageSid' => Str::random(32),
              'From' => '+15555555555',
              'To' => '+12222222222',
              'Body' => 'Test message',
          ];
-         return array_merge($defaults, $attrs);
-     }
+
+        return array_merge($defaults, $attrs);
+    }
 }

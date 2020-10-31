@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Message;
 use App\Subscriber;
+use App\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class SubscriberTest extends TestCase
 {
@@ -18,15 +19,15 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanViewSubscribers()
     {
-        $this->signIn(['admin' => 1])
+        $this->be(User::factory()->asAdmin()->create())
             ->get(route('subscribers.admin.index'))
             ->assertStatus(200);
     }
 
     public function testAdminCanViewSubscriberMessages()
     {
-        $message = factory(Message::class)->create();
-        $this->signIn(['admin' => 1])
+        $message = Message::factory()->create();
+        $this->be(User::factory()->asAdmin()->create())
             ->get(route('subscribers.admin.edit', $message->subscriber))
             ->assertSee($message->subscriber->number);
     }
@@ -38,14 +39,14 @@ class SubscriberTest extends TestCase
 
     public function testAdminCanCreateSubscriber()
     {
-        $subscriber = factory(Subscriber::class)->make();
-        $this->signIn(['admin' => 1])
+        $subscriber = Subscriber::factory()->make();
+        $this->be(User::factory()->asAdmin()->create())
             ->withoutExceptionHandling()
             ->post(route('subscribers.admin.create'), $subscriber->toArray())
             ->assertRedirect(route('subscribers.admin.index'));
 
         $this->assertDatabaseHas('subscribers', [
-            'number' => $subscriber->number
+            'number' => $subscriber->number,
         ]);
     }
 
@@ -53,14 +54,14 @@ class SubscriberTest extends TestCase
     {
         $this->assertAdminOnly(
             'put',
-            route('subscribers.admin.update', factory(Subscriber::class)->create())
+            route('subscribers.admin.update', Subscriber::factory()->create())
         );
     }
 
     public function testAdminCanUpdateSubscriber()
     {
-        $subscriber = factory(Subscriber::class)->create(['subscribed' => true]);
-        $this->signIn(['admin' => 1])
+        $subscriber = Subscriber::factory()->create(['subscribed' => true]);
+        $this->be(User::factory()->asAdmin()->create())
             ->withoutExceptionHandling()
             ->put(route('subscribers.admin.update', $subscriber), [])
             ->assertRedirect(route('subscribers.admin.index'));
