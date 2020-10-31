@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\MessageFilters;
 use App\Message;
 use App\Subscriber;
 use App\Tag;
 use Illuminate\Http\Request;
-use App\Filters\MessageFilters;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriberController extends Controller
 {
@@ -29,6 +29,7 @@ class SubscriberController extends Controller
     public function home()
     {
         $subscriber = Auth::guard('subscriber')->user();
+
         return view('subscriber.home', [
             'subscriber' => $subscriber,
             'locationTags' => Tag::locations()->get(),
@@ -85,7 +86,7 @@ class SubscriberController extends Controller
 
     public function updateLocale(Request $request)
     {
-        $request->validate([ 'locale' => 'required|in:en,es' ]);
+        $request->validate(['locale' => 'required|in:en,es']);
 
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->locale = $request->get('locale');
@@ -98,6 +99,7 @@ class SubscriberController extends Controller
     {
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->tags()->sync($request->input('tags'));
+
         return response()->json($subscriber->tagIds());
     }
 
@@ -106,6 +108,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->subscribed = true;
         $subscriber->save();
+
         return redirect()->route('subscriber.home');
     }
 
@@ -114,6 +117,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->subscribed = false;
         $subscriber->save();
+
         return redirect()->route('subscriber.home');
     }
 
@@ -148,6 +152,7 @@ class SubscriberController extends Controller
         $subscriber = Auth::guard('subscriber')->user();
         $subscriber->hide_from_pledge_board = $request->boolean('hide_from_pledge_board');
         $subscriber->save();
+
         return redirect()->route('subscriber.home')->with('status', 'Pledge board display status updated.');
     }
 }

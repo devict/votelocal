@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-use Carbon\Carbon;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\Sms\Contracts\Sms;
+use App\Subscriber;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Services\Sms\Contracts\Sms;
-
-use App\Subscriber;
 
 class SubscriberLoginController extends Controller
 {
@@ -46,7 +45,7 @@ class SubscriberLoginController extends Controller
 
     public function login(Request $request, Sms $sms)
     {
-        $request->validate([ 'number' => 'required|digits:10' ]);
+        $request->validate(['number' => 'required|digits:10']);
 
         $number = $request->get('number');
 
@@ -62,7 +61,7 @@ class SubscriberLoginController extends Controller
         if ($request->has('pledge')) {
             $subscriber->pledged = true;
         }
-        if ($request->has('referred_by') && !$subscriber->referred_by) {
+        if ($request->has('referred_by') && ! $subscriber->referred_by) {
             $subscriber->referred_by = $request->input('referred_by');
         }
         if ($request->has('name')) {
@@ -95,13 +94,15 @@ class SubscriberLoginController extends Controller
     public function verify(Request $request)
     {
         if (Auth::guard('subscriber')->attempt($request->only(['number', 'password']))) {
-            if (!Auth::guard('subscriber')->user()->withinValidVerifyTime()) {
+            if (! Auth::guard('subscriber')->user()->withinValidVerifyTime()) {
                 return redirect()->back()->with('notify', 'Verification timed out, please try again.');
             }
 
             $request->session()->remove('fromPledge');
+
             return redirect()->intended($this->redirectTo);
         }
+
         return redirect()->back()->with('notify', 'Login failed, give it another shot.');
     }
 }

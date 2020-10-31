@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Subscriber;
 use App\ScheduledMessage;
-use Illuminate\Console\Command;
 use App\Services\Sms\Contracts\Sms;
+use App\Subscriber;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use \Twitter;
+use Twitter;
 
 class SendScheduledMessages extends Command
 {
@@ -59,12 +59,13 @@ class SendScheduledMessages extends Command
                     $filteredSubscribers = $subscribers->filter(function ($sub) use ($locationTags, $topicTags) {
                         $locationTagMatches = $sub->locationTags->intersect($locationTags);
                         $topicTagMatches = $sub->topicTags->intersect($topicTags);
+
                         return $locationTagMatches->isNotEmpty() && $topicTagMatches->isNotEmpty();
                     });
 
                     // Send to filtered subscribers.
                     if ($filteredSubscribers->count()) {
-                        Log::info('Sending message ' . $message->id . ' to ' . $filteredSubscribers->count() . ' subscribers.');
+                        Log::info('Sending message '.$message->id.' to '.$filteredSubscribers->count().' subscribers.');
 
                         foreach ($filteredSubscribers as $subscriber) {
                             $body = $message->body_en;
@@ -82,7 +83,7 @@ class SendScheduledMessages extends Command
                                     ['scheduled_message_id' => $message->id]
                                 );
                             } catch (\Exception $e) {
-                                Log::info('Failed to send message ' . $message->id . ' to ' . $subscriber->number . ' (' . $subscriber->id . ')');
+                                Log::info('Failed to send message '.$message->id.' to '.$subscriber->number.' ('.$subscriber->id.')');
                             }
                         }
                     }
