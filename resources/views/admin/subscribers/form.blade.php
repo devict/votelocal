@@ -20,6 +20,28 @@
                 :checked="old('subscribed', $subscriber->subscribed)"
             />
         </div>
+        <h2 class="text-xl font-bold mt-6">@lang('Notification Preferences')</h2>
+        <div class="mt-4 grid grid-cols-2 gap-4">
+            @php $selected = collect(old('tags', $subscriber->tags->pluck('id'))); @endphp
+            <x-fieldset :label="__('Locations')">
+                <ul>
+                    @foreach($locationTags as $tag)
+                        <li class="text-sm">
+                            <x-checkbox :label="$tag->name" name="tags[]" :value="$tag->id" :checked="$selected->contains($tag->id)" />
+                        </li>
+                    @endforeach
+                </ul>
+            </x-fieldset>
+            <x-fieldset :label="__('Topics')">
+                <ul>
+                    @foreach($topicTags as $tag)
+                        <li class="text-sm">
+                            <x-checkbox :label="$tag->name" name="tags[]" :value="$tag->id" :checked="$selected->contains($tag->id)" />
+                        </li>
+                    @endforeach
+                </ul>
+            </x-fieldset>
+        </div>
     </div>
     <div class="bg-gray-100 border-t border-gray-200 flex justify-{{ $subscriber->exists ? 'between' : 'end' }} items-center px-4 py-4 sm:px-6">
         @if ($subscriber->exists)

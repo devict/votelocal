@@ -17,6 +17,7 @@
                 <th class="px-4 py-4 sm:px-6">Subscriber Number</th>
                 <th class="px-4 py-4 sm:px-6">Subscribed</th>
                 <th class="px-4 py-4 sm:px-6">Locale</th>
+                <th class="px-4 py-4 sm:px-6">Tags</th>
                 <th class="px-4 py-4 sm:px-6">Created</th>
                 <th class="px-4 py-4 sm:px-6">Updated</th>
             </tr>
@@ -54,6 +55,9 @@
                         >
                             {{ $subscriber->locale }}
                         </a>
+                    </td>
+                    <td class="border-t px-4 sm:px-6">
+                        {{ $subscriber->tags_count }}
                     </td>
                     <td class="border-t">
                         <a

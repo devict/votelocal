@@ -20,6 +20,7 @@
                 <th class="px-4 py-4 sm:px-6">Name</th>
                 <th class="px-4 py-4 sm:px-6">Subscriber Default</th>
                 <th class="px-4 py-4 sm:px-6">Message Default</th>
+                <th class="px-4 py-4 sm:px-6">Subscribers</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,9 @@
                         @else
                             <div class="w-8 text-center">—</div>
                         @endif
+                    </td>
+                    <td class="border-t px-4 py-4 sm:px-6">
+                        {{ $tag->subscribers_count }}
                     </td>
                 </tr>
             @endforeach

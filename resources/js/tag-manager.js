@@ -1,3 +1,6 @@
+let axios = require('axios');
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 export default options => {
     return {
         updateEndpoint: '',

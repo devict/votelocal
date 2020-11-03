@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
-use Validator;
 
 class TagController extends Controller
 {
     public function index()
     {
         return view('admin.tags.index', [
-            'locationTags' => Tag::locations()->get(),
-            'topicTags' => Tag::topics()->get(),
+            'locationTags' => Tag::locations()->withCount('subscribers')->get(),
+            'topicTags' => Tag::topics()->withCount('subscribers')->get(),
         ]);
     }
 
@@ -41,7 +40,6 @@ class TagController extends Controller
         return redirect('/admin/tags')
             ->with('status', 'Tag created.');
     }
-
 
     public function edit(Tag $tag)
     {
@@ -72,7 +70,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+
         return redirect('/admin/tags')->with('status', 'Tag deleted.');
     }
-
 }

@@ -75,7 +75,7 @@
                         <div
                             x-data="tagManager({
                                 updateEndpoint: '{{ route('subscriber.updateTags') }}',
-                                activeTags: {{ json_encode($subscriber->tagIds()) }}
+                                activeTags: {{ json_encode($subscriber->tags->pluck('id')) }}
                             })"
                             class="mt-4 grid grid-cols-2 gap-4"
                         >
