@@ -66,6 +66,10 @@
                     <img style="max-width: 190px" src="{{ asset('img/devict.png') }}" alt="devICT logo">
                 </a>
                 <br>
+                <a class="inline-block mb-3" href="https://www.digitalocean.com/" target="_blank">
+                    <img style="max-width: 190px" src="{{ asset('img/digital-ocean.png') }}" alt="Digital Ocean">
+                </a>
+                <br>
                 <a class="inline-block" href="https://www.abcbilingualresources.com/" target="_blank">
                     <img style="max-width: 190px" src="{{ asset('img/ab-c-bilingual.png') }}" alt="AB&C Bilingual Resources logo">
                 </a>
